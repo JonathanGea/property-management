@@ -1,0 +1,66 @@
+<div class="page">
+  <header class="heading">
+    <p class="eyebrow">Pembayaran sewa</p>
+    <h1>Keuangan</h1>
+    <p class="subtitle">Catatan manual untuk {{ monthLabel }}.</p>
+  </header>
+  <div class="finance-grid">
+    <article class="summary">
+      <span class="summary-icon"><app-icon name="wallet" /></span
+      ><span>Sudah diterima bulan ini</span
+      ><strong>Rp {{ store.incomeThisMonth().toLocaleString('id-ID') }}</strong
+      ><small>{{ store.paidThisMonth().length }} pembayaran dicatat</small>
+    </article>
+    <article class="summary">
+      <span class="summary-icon amber"><app-icon name="clock" /></span
+      ><span>Belum dibayar bulan ini</span><strong>{{ store.unpaidRooms().length }} kamar</strong
+      ><small>Dari {{ store.occupiedUnits() }} kamar terisi</small>
+    </article>
+  </div>
+  <section class="panel unpaid-panel">
+    <div class="panel-heading">
+      <h2>Belum dibayar</h2>
+      <span>{{ monthLabel }}</span>
+    </div>
+    @for (item of store.unpaidRooms(); track item.property.id + '-' + item.room.id) {
+      <a class="transaction link-row" [routerLink]="['/properti', item.property.id]"
+        ><span class="due-date" [attr.aria-label]="'Jatuh tempo tanggal ' + item.room.dueDay"
+          ><small>tanggal</small><strong>{{ item.room.dueDay }}</strong></span
+        >
+        <div>
+          <strong>{{ item.room.tenantName }} · Kamar {{ item.room.number }}</strong
+          ><small>{{ item.property.name }}</small>
+        </div>
+        <b>Rp {{ item.room.monthlyRent.toLocaleString('id-ID') }}</b></a
+      >
+    } @empty {
+      <p class="empty">Tidak ada pembayaran yang menunggu dicatat.</p>
+    }
+  </section>
+  <section class="panel history">
+    <div class="panel-heading">
+      <h2>Riwayat pembayaran</h2>
+      <span>Terbaru lebih dulu</span>
+    </div>
+    @for (payment of store.payments().slice().reverse(); track payment.id) {
+      <div class="transaction">
+        <span class="badge"><app-icon name="check" /></span>
+        <div>
+          <strong>{{ payment.tenantName }} · Kamar {{ payment.roomNumber }}</strong
+          ><small>{{ formatDate(payment.paidAt) }} · Periode {{ payment.period }}</small>
+        </div>
+        <b>+ Rp {{ payment.amount.toLocaleString('id-ID') }}</b
+        ><button
+          class="cancel"
+          type="button"
+          (click)="cancelPayment(payment.id)"
+          [attr.aria-label]="'Batalkan pembayaran ' + payment.tenantName"
+        >
+          Batal
+        </button>
+      </div>
+    } @empty {
+      <p class="empty">Belum ada pembayaran yang dicatat.</p>
+    }
+  </section>
+</div>

@@ -1,12 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AppShell } from './layout/app-shell';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
-  templateUrl: './app.html',
+  imports: [RouterOutlet, AppShell],
+  template: '<app-shell><router-outlet /></app-shell>',
 })
-export class App {
-  protected readonly title = signal('fe');
-}
+export class App {}

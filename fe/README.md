@@ -1,59 +1,34 @@
-# Fe
+# Rentora frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.1.
+Frontend Rentora untuk pencatatan properti sewa, berbasis Angular dan dirancang dari lebar layar kecil ke layar besar.
 
-## Development server
-
-To start a local development server, run:
+## Menjalankan
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Buka `http://localhost:4200`. Untuk verifikasi, jalankan `npm run build` dan `npm test -- --watch=false`.
 
-## Code scaffolding
+## Struktur
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+src/app/
+├── core/               # model data dan state pencatatan MVP
+├── features/
+│   ├── dashboard/      # halaman ringkasan kos
+│   ├── properties/     # daftar properti, unit, penyewa MVP
+│   ├── finance/        # pembayaran sewa
+│   └── more/           # halaman menu lainnya
+├── layout/             # header, footer, dan navigasi utama
+├── shared/ui/          # komponen visual yang digunakan lintas halaman
+├── app.routes.ts       # path halaman
+└── app.ts              # root aplikasi
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Data kos, kamar, penyewa, dan pembayaran disimpan di `localStorage` browser melalui `PropertyStore`. Rancangan cadangan JSON dan daftar fitur di luar cakupan MVP dijelaskan di PRD.
 
-```bash
-ng generate --help
-```
+Rancangan cakupan dan batasan MVP ada di [PRD](../docs/PRD.md). Data dan aksi tiap halaman dijabarkan di [peta halaman](../docs/PAGES.md).
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Ikon tab browser tersedia sebagai `public/favicon.svg` dan `public/favicon.ico`. Jika logo berubah, perbarui SVG dan jalankan `node scripts/generate-favicon.mjs` untuk membuat ulang ICO.

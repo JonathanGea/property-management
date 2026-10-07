@@ -1,0 +1,38 @@
+<div class="shell">
+  <header class="topbar">
+    <a routerLink="/" class="brand" aria-label="Rentora, ke beranda"
+      ><span class="brand-mark"><app-icon name="home" /></span
+      ><span>rentora<span class="brand-dot">.</span></span></a
+    >
+    <nav class="desktop-nav" aria-label="Navigasi utama">
+      @for (item of navigation; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: !!item.exact }"
+          ><app-icon [name]="item.icon" />{{ item.label }}</a
+        >
+      }
+    </nav>
+    <span class="owner-badge">Buku kos pemilik</span>
+  </header>
+  @if (store.storageError()) {
+    <p class="storage-warning" role="alert">
+      Perubahan belum tersimpan di perangkat ini. Periksa ruang penyimpanan atau izin browser.
+    </p>
+  }
+  <main id="konten"><ng-content /></main>
+  <footer class="site-footer">
+    <span>© 2026 Rentora</span><span>Data tersimpan di browser perangkat ini.</span>
+  </footer>
+  <nav class="bottom-nav" aria-label="Navigasi utama seluler">
+    @for (item of navigation; track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: !!item.exact }"
+        ><app-icon [name]="item.icon" /><span>{{ item.label }}</span></a
+      >
+    }
+  </nav>
+</div>

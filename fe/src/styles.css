@@ -1,3 +1,80 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+:root {
+  --blue: #2f6251;
+  --ink: #25372e;
+  --muted: #68776d;
+  --line: #d7ddd3;
+  --radius: 4px;
+  --shadow: none;
+  --page-gutter: 16px;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  min-width: 320px;
+}
+body {
+  margin: 0;
+  background: #f5f3eb;
+  color: var(--ink);
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+button,
+input {
+  font: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #7ca78f;
+  outline-offset: 3px;
+}
+.page {
+  max-width: 1180px;
+  margin: auto;
+  padding: 26px var(--page-gutter) calc(96px + env(safe-area-inset-bottom));
+}
+.button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 4px;
+  padding: 0 15px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.button app-icon {
+  width: 17px;
+  height: 17px;
+}
+.button-primary {
+  background: var(--blue);
+  color: #fff;
+}
+.button-secondary {
+  border-color: var(--line);
+  background: #fffefa;
+  color: var(--ink);
+}
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: 28px;
+  }
+  .page {
+    padding-top: 39px;
+    padding-bottom: 54px;
+  }
+}

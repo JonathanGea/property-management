@@ -1,0 +1,129 @@
+<div class="page dashboard">
+  <header class="welcome">
+    <div>
+      <p class="eyebrow">Catatan bulan ini</p>
+      <h1>Yang perlu dicatat</h1>
+      <p class="subtitle">Pembayaran sewa dan keadaan kamar di semua kos Anda.</p>
+    </div>
+    <a routerLink="/properti/baru" class="button button-primary desktop-action"
+      ><app-icon name="plus" />Tambah kos</a
+    >
+  </header>
+
+  <section aria-label="Ringkasan" class="stats-grid">
+    <app-stat-card
+      icon="building"
+      tone="blue"
+      label="Total kos"
+      [value]="store.properties().length.toString()"
+      detail="Kos terdaftar"
+    />
+    <app-stat-card
+      icon="check"
+      tone="green"
+      label="Kamar terisi"
+      [value]="store.occupiedUnits() + ' / ' + store.totalUnits()"
+      detail="Dari seluruh kamar"
+    />
+    <app-stat-card
+      icon="wallet"
+      tone="amber"
+      label="Belum dibayar"
+      [value]="store.unpaidRooms().length.toString()"
+      detail="Kamar terisi bulan ini"
+    />
+  </section>
+
+  <div class="insights-grid">
+    <section class="panel activity" aria-labelledby="activity-title">
+      <div class="section-head">
+        <div>
+          <p class="section-index">01 / Pembayaran</p>
+          <h2 id="activity-title">Belum dicatat lunas</h2>
+          <p>{{ store.unpaidRooms().length }} kamar menunggu catatan pembayaran</p>
+        </div>
+        <a routerLink="/keuangan" class="text-link">Lihat semua <app-icon name="chevron" /></a>
+      </div>
+      <div class="activity-list">
+        @for (
+          item of store.unpaidRooms().slice(0, 3);
+          track item.property.id + '-' + item.room.id
+        ) {
+          <a class="activity-row due-link" [routerLink]="['/properti', item.property.id]"
+            ><span class="due-date" [attr.aria-label]="'Jatuh tempo tanggal ' + item.room.dueDay"
+              ><small>tanggal</small><strong>{{ item.room.dueDay }}</strong></span
+            >
+            <div>
+              <strong>{{ item.room.tenantName }} · Kamar {{ item.room.number }}</strong>
+              <p>{{ item.property.name }}</p>
+            </div>
+            <span class="due-amount"
+              >Rp {{ item.room.monthlyRent.toLocaleString('id-ID') }}</span
+            ></a
+          >
+        } @empty {
+          <p class="empty-note">
+            {{
+              store.occupiedUnits()
+                ? 'Semua kamar terisi sudah dicatat lunas bulan ini.'
+                : 'Belum ada penyewa aktif. Isi data penyewa di halaman kos.'
+            }}
+          </p>
+        }
+      </div>
+    </section>
+    <section class="panel occupancy" aria-labelledby="occupancy-title">
+      <div class="section-head">
+        <div>
+          <p class="section-index">02 / Kamar</p>
+          <h2 id="occupancy-title">Okupansi kamar</h2>
+          <p>Seluruh kos Anda saat ini</p>
+        </div>
+      </div>
+      <div class="occupancy-content">
+        <div class="occupancy-total">
+          <strong>{{ store.occupancyRate() }}%</strong><span>kamar terisi</span>
+        </div>
+        <div
+          class="occupancy-bar"
+          role="img"
+          [attr.aria-label]="store.occupancyRate() + '% kamar terisi'"
+          [style.--occupied]="store.occupancyRate() + '%'"
+        ></div>
+        <div class="legend">
+          <div>
+            <i class="legend-dot rented"></i><span>Terisi</span
+            ><strong>{{ store.occupiedUnits() }} kamar</strong>
+          </div>
+          <div>
+            <i class="legend-dot available"></i><span>Kosong</span
+            ><strong>{{ store.totalUnits() - store.occupiedUnits() }} kamar</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel properties" aria-labelledby="properties-title">
+    <div class="section-head">
+      <div>
+        <h2 id="properties-title">Daftar kos</h2>
+        <p>Buka kos untuk melihat kamar dan mencatat pembayaran</p>
+      </div>
+      <a routerLink="/properti" class="text-link">Lihat semua <app-icon name="chevron" /></a>
+    </div>
+    <div class="property-list">
+      @for (property of store.properties().slice(0, 3); track property.id) {
+        <a class="property-link" [routerLink]="['/properti', property.id]"
+          ><app-property-card [property]="property"
+        /></a>
+      } @empty {
+        <p class="empty-note">Belum ada kos. Tambahkan kos pertama untuk mulai melacak kamar.</p>
+      }
+    </div>
+  </section>
+
+  <a routerLink="/properti/baru" class="mobile-add" aria-label="Tambah kos"
+    ><app-icon name="plus"
+  /></a>
+</div>
