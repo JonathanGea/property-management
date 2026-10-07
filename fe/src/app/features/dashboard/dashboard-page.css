@@ -1,14 +1,6 @@
 :host {
   display: block;
 }
-.welcome {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 27px;
-}
-.eyebrow,
 .section-index {
   margin: 0 0 9px;
   color: var(--blue);
@@ -16,25 +8,11 @@
   font-weight: 800;
   letter-spacing: 0;
 }
-.welcome h1 {
-  margin: 0;
-  font-size: clamp(28px, 5vw, 38px);
-  line-height: 1.15;
-  letter-spacing: -0.04em;
-}
-.subtitle {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-}
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
   margin-bottom: 20px;
-}
-.stats-grid app-stat-card:last-child {
-  grid-column: 1 / -1;
 }
 .insights-grid {
   display: grid;
@@ -149,10 +127,32 @@
   gap: 17px;
   padding-top: 6px;
 }
+.occupancy-donut {
+  width: 190px;
+  height: 190px;
+  margin: 0 auto 8px;
+  padding: 18px;
+  border-radius: 50%;
+  background: conic-gradient(var(--blue) var(--occupied), #dce6dc 0);
+  transform: rotate(-30deg);
+}
 .occupancy-total {
   display: flex;
-  align-items: baseline;
-  gap: 9px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  background: #fffefa;
+  border-radius: 50%;
+  transform: rotate(30deg);
+}
+.occupancy-total app-icon {
+  color: var(--blue);
+  margin-bottom: 3px;
+}
+.occupancy-total small {
+  font-size: 20px;
 }
 .occupancy-total strong {
   font-size: 38px;
@@ -163,16 +163,13 @@
   color: var(--muted);
   font-size: 12px;
 }
-.occupancy-bar {
-  height: 13px;
-  background: #dce6dc;
-}
-.occupancy-bar::before {
-  content: '';
-  display: block;
-  width: var(--occupied);
-  height: 100%;
-  background: var(--blue);
+.occupancy-note {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
 }
 .legend {
   display: flex;
@@ -196,6 +193,7 @@
   width: 8px;
   height: 8px;
   margin-top: 3px;
+  border-radius: 50%;
 }
 .rented {
   background: var(--blue);
@@ -213,15 +211,9 @@
   font-size: 13px;
 }
 @media (min-width: 768px) {
-  .welcome {
-    margin-bottom: 31px;
-  }
   .stats-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
-  }
-  .stats-grid app-stat-card:last-child {
-    grid-column: auto;
   }
   .insights-grid {
     grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);

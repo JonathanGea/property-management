@@ -1,38 +1,43 @@
 <div class="page dashboard">
-  <header class="welcome">
-    <div>
-      <p class="eyebrow">Catatan bulan ini</p>
-      <h1>Yang perlu dicatat</h1>
-      <p class="subtitle">Pembayaran sewa dan keadaan unit di semua properti Anda.</p>
-    </div>
-    <a routerLink="/properti/baru" class="button button-primary"
-      ><app-icon name="plus" />Tambah properti</a
-    >
-  </header>
-
   <section aria-label="Ringkasan" class="stats-grid">
     <app-stat-card
       icon="building"
       tone="blue"
       label="Total properti"
       [value]="store.properties().length.toString()"
-      detail="Properti terdaftar"
+      suffix="properti"
+      [detail]="store.totalUnits() + ' unit dalam portofolio Anda'"
+      action="Kelola properti"
     />
     <app-stat-card
       icon="check"
       tone="green"
       label="Unit terisi"
-      [value]="store.occupiedUnits() + ' / ' + store.totalUnits()"
-      detail="Dari seluruh unit"
+      [value]="store.occupiedUnits().toString()"
+      [suffix]="'/ ' + store.totalUnits() + ' unit'"
+      [detail]="store.occupancyRate() + '% dari seluruh unit terisi'"
+      [progress]="store.totalUnits() ? (store.occupiedUnits() / store.totalUnits()) * 100 : 0"
+      action="Lihat ketersediaan unit"
     />
     <app-stat-card
       icon="wallet"
       tone="amber"
       label="Belum dibayar"
       [value]="store.unpaidRooms().length.toString()"
-      detail="Unit terisi bulan ini"
+      suffix="unit"
+      [detail]="
+        store.unpaidRooms().length
+          ? 'Menunggu catatan lunas bulan ini'
+          : store.occupiedUnits()
+            ? 'Semua unit terisi sudah lunas'
+            : 'Belum ada penyewa aktif'
+      "
+      link="/keuangan"
+      action="Periksa pembayaran"
     />
   </section>
+
+  <app-payment-overview />
 
   <div class="insights-grid">
     <section class="panel activity" aria-labelledby="activity-title">
@@ -85,15 +90,26 @@
         </div>
       </div>
       <div class="occupancy-content">
-        <div class="occupancy-total">
-          <strong>{{ store.occupancyRate() }}%</strong><span>unit terisi</span>
-        </div>
         <div
-          class="occupancy-bar"
+          class="occupancy-donut"
           role="img"
-          [attr.aria-label]="store.occupancyRate() + '% unit terisi'"
-          [style.--occupied]="store.occupancyRate() + '%'"
-        ></div>
+          [attr.aria-label]="
+            store.occupiedUnits() +
+            ' dari ' +
+            store.totalUnits() +
+            ' unit terisi (' +
+            store.occupancyRate() +
+            '%)'
+          "
+          [style.--occupied]="
+            (store.totalUnits() ? (store.occupiedUnits() / store.totalUnits()) * 100 : 0) + '%'
+          "
+        >
+          <div class="occupancy-total" aria-hidden="true">
+            <app-icon name="building" /><strong>{{ store.occupancyRate() }}<small>%</small></strong
+            ><span>unit terisi</span>
+          </div>
+        </div>
         <div class="legend">
           <div>
             <i class="legend-dot rented"></i><span>Terisi</span
@@ -104,6 +120,15 @@
             ><strong>{{ store.totalUnits() - store.occupiedUnits() }} unit</strong>
           </div>
         </div>
+        <p class="occupancy-note">
+          {{
+            store.totalUnits()
+              ? store.totalUnits() -
+                store.occupiedUnits() +
+                ' unit tersedia untuk penyewa berikutnya.'
+              : 'Tambahkan unit untuk mulai memantau okupansi.'
+          }}
+        </p>
       </div>
     </section>
   </div>

@@ -1,24 +1,21 @@
 # Peta Halaman Rentora MVP
 
-Dokumen ini menurunkan halaman, data yang tampil, dan aksi pengguna dari [PRD Rentora MVP](PRD.md).
+Dokumen ini menurunkan halaman, data, aksi, dan aturan dari [PRD Rentora MVP](PRD.md). Definisi data mengacu pada bagian [Definisi](PRD.md#definisi); aturan lengkap mengikuti fitur PRD yang ditautkan pada setiap halaman.
 
 ## Daftar Halaman
 
 | ID | Halaman | Tujuan | Fitur PRD |
 | --- | --- | --- | --- |
-| H-1 | [Beranda](#h-1) | Melihat ringkasan seluruh properti dan pembayaran bulan berjalan | [F-5](PRD.md#fitur-5) |
-| H-2 | [Daftar properti sewa](#h-2) | Melihat dan membuka properti sewa yang dikelola | [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2) |
-| H-3 | [Tambah properti sewa](#h-3) | Mencatat properti baru beserta unit awal | [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2) |
-| H-4 | [Detail properti sewa](#h-4) | Mengelola informasi properti dan daftar unit sewanya | [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7) |
-| H-8 | [Detail unit sewa](#h-8) | Mengelola satu unit, masa huni penyewa, pembayaran, dan riwayatnya | [F-2](PRD.md#fitur-2), [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7) |
-| H-5 | [Riwayat penghuni](#h-5) | Melihat penyewa aktif dan mantan penyewa pada satu properti | [F-7](PRD.md#fitur-7) |
-| H-6 | [Keuangan](#h-6) | Memilih periode sewa serta melihat ringkasan dan riwayat pembayaran | [F-4](PRD.md#fitur-4), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6) |
-| H-7 | [Lainnya](#h-7) | Melihat informasi penyimpanan dan mengunduh salinan data | [F-8](PRD.md#fitur-8) |
-| H-9 | [Daftar penghuni](#h-9) | Melihat seluruh penghuni aktif dan mantan penghuni lintas properti | [F-7](PRD.md#fitur-7) |
-
-Alur utama: [Daftar properti sewa](#h-2) → [Detail properti sewa](#h-4) → [Detail unit sewa](#h-8). Formulir data penyewa, koreksi masa huni, dan pencatatan pembayaran berada di Detail unit sewa. Riwayat penghuni pada H-5 mencakup seluruh unit dalam satu properti; riwayat pada H-8 hanya mencakup unit yang dibuka.
-
-Alur daftar seluruh penghuni: **Penghuni** pada bar navigasi bawah → [Daftar penghuni](#h-9) → [Detail unit sewa](#h-8) pada masa huni terpilih.
+| H-1 | [Beranda](#h-1) | Melihat ringkasan properti, unit, dan pembayaran bulan berjalan | [F-5](PRD.md#fitur-5) |
+| H-2 | [Daftar properti sewa](#h-2) | Melihat dan membuka properti yang dikelola | [F-1](PRD.md#fitur-1), [F-5](PRD.md#fitur-5) |
+| H-3 | [Tambah properti sewa](#h-3) | Membuat properti dengan nama dan lokasi | [F-1](PRD.md#fitur-1) |
+| H-4 | [Detail properti sewa](#h-4) | Mengelola properti, menambah unit, dan melihat riwayat properti | [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7) |
+| H-8 | [Detail unit sewa](#h-8) | Mengelola harga standar, masa sewa, riwayat tarif, dan pembayaran unit | [F-2](PRD.md#fitur-2), [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7) |
+| H-5 | [Riwayat penghuni](#h-5) | Melihat seluruh masa sewa pada satu properti | [F-3](PRD.md#fitur-3), [F-7](PRD.md#fitur-7) |
+| H-6 | [Keuangan](#h-6) | Melihat pembayaran dan periode yang belum dicatat lunas | [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6) |
+| H-9 | [Daftar penghuni](#h-9) | Mengelola identitas penghuni lintas properti | [F-7](PRD.md#fitur-7) |
+| H-10 | [Detail penghuni](#h-10) | Mengelola identitas dan memulai atau melihat masa sewa | [F-3](PRD.md#fitur-3), [F-7](PRD.md#fitur-7) |
+| H-7 | [Lainnya](#h-7) | Melihat informasi penyimpanan dan mengekspor data | [F-8](PRD.md#fitur-8) |
 
 ## Navigasi
 
@@ -33,67 +30,86 @@ Alur daftar seluruh penghuni: **Penghuni** pada bar navigasi bawah → [Daftar p
 
 - [Lainnya](#h-7): ikon saja di kanan atas, dengan nama aksesibel **Lainnya**.
 
+## Alur Utama
+
+1. [Daftar properti](#h-2) → [Tambah properti](#h-3) → [Detail properti](#h-4).
+2. Di detail properti, **Tambah unit** dengan nomor dan harga standar → [Detail unit](#h-8).
+3. [Daftar penghuni](#h-9) → **Tambah penghuni** atau pilih identitas yang ada → [Detail penghuni](#h-10).
+4. Di detail penghuni, **Mulai masa sewa** → pilih properti/unit, tanggal masuk, jatuh tempo, dan tarif awal → [Detail unit](#h-8) pada masa sewa baru.
+5. Di detail unit, **Catat pembayaran** untuk bulan sewa pilihan; **Ubah tarif** untuk menambahkan tarif dan periode mulai berlaku; **Akhiri masa sewa** ketika penghuni keluar.
+
+**Jalur dari unit kosong:** H-8 → **Mulai masa sewa** → pilih penghuni yang ada atau buat identitas baru. Properti dan unit sudah terpilih. Formulir ini mengikuti aturan yang sama dengan formulir di H-10.
+
+**Jalur riwayat:** H-4 → [Riwayat penghuni](#h-5) → H-8 pada masa sewa terpilih; H-9 → H-10 → H-8 pada masa sewa terpilih. Penghuni yang menyewa kembali memakai identitas yang sama dan masa sewa baru.
+
 ## Data yang Menghubungkan Halaman
 
 | Data | Isi | Halaman terkait |
 | --- | --- | --- |
-| Properti sewa | Nama, lokasi, daftar unit | H-1, H-2, H-3, H-4, H-5, H-6, H-8, H-9 |
-| Unit sewa | Nomor unit, properti induk, status kosong atau terisi | H-1, H-2, H-3, H-4, H-5, H-6, H-8, H-9 |
-| Masa huni penyewa | Nama, telepon opsional, unit, tarif bulanan, tanggal jatuh tempo, tanggal mulai, tanggal keluar yang kosong selama aktif | H-5, H-8, H-9; ringkasan penyewa aktif di H-1, H-4, dan H-6 |
-| Pembayaran sewa | Properti, nomor unit, nama penyewa saat dicatat, periode sewa, nominal, waktu pencatatan, status tercatat lunas atau dibatalkan | H-4, H-6, H-8 |
-| Salinan data JSON | Seluruh data kos, kamar, masa huni, dan pembayaran termasuk yang dibatalkan | H-7 |
+| Properti sewa | Nama, lokasi, daftar unit | H-1, H-2, H-3, H-4; konteks pada halaman lain |
+| Unit sewa | Properti induk, nomor, harga standar bulanan, status dari masa sewa aktif | H-4, H-8; pemilihan pada H-10 |
+| Penghuni | Identitas tersendiri: nama dan telepon opsional | H-9, H-10; pemilihan pada H-8; nama terkait pada riwayat |
+| Masa sewa | Hubungan penghuni-unit, tanggal masuk/keluar, jatuh tempo | H-5, H-8, H-10; ringkasan pada H-1, H-4, H-6, H-9 |
+| Riwayat tarif | Masa sewa, tarif kesepakatan, bulan/tahun mulai berlaku, catatan opsional | H-8; tarif awal pada H-10; tarif periode pada H-6 |
+| Transaksi pembayaran | Masa sewa terkait; salinan properti, unit, nama penghuni, periode sewa, tarif periode, nominal, tanggal pembayaran, waktu pencatatan, status | H-4, H-6, H-8 |
+| Salinan data JSON | Seluruh data di atas, hubungan antar data, tarif terjadwal, dan transaksi yang dibatalkan | H-7 |
 
-Saat kamar dikosongkan, tanggal keluar diisi dan masa huni berakhir, tetapi riwayat penghuni dan pembayaran tetap tersedia. Riwayat penghuni mencakup mantan penyewa meskipun tidak ada catatan pembayarannya ([F-3](PRD.md#fitur-3), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7)).
+**Pemilihan tarif:** gunakan tarif kesepakatan dengan periode mulai berlaku paling akhir yang tidak melewati bulan sewa pilihan. Harga standar unit hanya menjadi nilai awal untuk masa sewa baru. Transaksi menyimpan salinan tarif dan nominal saat dicatat, sesuai [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), dan [F-6](PRD.md#fitur-6).
+
+**Identitas dan riwayat:** daftar penghuni memiliki satu entri per orang; riwayat properti/unit memiliki satu entri per masa sewa. Identitas tanpa masa sewa tetap dapat disimpan. Riwayat masa sewa tetap tersedia meskipun belum memiliki pembayaran.
 
 <a id="h-1"></a>
 
 ## H-1 — Beranda
 
-**Data tampil:** jumlah properti sewa; jumlah unit kosong dan terisi; tingkat okupansi; unit terisi yang **Belum dicatat lunas** untuk bulan berjalan; daftar properti.
+**Data tampil:** jumlah properti; unit kosong/terisi; tingkat okupansi; unit terisi yang **Belum dicatat lunas** untuk bulan berjalan; daftar properti.
 
-**Aksi:** buka properti atau unit terkait untuk menindaklanjuti pembayaran; buka daftar properti sewa atau Keuangan.
+**Aksi:** buka properti atau unit pada masa sewa terkait; buka Keuangan untuk menindaklanjuti pencatatan pembayaran.
 
-**Acuan PRD:** K-2, K-4, K-5; [F-5](PRD.md#fitur-5). Angka harus mengikuti data yang dimasukkan, bukan data contoh.
+**Keadaan kosong:** bila belum ada properti, tampilkan ajakan **Tambah properti** menuju H-3. Angka ringkasan mengikuti data pengguna.
+
+**Acuan PRD:** [K-2](PRD.md#k-2), [K-4](PRD.md#k-4), [K-5](PRD.md#k-5); [F-5](PRD.md#fitur-5).
 
 <a id="h-2"></a>
 
 ## H-2 — Daftar properti sewa
 
-**Data tampil:** daftar properti sewa yang dikelola, masing-masing dengan nama dan lokasi. Ringkasan unit dapat membantu pemilik memilih properti yang akan dibuka.
+**Data tampil:** nama dan lokasi setiap properti, serta ringkasan jumlah unit kosong/terisi.
 
-**Aksi:** pilih **Tambah properti** untuk membuka H-3; buka satu properti untuk menuju H-4.
+**Aksi:** **Tambah properti** membuka H-3; pilih properti membuka H-4.
 
-**Keadaan kosong:** bila belum ada properti, tampilkan ajakan untuk menambahkan properti pertama.
+**Keadaan kosong:** tampilkan ajakan menambahkan properti pertama.
 
-**Acuan PRD:** K-1, K-2; [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2).
+**Acuan PRD:** [K-1](PRD.md#k-1), [K-2](PRD.md#k-2); [F-1](PRD.md#fitur-1), [F-5](PRD.md#fitur-5).
 
 <a id="h-3"></a>
 
 ## H-3 — Tambah properti sewa
 
-**Data masukan:** nama properti, lokasi, dan jumlah unit awal.
+**Data masukan:** nama dan lokasi, keduanya wajib.
 
-**Aksi dan hasil:** **Simpan** membuat properti serta unit awal sesuai jumlah yang dimasukkan; properti baru muncul di H-2 dan dapat dibuka di H-4. **Batal** kembali tanpa membuat properti.
+**Aksi dan hasil:** **Simpan** membuat properti tanpa unit dan membuka H-4 untuk menambahkan unit. **Batal** kembali ke H-2 tanpa membuat properti.
 
-**Acuan PRD:** K-1; [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2).
+**Acuan PRD:** [K-1](PRD.md#k-1); [F-1](PRD.md#fitur-1).
 
 <a id="h-4"></a>
 
 ## H-4 — Detail properti sewa
 
-**Data tampil:** nama dan lokasi properti; jumlah unit kosong dan terisi; daftar unit dengan nomor, status, nama penyewa aktif jika ada, serta status pencatatan pembayaran bulan berjalan. Riwayat pembayaran properti menampilkan nomor unit, nama penyewa saat dicatat, periode, nominal, waktu pencatatan, dan status. Sediakan akses ke H-5 untuk seluruh riwayat penghuni properti.
+**Data tampil:** nama dan lokasi properti; jumlah unit kosong/terisi; daftar unit dengan nomor, harga standar, status, penghuni aktif, serta status pembayaran bulan berjalan. Riwayat pembayaran mencakup transaksi seluruh unit pada properti ini dengan salinan nomor unit, nama penghuni, periode, tarif, nominal, tanggal pembayaran, waktu pencatatan, dan status.
 
 | Aksi | Masukan atau syarat | Hasil |
 | --- | --- | --- |
-| **Ubah properti** | Nama dan lokasi properti | Data properti diperbarui |
-| **Hapus properti** | Seluruh unit pada properti belum pernah memiliki penghuni atau pembayaran; konfirmasi | Properti dan unit kosongnya dihapus |
-| **Tambah unit** | Properti yang sedang dibuka | Unit baru berstatus kosong muncul dalam daftar |
-| **Buka unit** | Pilih unit dalam daftar | Buka H-8 untuk unit tersebut |
-| **Riwayat penghuni** | Properti yang sedang dibuka | Buka H-5 untuk properti tersebut |
+| **Ubah properti** | Nama dan lokasi wajib | Data diperbarui; salinan pada transaksi lama tetap sama |
+| **Hapus properti** | Seluruh unit belum memiliki masa sewa/pembayaran; konfirmasi | Properti dan unit kosongnya dihapus; kembali ke H-2 |
+| **Tambah unit** | Nomor unik dalam properti dan harga standar bulanan lebih dari Rp 0 | Unit kosong dibuat; buka H-8 |
+| **Buka unit** | Pilih unit | Buka H-8 |
+| **Riwayat penghuni** | Properti yang dibuka | Buka H-5 |
+| **Buka transaksi terkait** | Pilih catatan pembayaran | Buka H-8 pada masa sewa terkait |
 
-**Keadaan kosong:** bila properti belum memiliki unit, tampilkan pilihan **Tambah unit**. Setelah penghapusan properti berhasil, kembali ke H-2.
+**Keadaan kosong:** properti tanpa unit menampilkan **Tambah unit**; riwayat tanpa pembayaran menampilkan pesan kosong.
 
-**Acuan PRD:** K-1, K-2, K-3, K-5; [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7).
+**Acuan PRD:** [K-1](PRD.md#k-1), [K-2](PRD.md#k-2), [K-3](PRD.md#k-3), [K-5](PRD.md#k-5); [F-1](PRD.md#fitur-1), [F-2](PRD.md#fitur-2), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7).
 
 <a id="h-8"></a>
 
@@ -101,55 +117,105 @@ Saat kamar dikosongkan, tanggal keluar diisi dan masa huni berakhir, tetapi riwa
 
 **Tujuan:** melihat kondisi dan mengelola satu unit di dalam properti.
 
-**Data tampil:** nama properti induk; nomor dan status unit; data penyewa aktif berupa nama, telepon opsional, tarif bulanan, tanggal jatuh tempo, dan tanggal mulai; status **Tercatat lunas** atau **Belum dicatat lunas** untuk bulan berjalan. Riwayat penghuni unit menampilkan setiap masa huni dengan nama, tanggal mulai, dan tanggal keluar jika sudah berakhir.
+**Data tampil:** properti induk; nomor, harga standar, dan status unit; identitas penghuni aktif; tanggal masuk/keluar dan jatuh tempo masa sewa yang dipilih; tarif kesepakatan bulan berjalan atau bulan pilihan; status pencatatan pembayaran. Harga standar unit dan tarif kesepakatan diberi label terpisah.
+
+### Masa sewa dan riwayat tarif
+
+Riwayat unit menampilkan satu entri per masa sewa, dengan nama penghuni, status, tanggal masuk/keluar, dan akses ke H-10. Memilih entri mengubah konteks pengelolaan tarif dan pembayaran ke masa sewa tersebut.
+
+Riwayat tarif untuk masa sewa pilihan menampilkan tarif, bulan/tahun mulai berlaku, dan catatan opsional. Tarif terjadwal yang belum berlaku ditandai; setelah masa sewa berakhir, entri setelah bulan keluar ditandai tidak digunakan. **Ubah tarif** menambahkan entri baru. Koreksi entri dilakukan melalui aksi tersendiri dengan penjelasan periode dan pembayaran yang terdampak.
 
 ### Riwayat pembayaran unit
 
-Bagian ini menampilkan semua catatan pembayaran pada unit yang dibuka, dari seluruh masa huni penghuni aktif maupun mantan penghuni. Setiap catatan memuat nama penyewa saat dicatat, periode sewa, nominal, waktu pencatatan, serta status **Tercatat lunas** atau **Dibatalkan**, sesuai [F-6](PRD.md#fitur-6).
+Menampilkan seluruh pembayaran dari masa sewa aktif maupun lampau pada unit ini. Setiap catatan memuat salinan nama penghuni, bulan sewa, tarif periode, nominal, tanggal pembayaran sebenarnya, waktu pencatatan, dan status **Tercatat lunas** atau **Dibatalkan**.
 
-Catatan yang dibatalkan tetap terlihat tetapi tidak dihitung dalam total pembayaran. Riwayat tidak hilang saat unit dikosongkan atau ditempati penyewa baru. Bila belum ada catatan, tampilkan pesan **Belum ada catatan pembayaran untuk unit ini**.
+Pembayaran yang dibatalkan tetap terlihat dan dikecualikan dari total. Riwayat tetap tersedia saat unit kosong atau ditempati orang lain. Bila belum ada transaksi, tampilkan **Belum ada catatan pembayaran untuk unit ini**.
 
 ### Aksi dan aturan unit
 
 | Aksi | Masukan atau syarat | Hasil |
 | --- | --- | --- |
-| **Ubah nomor unit** | Nomor baru unik dalam properti; unit belum pernah memiliki penghuni atau pembayaran | Nomor diperbarui; tetap di H-8 |
-| **Hapus unit** | Unit belum pernah memiliki penghuni atau pembayaran; konfirmasi | Unit dihapus; kembali ke H-4 |
-| **Isi penyewa** | Unit kosong; nama, telepon opsional, tarif bulanan, tanggal jatuh tempo, tanggal mulai; tanggal keluar kosong | Masa huni aktif dibuat; unit menjadi terisi |
-| **Koreksi masa huni** | Pilih masa huni aktif atau entri riwayat; perbaiki data tanpa membuat entri baru | Data masa huni diperbarui; pembayaran lama tetap sama |
-| **Akhiri masa huni** | Unit terisi; tanggal keluar sebenarnya dan konfirmasi | Unit menjadi kosong; riwayat tetap tersedia |
-| **Catat pembayaran** | Pilih masa huni aktif atau lampau, periode yang memenuhi aturan PRD, dan nominal penuh | Catatan dibuat; status periode menjadi **Tercatat lunas** |
-| **Kembali ke properti** | Properti induk unit | Buka H-4 |
+| **Ubah nomor unit** | Nomor unik; unit belum memiliki masa sewa/pembayaran | Nomor diperbarui |
+| **Ubah harga standar** | Harga bulanan berupa rupiah bulat lebih dari Rp 0 | Harga unit diperbarui; tarif masa sewa tetap sama |
+| **Hapus unit** | Belum memiliki masa sewa/pembayaran; konfirmasi | Unit dihapus; kembali ke H-4 |
+| **Mulai masa sewa** | Unit kosong; pilih penghuni atau buat identitas; tanggal masuk, jatuh tempo, tarif awal otomatis dari unit | Masa sewa dan tarif awal dibuat; unit terisi |
+| **Buka penghuni** | Penghuni pada masa sewa terkait | Buka H-10 |
+| **Koreksi masa sewa** | Pilih masa sewa dan perbaiki data sesuai F-3 | Entri diperbarui; transaksi lama tetap sama |
+| **Ubah tarif** | Masa sewa pilihan, tarif baru, bulan mulai berlaku, catatan opsional | Tambah riwayat tarif tanpa menimpa tarif lama |
+| **Koreksi entri tarif** | Entri pilihan; periksa dampak dan konfirmasi | Perhitungan periode yang belum dicatat diperbarui; transaksi lama tetap sama |
+| **Akhiri masa sewa** | Masa sewa aktif; tanggal keluar sebenarnya dan konfirmasi | Unit kosong; riwayat tetap tersedia |
+| **Catat pembayaran** | Masa sewa dan bulan yang valid; nominal otomatis dari tarif periode; tanggal pembayaran | Transaksi dibuat; periode **Tercatat lunas** |
+| **Kembali ke properti** | Properti induk | Buka H-4 |
 
-**Aturan:** nomor unit unik dalam properti; unit yang memiliki riwayat tidak dapat dihapus atau diganti nomornya. Validasi masa huni mengikuti [F-3](PRD.md#fitur-3): satu penyewa aktif per unit, tarif rupiah bulat lebih dari Rp 0, jatuh tempo 1–28, tanggal keluar kosong selama aktif, dan koreksi tanggal menjaga hubungan dengan riwayat pembayaran. Pencatatan pembayaran mengikuti [F-4](PRD.md#fitur-4): periode dalam masa huni sampai bulan berjalan, nominal penuh tanpa prorata, dan paling banyak satu catatan yang belum dibatalkan untuk setiap masa huni dan periode. Nominal awal mengikuti tarif terakhir pada masa huni terpilih dan dapat disesuaikan untuk periode lama.
+**Aturan:** validasi masa sewa dan tarif mengikuti [F-3](PRD.md#fitur-3). Tarif awal berlaku mulai bulan masuk; entri baru unik per bulan mulai berlaku dan dapat dijadwalkan. Perubahan tarif berlaku per bulan, dengan tarif penuh pada bulan masuk/keluar. Formulir pembayaran mengikuti [F-4](PRD.md#fitur-4): bulan berada dalam masa sewa sampai bulan berjalan, nominal penuh sama dengan tarif periode, tanggal pembayaran paling jauh hari ini, dan paling banyak satu transaksi yang belum dibatalkan per masa sewa/bulan. Waktu pencatatan otomatis.
 
-**Keadaan halaman:** unit kosong menampilkan **Isi penyewa**; unit terisi menampilkan data penyewa dan **Akhiri masa huni**. Riwayat tetap terlihat saat unit kembali kosong. Bila dibuka melalui H-5 atau H-9, tampilkan masa huni yang dipilih, termasuk bila unit saat ini ditempati orang lain. Setelah data disimpan, tetap di H-8 dan perbarui status serta daftar terkait. Bila belum ada riwayat penghuni atau pembayaran, tampilkan keadaan kosong pada bagian terkait. Bila unit tidak ditemukan, tampilkan pesan dan tautan ke H-4.
+**Keadaan halaman:** unit kosong menampilkan **Mulai masa sewa**; unit terisi menampilkan masa sewa aktif dan **Akhiri masa sewa**. Bila dibuka melalui H-5, H-6, atau H-10, tampilkan masa sewa yang dipilih walaupun penghuni aktif unit sudah berbeda. Setelah penyimpanan, perbarui bagian terkait tanpa kehilangan konteks masa sewa. Jika unit tidak ditemukan, tampilkan pesan dan tautan H-4. Jika belum ada penghuni, formulir mulai masa sewa menyediakan pembuatan identitas baru.
 
-**Acuan PRD:** K-1 s.d. K-5; [F-2](PRD.md#fitur-2), [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7).
+**Acuan PRD:** [K-1](PRD.md#k-1), [K-2](PRD.md#k-2), [K-3](PRD.md#k-3), [K-4](PRD.md#k-4), [K-5](PRD.md#k-5); [F-2](PRD.md#fitur-2), [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7).
 
 <a id="h-5"></a>
 
 ## H-5 — Riwayat penghuni
 
-**Data tampil:** semua masa huni yang pernah dicatat pada properti yang dibuka, termasuk penyewa aktif dan mantan penyewa. Setiap entri memuat nama, nomor unit, status **Aktif** atau **Sudah keluar**, tanggal mulai, dan tanggal keluar bila sudah tidak aktif. Tanggal keluar penyewa aktif kosong. Penghuni lama tetap muncul setelah unit ditempati penyewa baru.
+**Data tampil:** satu entri per masa sewa pada properti yang dibuka, dengan nama penghuni, nomor unit, status **Aktif** atau **Sudah keluar**, tanggal masuk, dan tanggal keluar bila sudah berakhir. Penghuni yang menyewa beberapa kali memiliki entri terpisah.
 
-**Aksi:** pilih entri masa huni untuk membuka H-8 pada unit dan masa huni terkait, lalu membetulkan data atau mencatat pembayaran periode lampau; kembali ke H-4.
+**Aksi:** pilih masa sewa untuk membuka H-8 pada konteks terkait; buka identitas penghuni di H-10; kembali ke H-4.
 
-**Keadaan kosong:** bila belum ada penghuni yang pernah dicatat, tampilkan daftar kosong. Riwayat tidak boleh bergantung pada adanya pembayaran.
+**Keadaan kosong:** tampilkan pesan jika belum ada masa sewa. Riwayat tidak bergantung pada adanya pembayaran.
 
-**Acuan PRD:** K-3; [F-7](PRD.md#fitur-7), terkait alur kosongkan kamar pada [F-3](PRD.md#fitur-3).
+**Acuan PRD:** [K-3](PRD.md#k-3); [F-3](PRD.md#fitur-3), [F-7](PRD.md#fitur-7).
 
 <a id="h-6"></a>
 
 ## H-6 — Keuangan
 
-**Data tampil:** periode bulan sewa yang dipilih; total nominal pembayaran yang belum dibatalkan pada periode tersebut; daftar masa huni yang **Belum dicatat lunas** pada periode itu, termasuk mantan penyewa yang menempati kamar pada bulan tersebut; riwayat semua pembayaran dengan kos, kamar, nama penyewa saat dicatat, periode, nominal, waktu pencatatan, dan status.
+**Data tampil:** bulan sewa pilihan; total nominal pembayaran yang belum dibatalkan; daftar masa sewa yang **Belum dicatat lunas** pada bulan tersebut beserta tarif yang berlaku, termasuk masa sewa yang sudah berakhir. Riwayat transaksi memuat salinan properti, unit, penghuni, bulan sewa, tarif, nominal, tanggal pembayaran, waktu pencatatan, dan status.
 
-**Aksi:** pilih periode bulan sewa sampai bulan berjalan; buka H-8 pada unit dan masa huni terkait untuk mencatat pembayaran penuh, termasuk periode lampau setelah penyewa keluar; **Batalkan pembayaran** yang salah dengan konfirmasi. Catatan yang dibatalkan tetap terlihat, tidak dihitung dalam total, dan status periode terkait kembali **Belum dicatat lunas** sehingga pembayaran pengganti dapat dicatat.
+**Aksi:** pilih bulan sampai bulan berjalan; buka H-8 pada masa sewa terkait untuk mencatat pembayaran; **Batalkan pembayaran** yang salah dengan konfirmasi. Pembatalan mempertahankan transaksi dalam riwayat, mengeluarkannya dari total, dan membuka periode untuk pencatatan ulang.
 
-**Keadaan kosong:** tampilkan pesan bila belum ada pembayaran yang tercatat atau tidak ada masa huni yang menunggu pencatatan pembayaran pada periode pilihan.
+**Aturan:** total mengikuti bulan sewa, bukan tanggal pembayaran atau waktu pencatatan. Perubahan tarif lampau tidak mengubah transaksi yang sudah tercatat.
 
-**Acuan PRD:** K-4, K-5; [F-4](PRD.md#fitur-4), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6).
+**Keadaan kosong:** tampilkan pesan jika belum ada pembayaran atau tidak ada masa sewa yang menunggu pencatatan pada bulan pilihan.
+
+**Acuan PRD:** [K-4](PRD.md#k-4), [K-5](PRD.md#k-5); [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6).
+
+<a id="h-9"></a>
+
+## H-9 — Daftar penghuni
+
+**Tujuan:** mengelola identitas seluruh penghuni dari menu **Penghuni** pada bar navigasi bawah.
+
+**Data tampil:** satu entri per identitas dengan nama, telepon opsional, status **Aktif**, **Sudah keluar**, atau **Belum menyewa**, serta ringkasan properti/unit pada masa sewa aktif bila ada. Orang yang menyewa kembali tetap memiliki satu entri; seluruh masa sewanya tersedia di H-10.
+
+**Filter:** properti dan status, masing-masing bernilai awal **Semua**. Filter properti mencocokkan seluruh riwayat masa sewa, termasuk yang sudah berakhir. Penghuni tanpa masa sewa ditampilkan saat properti bernilai **Semua**.
+
+**Aksi:** **Tambah penghuni** membuka formulir nama wajib dan telepon opsional; tampilkan calon identitas serupa untuk dipilih tanpa menganggap nama sama sebagai orang yang sama. **Simpan** membuat identitas dan membuka H-10; **Batal** tidak membuat identitas. Pilih penghuni yang ada untuk membuka H-10; ubah atau kembalikan filter ke **Semua**.
+
+**Keadaan halaman:** daftar kosong menyediakan **Tambah penghuni**. Jika filter tidak menemukan hasil, tampilkan pesan dan pilihan mengembalikan filter. Identitas tanpa masa sewa atau pembayaran tetap ditampilkan sesuai filter.
+
+**Acuan PRD:** [K-3](PRD.md#k-3); [F-7](PRD.md#fitur-7).
+
+<a id="h-10"></a>
+
+## H-10 — Detail penghuni
+
+**Tujuan:** mengelola identitas sekali dan menggunakannya pada setiap masa sewa.
+
+**Data tampil:** nama, telepon opsional, status penghuni, dan seluruh masa sewa lintas properti. Setiap masa sewa memuat properti, unit, status, tanggal masuk/keluar, jatuh tempo, dan tarif kesepakatan yang berlaku pada bulan berjalan atau bulan keluar bila sudah berakhir.
+
+| Aksi | Masukan atau syarat | Hasil |
+| --- | --- | --- |
+| **Ubah identitas** | Nama wajib, telepon opsional | Identitas diperbarui pada tampilan terkait; salinan transaksi lama tetap sama |
+| **Mulai masa sewa** | Pilih properti dan unit kosong; tanggal masuk, jatuh tempo 1–28, tarif awal otomatis dari harga unit dan dapat disesuaikan | Masa sewa dibuat; buka H-8 pada masa sewa baru |
+| **Buka masa sewa** | Pilih masa sewa aktif atau lampau | Buka H-8 pada konteks tersebut untuk tarif, koreksi, dan pembayaran |
+| **Hapus penghuni** | Identitas belum memiliki masa sewa; konfirmasi | Identitas dihapus; kembali ke H-9 |
+| **Kembali ke daftar** | — | Buka H-9 |
+
+**Aturan:** formulir mulai masa sewa mengikuti [F-3](PRD.md#fitur-3). Tanggal keluar kosong ketika dibuat; tarif awal disimpan tersendiri mulai bulan masuk. Memilih unit lain memperbarui nilai awal tarif dan pengguna memeriksa ulang sebelum menyimpan. Pindah unit dilakukan dengan mengakhiri masa sewa lama melalui H-8, lalu memulai masa sewa baru memakai identitas ini.
+
+**Keadaan halaman:** tanpa masa sewa, tampilkan **Mulai masa sewa**. Jika belum ada properti atau unit kosong, tampilkan pesan dan tautan ke H-2 untuk membuat properti atau menambah unit. Jika penghuni tidak ditemukan, tampilkan pesan dan tautan H-9. Penghuni dengan riwayat tetap dapat dibuka setelah seluruh masa sewanya berakhir.
+
+**Acuan PRD:** [K-2](PRD.md#k-2), [K-3](PRD.md#k-3); [F-3](PRD.md#fitur-3), [F-7](PRD.md#fitur-7).
 
 <a id="h-7"></a>
 
@@ -159,24 +225,8 @@ Catatan yang dibatalkan tetap terlihat tetapi tidak dihitung dalam total pembaya
 
 **Data tampil:** informasi penyimpanan pada browser/perangkat yang digunakan dan pilihan ekspor data.
 
-**Aksi:** **Ekspor data** mengunduh berkas JSON berisi seluruh properti, unit, riwayat penghuni, dan catatan pembayaran beserta status pembatalannya.
+**Aksi:** **Ekspor data** mengunduh JSON berisi seluruh properti, unit dan harga standar, identitas penghuni, masa sewa, riwayat tarif termasuk jadwal mendatang, serta transaksi beserta salinan data dan status pembatalannya. Hubungan antar data ikut diekspor.
 
-**Keadaan gagal:** bila ekspor gagal, tampilkan pesan yang jelas. Jelaskan bahwa data lokal dapat hilang bila data browser terhapus atau perangkat hilang.
+**Keadaan gagal:** jika ekspor gagal, tampilkan pesan yang jelas. Jelaskan bahwa data lokal dapat hilang jika data browser terhapus atau perangkat hilang.
 
-**Acuan PRD:** K-6; [F-8](PRD.md#fitur-8).
-
-<a id="h-9"></a>
-
-## H-9 — Daftar penghuni
-
-**Tujuan:** melihat seluruh penghuni aktif dan mantan penghuni dari semua properti dalam satu daftar. Halaman diakses melalui **Penghuni** pada bar navigasi bawah.
-
-**Data tampil:** satu baris untuk setiap masa huni, berisi nama penghuni, nama properti, nomor unit, status **Aktif** atau **Sudah keluar**, tanggal mulai, dan tanggal keluar bila sudah berakhir. Tanggal keluar yang kosong ditampilkan sebagai tanda belum berakhir. Orang yang pernah menyewa beberapa kali memiliki baris terpisah untuk setiap masa huni.
-
-**Filter:** properti dan status penghuni, masing-masing dengan pilihan **Semua**. Awalnya semua properti serta penghuni aktif dan yang sudah keluar ditampilkan. Kedua filter dapat digunakan bersamaan.
-
-**Aksi:** pilih entri untuk membuka H-8 pada unit dan masa huni terkait, lalu melihat riwayat, membetulkan data, atau mencatat pembayaran sesuai aturan PRD; ubah atau kembalikan filter ke **Semua**; pindah halaman melalui bar navigasi bawah.
-
-**Keadaan halaman:** bila belum ada masa huni yang pernah dicatat, tampilkan keadaan kosong. Bila tidak ada entri yang cocok dengan filter, tampilkan pesan dan pilihan mengembalikan filter ke **Semua**. Masa huni tanpa pembayaran tetap muncul. Perubahan masa huni dari H-8 memperbarui daftar dan statusnya.
-
-**Acuan PRD:** K-3; [F-7](PRD.md#fitur-7), terkait koreksi masa huni pada [F-3](PRD.md#fitur-3).
+**Acuan PRD:** [K-6](PRD.md#k-6); [F-8](PRD.md#fitur-8).

@@ -1,0 +1,89 @@
+<section class="panel payment-overview" aria-labelledby="payment-overview-title">
+  <div class="payment-summary">
+    <span class="visual-label"><app-icon name="chart" /> Gambaran bulan ini</span>
+    <h2 id="payment-overview-title">Bagaimana kabar pembayaran?</h2>
+    <div class="payment-rate">
+      <strong>{{ paymentRate() }}<span>%</span></strong>
+    </div>
+    <p>{{ paidUnits() }} dari {{ store.occupiedUnits() }} unit terisi sudah dicatat lunas.</p>
+    <a routerLink="/keuangan" class="summary-link"
+      >Buka catatan keuangan <app-icon name="chevron"
+    /></a>
+  </div>
+  <div class="payment-chart">
+    <div class="chart-heading">
+      <div>
+        <h3>Status unit per properti</h3>
+        <p>Panjang batang menunjukkan jumlah unit</p>
+      </div>
+      <span class="period-chip">Bulan ini</span>
+    </div>
+    <div class="chart-legend">
+      <span><i class="legend-dot paid"></i>Lunas</span>
+      <span><i class="legend-dot unpaid"></i>Belum lunas</span>
+      <span><i class="legend-dot available"></i>Kosong</span>
+    </div>
+    <div class="chart-rows">
+      @for (item of paymentOverview().slice(0, 5); track item.id) {
+        <a
+          class="chart-row"
+          [routerLink]="['/properti', item.id]"
+          [queryParams]="{ from: 'beranda' }"
+        >
+          <div class="chart-row-heading">
+            <strong>{{ item.name }}</strong
+            ><span>{{ item.total }} unit</span>
+          </div>
+          <div
+            class="chart-track"
+            role="img"
+            [attr.aria-label]="
+              item.name +
+              ': ' +
+              item.paid +
+              ' unit lunas, ' +
+              item.unpaid +
+              ' belum lunas, ' +
+              item.vacant +
+              ' kosong'
+            "
+          >
+            <div class="chart-bar" [style.width.%]="item.width">
+              <span class="bar-segment paid" [style.flex-grow]="item.paid">
+                @if (item.paid) {
+                  {{ item.paid }}
+                }
+              </span>
+              <span class="bar-segment unpaid" [style.flex-grow]="item.unpaid">
+                @if (item.unpaid) {
+                  {{ item.unpaid }}
+                }
+              </span>
+              <span class="bar-segment available" [style.flex-grow]="item.vacant">
+                @if (item.vacant) {
+                  {{ item.vacant }}
+                }
+              </span>
+            </div>
+          </div>
+          <span class="chart-row-caption"
+            >{{ item.paid }} lunas · {{ item.unpaid }} belum lunas · {{ item.vacant }} kosong</span
+          >
+        </a>
+      } @empty {
+        <div class="chart-empty">
+          <app-icon name="building" /><strong>Gambaran properti dimulai di sini</strong>
+          <p>Tambahkan properti dan isi data penyewa untuk melihat diagram pembayaran.</p>
+          <a routerLink="/properti/baru" class="text-link"
+            >Tambah properti <app-icon name="chevron"
+          /></a>
+        </div>
+      }
+    </div>
+    @if (paymentOverview().length > 5) {
+      <a routerLink="/properti" class="text-link chart-more"
+        >Lihat {{ paymentOverview().length }} properti <app-icon name="chevron"
+      /></a>
+    }
+  </div>
+</section>

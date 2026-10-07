@@ -6,8 +6,12 @@ Rincian data dan aksi tiap halaman ada di [Peta Halaman Rentora MVP](PAGES.md).
 
 ## Definisi
 
-- **Properti sewa** adalah entitas utama yang dikelola pemilik, dengan nama, lokasi, dan daftar unit sewa.
-- **Unit sewa** adalah objek yang disewakan di dalam satu properti. Setiap unit memiliki nomor dan berstatus kosong atau terisi berdasarkan ada atau tidaknya penyewa aktif.
+- **Properti sewa** adalah entitas utama dengan nama, lokasi, dan daftar unit sewa.
+- **Unit sewa** adalah objek yang disewakan dalam satu properti, dengan nomor unik dan harga sewa standar bulanan. Status kosong atau terisi berasal dari masa sewa aktif.
+- **Penghuni** adalah identitas orang yang menyewa, dengan nama dan nomor telepon opsional. Satu penghuni dapat memiliki beberapa masa sewa tanpa mengulang identitasnya.
+- **Masa sewa** menghubungkan penghuni dengan unit, tanggal masuk/keluar, tanggal jatuh tempo, dan riwayat tarif kesepakatan. Istilah penyewa aktif merujuk pada penghuni dengan masa sewa yang belum berakhir.
+- **Riwayat tarif** berisi tarif kesepakatan bulanan dan periode mulai berlaku pada suatu masa sewa.
+- **Transaksi pembayaran** adalah catatan pelunasan satu periode bulan pada satu masa sewa, dengan tarif periode tersebut, nominal pembayaran, tanggal pembayaran sebenarnya, waktu pencatatan, dan status.
 
 ## Pengguna
 
@@ -17,7 +21,7 @@ Rincian data dan aksi tiap halaman ada di [Peta Halaman Rentora MVP](PAGES.md).
 
 1. <a id="k-1"></a> **K-1 — Mencatat properti dan unit sewa.** Pemilik perlu menyimpan dan membetulkan daftar properti serta unit yang dikelola agar tidak bergantung pada catatan terpisah.
 2. <a id="k-2"></a> **K-2 — Mengetahui ketersediaan unit.** Pemilik perlu melihat unit yang kosong atau terisi tanpa menghitungnya sendiri.
-3. <a id="k-3"></a> **K-3 — Mencatat penyewa aktif dan riwayat penghuni.** Pemilik perlu mengetahui siapa yang menempati unit, tarif bulanannya, tanggal jatuh temponya, serta melihat seluruh penghuni aktif dan mantan penghuni lintas properti maupun riwayat pada satu properti.
+3. <a id="k-3"></a> **K-3 — Mencatat penyewa aktif dan riwayat penghuni.** Pemilik perlu menyimpan identitas penghuni sekali, menghubungkannya dengan masa sewa, menentukan tarif kesepakatan dan jatuh tempo, serta melihat perubahan tarif dan riwayat penyewaannya.
 4. <a id="k-4"></a> **K-4 — Memantau pembayaran.** Pemilik perlu mengetahui periode sewa yang sudah atau belum dicatat lunas, termasuk periode lampau, dan dapat membetulkan salah input.
 5. <a id="k-5"></a> **K-5 — Melihat ringkasan dan riwayat.** Pemilik perlu melihat kondisi seluruh properti, total pembayaran yang tercatat, dan riwayat pembayaran bulan sebelumnya.
 6. <a id="k-6"></a> **K-6 — Menjaga salinan data.** Pemilik perlu mempertahankan data saat halaman dimuat ulang dan dapat mengunduh salinannya.
@@ -30,11 +34,11 @@ Rincian data dan aksi tiap halaman ada di [Peta Halaman Rentora MVP](PAGES.md).
 | --- | --- | --- | --- |
 | 1 | [Kelola properti sewa](#fitur-1) | [K-1](#k-1) | [Daftar properti sewa](PAGES.md#h-2), [Tambah properti sewa](PAGES.md#h-3), [Detail properti sewa](PAGES.md#h-4) |
 | 2 | [Kelola unit sewa](#fitur-2) | [K-1](#k-1), [K-2](#k-2) | [Detail properti sewa](PAGES.md#h-4), [Detail unit sewa](PAGES.md#h-8) |
-| 3 | [Kelola masa huni penyewa](#fitur-3) | [K-2](#k-2), [K-3](#k-3) | [Detail unit sewa](PAGES.md#h-8), [Riwayat penghuni](PAGES.md#h-5) |
+| 3 | [Kelola masa sewa dan riwayat tarif](#fitur-3) | [K-2](#k-2), [K-3](#k-3) | [Detail penghuni](PAGES.md#h-10), [Detail unit sewa](PAGES.md#h-8), [Riwayat penghuni](PAGES.md#h-5), [Keuangan](PAGES.md#h-6) |
 | 4 | [Catat pembayaran bulanan](#fitur-4) | [K-4](#k-4), [K-5](#k-5) | [Detail unit sewa](PAGES.md#h-8), [Keuangan](PAGES.md#h-6) |
-| 5 | [Dashboard dan ringkasan keuangan](#fitur-5) | [K-2](#k-2), [K-4](#k-4), [K-5](#k-5) | [Beranda](PAGES.md#h-1), [Keuangan](PAGES.md#h-6) |
+| 5 | [Dashboard dan ringkasan keuangan](#fitur-5) | [K-2](#k-2), [K-4](#k-4), [K-5](#k-5) | [Beranda](PAGES.md#h-1), [Daftar properti sewa](PAGES.md#h-2), [Detail properti sewa](PAGES.md#h-4), [Keuangan](PAGES.md#h-6) |
 | 6 | [Riwayat pembayaran](#fitur-6) | [K-5](#k-5) | [Detail properti sewa](PAGES.md#h-4), [Detail unit sewa](PAGES.md#h-8), [Keuangan](PAGES.md#h-6) |
-| 7 | [Daftar dan riwayat penghuni](#fitur-7) | [K-3](#k-3) | [Daftar penghuni](PAGES.md#h-9), [Riwayat penghuni](PAGES.md#h-5), [Detail unit sewa](PAGES.md#h-8) |
+| 7 | [Kelola penghuni dan riwayat penyewaan](#fitur-7) | [K-3](#k-3) | [Daftar penghuni](PAGES.md#h-9), [Detail penghuni](PAGES.md#h-10), [Detail properti sewa](PAGES.md#h-4), [Riwayat penghuni](PAGES.md#h-5), [Detail unit sewa](PAGES.md#h-8) |
 | 8 | [Penyimpanan lokal dan ekspor data](#fitur-8) | [K-6](#k-6) | [Lainnya](PAGES.md#h-7) |
 
 <a id="rencana-pengembangan"></a>
@@ -56,6 +60,7 @@ Fitur berikut tidak dikerjakan sekarang dan belum ditetapkan sebagai rencana pen
 - **Penerimaan uang:** penerimaan uang pembayaran sewa oleh aplikasi.
 - **Tagihan otomatis:** pembuatan tagihan sewa secara otomatis.
 - **Pembayaran online:** pembayaran sewa secara online, termasuk melalui QRIS.
+- **Diskon transaksi dan prorata:** potongan khusus saat pembayaran dan perhitungan tarif berdasarkan sebagian bulan. Tarif kesepakatan yang berbeda dari harga standar tetap dapat ditentukan pada masa sewa.
 - **Pembayaran sebagian:** pencatatan pembayaran yang belum melunasi seluruh nominal sewa bulanan.
 - **Pengingat WhatsApp:** pengiriman pengingat pembayaran melalui WhatsApp.
 - **Deposit:** pencatatan uang jaminan sewa.
@@ -65,135 +70,159 @@ Fitur berikut tidak dikerjakan sekarang dan belum ditetapkan sebagai rencana pen
 - **Identitas dan dokumen penyewa:** pengumpulan nomor identitas, foto KTP, dan dokumen kontrak.
 - **Kontak darurat:** pencatatan kontak yang dapat dihubungi dalam keadaan darurat.
 
+## Hubungan Data dan Alur Utama
+
+Properti memiliki unit. Penghuni memiliki masa sewa yang menunjuk satu unit; setiap masa sewa memiliki riwayat tarif dan transaksi pembayaran sendiri. Identitas penghuni digunakan kembali saat menyewa kembali atau pindah unit.
+
+1. Buat properti dengan nama dan lokasi.
+2. Tambahkan unit dengan nomor dan harga sewa standar.
+3. Buat identitas penghuni atau pilih penghuni yang sudah tercatat.
+4. Mulai masa sewa pada unit kosong: isi tanggal masuk dan jatuh tempo; tarif awal otomatis dari harga unit, lalu dapat disesuaikan sebagai kesepakatan.
+5. Catat pembayaran berdasarkan bulan sewa; nominal mengikuti tarif yang berlaku pada bulan tersebut.
+6. Bila tarif berubah, tambahkan tarif beserta bulan mulai berlaku. Perubahan harga standar unit tidak mengubah kesepakatan masa sewa yang sudah ada.
+7. Akhiri masa sewa dengan tanggal keluar sebenarnya. Unit kembali kosong; identitas, masa sewa, tarif, dan pembayaran tetap tersedia.
+
 ## Rincian Fitur
 
 <a id="fitur-1"></a>
 
 ### Fitur 1 — Kelola properti sewa [K-1](#k-1)
 
-Pemilik dapat melihat daftar kos, menambah kos dengan nama, lokasi, dan jumlah kamar awal, serta mengubah nama atau lokasi kos. Kos yang belum pernah memiliki penghuni atau pembayaran dapat dihapus setelah konfirmasi; kos yang memiliki riwayat tetap disimpan.
+Pemilik dapat melihat daftar properti, menambahkan properti dengan nama dan lokasi, serta mengubah informasi tersebut. Unit ditambahkan setelah properti tersimpan melalui detail properti.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka daftar properti sewa dan memilih **Tambah properti**.
-2. Pemilik mengisi nama, lokasi, dan jumlah kamar awal, lalu menyimpan.
-3. Kos baru muncul pada daftar dan dapat dibuka untuk melihat kamarnya.
-4. Bila perlu, pemilik membuka detail kos, mengubah nama atau lokasi, lalu menyimpan perubahan.
-5. Pemilik dapat menghapus kos yang belum memiliki riwayat setelah mengonfirmasi penghapusan.
+1. Buka **Properti**, lalu **Tambah properti**.
+2. Isi nama dan lokasi, lalu simpan.
+3. Buka detail properti untuk menambahkan unit atau mengubah informasi properti.
+4. Hapus properti yang belum memiliki masa sewa atau pembayaran setelah konfirmasi.
 
-**Kriteria selesai:** kos dan jumlah kamar awal sesuai input; perubahan tersimpan tanpa data contoh; kos yang memiliki riwayat penghuni atau pembayaran tidak dapat dihapus.
+**Kriteria selesai:** nama dan lokasi wajib diisi; properti baru belum memiliki unit; properti dan unit kosongnya hanya dapat dihapus bila seluruh unit belum memiliki riwayat masa sewa atau pembayaran.
 
 <a id="fitur-2"></a>
 
 ### Fitur 2 — Kelola unit sewa [K-1](#k-1), [K-2](#k-2)
 
-Kamar awal dibuat saat kos ditambahkan. Pemilik dapat menambah kamar, membetulkan nomor kamar, dan melihat status kosong atau terisi. Nomor kamar harus unik di dalam satu kos. Kamar yang belum pernah memiliki penghuni atau pembayaran dapat dihapus setelah konfirmasi.
+Setiap unit memiliki nomor dan harga sewa standar per bulan. Harga standar menjadi nilai awal saat membuat masa sewa; perubahan harga unit hanya memengaruhi nilai awal untuk masa sewa baru.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka detail properti dan melihat daftar kamar.
-2. Pemilik memilih **Tambah unit** bila membutuhkan kamar baru.
-3. Kamar baru muncul dengan status kosong; status berubah menjadi terisi setelah ada penyewa aktif.
-4. Pemilik memilih unit dalam daftar untuk membuka **Detail unit sewa** dan melihat nomor, status, penyewa aktif, serta riwayat unit tersebut.
-5. Dari detail unit, pemilik dapat membetulkan nomor atau menghapus kamar yang belum memiliki riwayat.
+1. Buka detail properti, lalu **Tambah unit**.
+2. Isi nomor unit dan harga sewa standar, lalu simpan; unit berstatus kosong.
+3. Buka detail unit untuk melihat harga standar, penghuni aktif, masa sewa, serta riwayat pembayaran.
+4. Pilih **Ubah harga standar** bila harga untuk penyewaan baru berubah.
+5. Ubah nomor atau hapus unit yang belum memiliki riwayat setelah konfirmasi penghapusan.
 
-**Kriteria selesai:** satu kamar memiliki satu status yang berasal dari data penyewa aktif; nomor kamar tidak berulang dalam satu kos; jumlah kamar pada ringkasan sesuai daftar kamar; kamar yang memiliki riwayat tidak dapat dihapus atau diganti nomornya.
+**Kriteria selesai:** nomor wajib diisi dan unik dalam properti; harga berupa rupiah bulat lebih dari Rp 0; satu unit hanya memiliki satu masa sewa aktif; perubahan harga standar tidak mengubah tarif kesepakatan atau transaksi; unit dengan riwayat tidak dapat dihapus atau diganti nomornya.
 
 <a id="fitur-3"></a>
 
-### Fitur 3 — Kelola masa huni penyewa [K-2](#k-2), [K-3](#k-3)
+### Fitur 3 — Kelola masa sewa dan riwayat tarif [K-2](#k-2), [K-3](#k-3)
 
-Pemilik dapat mengisi nama penyewa, nomor telepon opsional, tarif sewa bulanan, tanggal jatuh tempo, dan tanggal mulai menempati untuk kamar kosong. Tanggal keluar kosong saat penyewa masih aktif dan diisi ketika masa huni berakhir. Satu kamar hanya dapat memiliki satu penyewa aktif. Data masa huni dapat dikoreksi tanpa membuat riwayat penghuni baru; koreksi tidak mengubah catatan pembayaran yang sudah dibuat.
+Masa sewa menyimpan hubungan penghuni dan unit, tanggal masuk, tanggal keluar opsional, jatuh tempo, serta riwayat tarif kesepakatan. Tarif awal disalin dari harga standar unit saat formulir dibuat dan dapat disesuaikan sebelum penyimpanan. Setelah tersimpan, tarif kesepakatan berdiri sendiri.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka **Detail unit sewa** untuk kamar kosong, lalu mengisi data penyewa serta tanggal mulai menempati.
-2. Pemilik menyimpan data; kamar menjadi terisi.
-3. Bila ada kesalahan data, pemilik membuka masa huni terkait dan menyimpan koreksi. Perubahan tarif hanya berlaku untuk pencatatan pembayaran berikutnya.
-4. Saat penyewa keluar, pemilik memilih **Akhiri masa huni**, mengisi tanggal keluar yang sebenarnya, dan mengonfirmasi.
-5. Kamar kembali kosong, sedangkan riwayat penghuni dan pembayaran lama tetap tersedia.
+1. Dari detail penghuni, pilih **Mulai masa sewa**, lalu pilih properti dan unit kosong. Dari detail unit kosong, aksi yang sama sudah memilih properti dan unit; pilih penghuni yang ada atau tambahkan identitas baru.
+2. Isi tanggal masuk dan jatuh tempo, periksa tarif awal, lalu simpan. Tanggal keluar kosong; unit menjadi terisi.
+3. Pilih **Ubah tarif** pada masa sewa terkait, isi tarif baru, bulan/tahun mulai berlaku, dan catatan opsional.
+4. Koreksi data masa sewa atau entri tarif yang salah tanpa membuat masa sewa baru; tampilkan periode dan pembayaran yang terdampak sebelum konfirmasi.
+5. Pilih **Akhiri masa sewa**, isi tanggal keluar sebenarnya, lalu konfirmasi. Untuk pindah unit, akhiri masa sewa lama dan buat masa sewa baru dengan identitas penghuni yang sama.
 
-**Kriteria selesai:** tarif berupa rupiah bulat lebih dari Rp 0; tanggal jatuh tempo dibatasi 1–28; tanggal mulai tidak melewati hari ini; tanggal keluar boleh kosong untuk masa huni aktif, tetapi wajib diisi saat kamar dikosongkan dan tidak boleh mendahului tanggal mulai atau melewati hari ini; masa huni pada kamar yang sama tidak bertumpang tindih; koreksi tanggal tidak boleh menempatkan pembayaran yang sudah dicatat di luar masa huni; mengosongkan kamar tidak menghapus riwayat penghuni atau pembayaran.
+**Aturan masa sewa**
+
+- Tanggal masuk tidak melewati hari ini. Tanggal keluar wajib saat mengakhiri masa sewa, tidak mendahului tanggal masuk, dan tidak melewati hari ini.
+- Masa sewa dalam unit yang sama tidak bertumpang tindih; unit tujuan harus kosong saat memulai masa sewa.
+- Jatuh tempo berupa tanggal 1–28 dalam bulan sewa. Tarif berupa rupiah bulat lebih dari Rp 0.
+- Koreksi tanggal harus menjaga seluruh periode pembayaran tetap berada dalam masa sewa. Penghuni dan unit pada masa sewa yang sudah memiliki pembayaran tidak dapat diganti; tanggal dan jatuh tempo dapat dikoreksi sesuai validasi.
+
+**Aturan riwayat tarif**
+
+- Tarif awal berlaku mulai bulan tanggal masuk. Untuk suatu bulan sewa, gunakan entri dengan periode mulai berlaku paling akhir yang tidak melewati bulan tersebut.
+- Koreksi tanggal masuk atau periode tarif awal harus tetap menyediakan tarif mulai bulan masuk; formulir menolak perubahan yang meninggalkan bulan sewa tanpa tarif.
+- Satu masa sewa hanya memiliki satu entri tarif untuk setiap bulan mulai berlaku. Tarif baru dapat dijadwalkan untuk bulan mendatang pada masa sewa aktif.
+- Periode mulai berlaku tidak mendahului bulan masuk. Untuk masa sewa yang sudah berakhir, periode tersebut tidak melewati bulan keluar.
+- Perubahan berlaku per bulan; bulan masuk dan keluar menggunakan tarif penuh. Tarif baru tidak menimpa entri tarif sebelumnya.
+- Koreksi tarif lampau memengaruhi nominal awal pembayaran yang belum dicatat. Transaksi yang sudah tercatat tetap menyimpan tarif dan nominal sebelumnya; koreksi transaksi dilakukan melalui pembatalan dan pencatatan ulang.
+- Saat masa sewa diakhiri, tarif terjadwal setelah bulan keluar tetap disimpan sebagai riwayat dan tidak digunakan untuk pembayaran masa sewa tersebut.
+
+**Kriteria selesai:** perubahan harga standar dan tarif kesepakatan terpisah; setiap bulan dalam masa sewa memperoleh tepat satu tarif; riwayat tarif, masa sewa, dan pembayaran tetap tersedia setelah penghuni keluar atau pindah unit.
 
 <a id="fitur-4"></a>
 
 ### Fitur 4 — Catat pembayaran bulanan [K-4](#k-4), [K-5](#k-5)
 
-Pemilik mencatat pembayaran lunas secara manual untuk bulan sewa yang berada dalam masa huni, paling jauh bulan kalender berjalan. Periode yang lampau tetap dapat dicatat, termasuk setelah penyewa keluar. Bulan ketika penyewa masuk atau keluar memakai tarif bulanan penuh tanpa perhitungan prorata. Aplikasi mencegah pencatatan ganda dan menyediakan pembatalan bila terjadi salah input.
+Pemilik mencatat pelunasan secara manual untuk satu bulan sewa dalam suatu masa sewa, paling jauh bulan berjalan. Periode lampau dapat dicatat setelah penghuni keluar. Nominal otomatis mengikuti tarif kesepakatan yang berlaku pada bulan sewa terpilih.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka masa huni penyewa pada **Detail unit sewa**, langsung dari daftar unit atau melalui daftar penghuni, riwayat penghuni, maupun halaman Keuangan.
-2. Pemilik memilih periode bulan yang berada dalam masa huni dan belum dicatat lunas. Periode tidak boleh melewati bulan berjalan.
-3. Nominal awal mengikuti tarif terakhir yang tersimpan pada masa huni terpilih; bila mencatat periode lama setelah tarif berubah, pemilik dapat menyesuaikan nominal penuh untuk periode tersebut sebelum menyimpan.
-4. Pemilik memilih **Catat pembayaran**; status periode itu menjadi **Tercatat lunas**.
-5. Bila salah input, pemilik membatalkan catatan dengan konfirmasi; status periode kembali **Belum dicatat lunas** dan periode itu dapat dicatat ulang.
+1. Buka masa sewa pada detail unit, langsung atau melalui detail penghuni, riwayat penghuni, maupun Keuangan.
+2. Pilih bulan sewa yang belum dicatat lunas; aplikasi menampilkan tarif periode dan nominal penuh yang sama dengan tarif tersebut.
+3. Isi tanggal pembayaran sebenarnya, dengan nilai awal hari ini; periksa lalu pilih **Catat pembayaran**. Waktu pencatatan diisi otomatis.
+4. Jika salah, batalkan dengan konfirmasi, lalu catat ulang bila diperlukan.
 
-**Kriteria selesai:** hanya bulan yang beririsan dengan masa huni yang dapat dipilih, dengan batas akhir bulan berjalan untuk masa huni aktif atau bulan tanggal keluar untuk masa huni yang berakhir; satu masa huni pada satu kamar memiliki paling banyak satu catatan pembayaran yang belum dibatalkan untuk periode yang sama; nominal berupa rupiah bulat lebih dari Rp 0 dan merepresentasikan pembayaran lunas, bukan pembayaran sebagian; catatan yang dibatalkan tetap tersimpan untuk riwayat tetapi tidak dihitung dalam total.
+**Kriteria selesai:** periode beririsan dengan masa sewa dan tidak melewati bulan berjalan; satu masa sewa memiliki paling banyak satu pembayaran yang belum dibatalkan per bulan; nominal sama dengan tarif periode dan tidak dapat diganti langsung pada formulir pembayaran; koreksi kesepakatan dilakukan pada riwayat tarif; tanggal pembayaran wajib dan tidak melewati hari ini, terpisah dari periode sewa dan waktu pencatatan; catatan yang dibatalkan tetap tersimpan tetapi tidak dihitung dalam total; pembatalan membuat periode kembali **Belum dicatat lunas**.
 
 <a id="fitur-5"></a>
 
 ### Fitur 5 — Dashboard dan ringkasan keuangan [K-2](#k-2), [K-4](#k-4), [K-5](#k-5)
 
-Dashboard menampilkan jumlah properti, unit kosong dan terisi, tingkat okupansi, serta unit terisi yang **Belum dicatat lunas** untuk bulan berjalan. Halaman Keuangan menampilkan total pembayaran yang tercatat untuk periode sewa yang dipilih dan daftar masa huni dalam periode itu yang **Belum dicatat lunas**, termasuk mantan penyewa bila periode pilihannya berada dalam masa huni mereka.
+Beranda menampilkan jumlah properti, unit kosong/terisi, tingkat okupansi, dan unit terisi yang **Belum dicatat lunas** untuk bulan berjalan. Keuangan menampilkan total pembayaran untuk bulan sewa pilihan dan semua masa sewa pada bulan tersebut yang **Belum dicatat lunas**, termasuk masa sewa yang sudah berakhir.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka dashboard untuk melihat kondisi saat ini atau halaman Keuangan untuk memilih periode bulan sewa.
-2. Pemilik melihat ringkasan dan masa huni yang perlu ditindaklanjuti pada periode tersebut.
-3. Pemilik membuka detail unit dan masa huni terkait untuk mencatat pembayaran.
+1. Buka Beranda untuk kondisi saat ini atau Keuangan untuk memilih bulan sewa.
+2. Lihat ringkasan dan masa sewa yang perlu ditindaklanjuti.
+3. Buka detail unit pada masa sewa terkait untuk mencatat pembayaran.
 
-**Kriteria selesai:** angka berubah mengikuti data yang dimasukkan; total periode sewa dihitung dari nominal catatan pembayaran pada periode terpilih yang belum dibatalkan, bukan angka contoh; label **Belum dicatat lunas** tidak menyatakan bahwa penyewa pasti belum membayar di luar aplikasi.
+**Kriteria selesai:** angka mengikuti data pengguna; okupansi berasal dari masa sewa aktif; total dihitung dari nominal transaksi yang belum dibatalkan berdasarkan bulan sewa, terlepas dari tanggal pembayaran; label **Belum dicatat lunas** menjelaskan keadaan pencatatan dalam aplikasi.
 
 <a id="fitur-6"></a>
 
 ### Fitur 6 — Riwayat pembayaran [K-5](#k-5)
 
-Setiap catatan pembayaran memuat kos, nomor kamar, nama penyewa saat pembayaran dicatat, periode sewa, nominal, waktu pencatatan, dan status **Tercatat lunas** atau **Dibatalkan**. Perubahan data penyewa atau tarif berikutnya tidak mengubah isi catatan lama.
-
-Pada **Detail unit sewa**, riwayat pembayaran mencakup seluruh masa huni pada unit tersebut, termasuk penyewa aktif, mantan penyewa, dan catatan yang dibatalkan. Riwayat tetap tersedia ketika unit kosong atau ditempati penyewa baru.
+Setiap transaksi terhubung ke masa sewa dan menyimpan salinan nama properti, nomor unit, nama penghuni, bulan sewa, tarif periode, nominal pembayaran, tanggal pembayaran sebenarnya, waktu pencatatan, serta status **Tercatat lunas** atau **Dibatalkan**. Perubahan identitas, properti, harga unit, atau riwayat tarif tidak mengubah salinan pada transaksi lama.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka halaman Keuangan, detail properti, atau detail unit untuk melihat riwayat pembayaran sesuai konteksnya.
-2. Pemilik melihat pembayaran yang pernah dicatat beserta periode, nominal, dan statusnya.
-3. Setelah penyewa keluar, pemilik masih dapat melihat catatan pembayaran lama.
+1. Buka Keuangan untuk seluruh pembayaran, detail properti untuk pembayaran properti tersebut, atau detail unit untuk pembayaran seluruh masa sewanya.
+2. Lihat periode, tarif, nominal, tanggal pembayaran, waktu pencatatan, dan status.
+3. Buka masa sewa terkait; pembayaran penghuni lama tetap tersedia setelah unit ditempati penghuni baru.
 
-**Kriteria selesai:** riwayat lama tetap tersedia setelah kamar dikosongkan; catatan yang dibatalkan tetap terlihat dengan statusnya tetapi tidak menambah total pembayaran tercatat; pembayaran pengganti dapat dicatat untuk periode yang sama.
+**Kriteria selesai:** cakupan riwayat sesuai halaman; catatan yang dibatalkan tetap terlihat dan dikecualikan dari total; transaksi pengganti dapat dicatat untuk periode yang sama; seluruh salinan data transaksi lama tetap tersimpan.
 
 <a id="fitur-7"></a>
 
-### Fitur 7 — Daftar dan riwayat penghuni [K-3](#k-3)
+### Fitur 7 — Kelola penghuni dan riwayat penyewaan [K-3](#k-3)
 
-Pemilik dapat melihat **Daftar penghuni** lintas seluruh properti, mencakup penghuni aktif dan mantan penghuni. Setiap entri mewakili satu masa huni dan menampilkan nama penyewa, properti, unit, status **Aktif** atau **Sudah keluar**, tanggal mulai, dan tanggal keluar bila masa huni telah berakhir. Orang yang menyewa beberapa kali tetap memiliki entri masa huni terpisah. Daftar dapat disaring menurut properti dan status; awalnya semua properti dan kedua status ditampilkan.
+Identitas penghuni disimpan terpisah dari masa sewa. Daftar penghuni memuat satu entri per identitas, termasuk yang belum pernah menyewa, penghuni aktif, dan mantan penghuni. Status **Aktif** berarti memiliki sedikitnya satu masa sewa aktif; **Sudah keluar** berarti pernah menyewa dan seluruh masa sewanya berakhir; **Belum menyewa** berarti belum memiliki masa sewa.
 
-**Riwayat penghuni** pada detail properti menampilkan masa huni hanya untuk properti tersebut. Detail unit menampilkan masa huni hanya untuk unit terkait. Seluruh tampilan menggunakan data masa huni yang sama dan tetap tersedia terlepas dari ada atau tidaknya catatan pembayaran.
+Detail penghuni memuat identitas dan seluruh masa sewanya lintas properti. Riwayat penghuni pada detail properti memuat satu entri per masa sewa dalam properti tersebut; detail unit memuat masa sewa pada unit itu. Orang yang menyewa kembali memakai identitas yang sama dengan masa sewa baru.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik memilih **Penghuni** pada bar navigasi bawah untuk membuka **Daftar penghuni**.
-2. Pemilik melihat seluruh masa huni lintas properti dan dapat menyaring daftar menurut properti atau status.
-3. Untuk konteks satu properti, pemilik membuka detail properti dan memilih **Riwayat penghuni**.
-4. Dari kedua daftar tersebut, pemilik dapat membuka entri menuju detail unit dan masa huni terkait untuk membetulkan data atau mencatat pembayaran periode lampau.
-5. Setelah unit dikosongkan dan ditempati penyewa baru, entri penyewa lama tetap terlihat dengan tanggal keluar dan status **Sudah keluar**.
+1. Pilih **Penghuni** pada bar navigasi bawah untuk membuka daftar penghuni; filter properti dan status, dengan nilai awal **Semua**.
+2. Pilih **Tambah penghuni**, isi nama dan telepon opsional, lalu simpan. Identitas tersimpan meskipun belum memulai masa sewa.
+3. Pilih penghuni untuk membuka detail penghuni; ubah identitas, mulai masa sewa, atau pilih masa sewa menuju detail unit.
+4. Untuk konteks satu properti, buka detail properti lalu **Riwayat penghuni**; pilih entri menuju unit dan masa sewa terkait.
 
-**Kriteria selesai:** daftar global mencakup seluruh masa huni dari semua properti; filter properti dan status dapat dipakai bersamaan; status **Aktif** berasal dari tanggal keluar yang kosong dan **Sudah keluar** dari tanggal keluar yang terisi; daftar per properti dan per unit hanya menampilkan masa huni terkait; memilih entri membuka unit dan masa huni yang tepat; mengakhiri masa huni tidak menghapus entrinya; penghuni tetap terlihat meskipun tidak memiliki catatan pembayaran.
+**Kriteria selesai:** nama wajib, telepon opsional; nama yang sama tidak otomatis dianggap orang yang sama; tampilkan calon identitas yang serupa sebelum membuat penghuni baru agar pengguna dapat memilih identitas yang sudah ada; perubahan identitas muncul pada daftar dan masa sewa terkait tanpa mengubah transaksi lama; filter properti mencocokkan seluruh riwayat masa sewa penghuni; identitas tanpa masa sewa tidak muncul pada filter properti tertentu; penghuni dengan riwayat tidak dapat dihapus, sedangkan identitas yang belum memiliki masa sewa dapat dihapus setelah konfirmasi; riwayat tetap terlihat tanpa pembayaran.
 
 <a id="fitur-8"></a>
 
 ### Fitur 8 — Penyimpanan lokal dan ekspor data [K-6](#k-6)
 
-Data disimpan di browser yang sama. Pemilik dapat mengunduh salinan JSON yang mencakup kos, kamar, seluruh masa huni, serta catatan pembayaran termasuk yang dibatalkan.
+Data disimpan pada browser yang sama. Salinan JSON mencakup properti, unit dan harga standarnya, identitas penghuni, masa sewa, seluruh riwayat tarif termasuk jadwal mendatang, dan semua transaksi beserta salinan data dan status pembatalannya. Hubungan antar data tetap disertakan.
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik memilih ikon **Lainnya** di kanan atas header untuk membuka halaman **Lainnya**, lalu memilih **Ekspor data**.
-2. Aplikasi mengunduh berkas JSON berisi data yang tersimpan saat itu.
+1. Pilih ikon **Lainnya** di kanan atas header, lalu **Ekspor data**.
+2. Unduh berkas JSON berisi seluruh data saat itu.
 
-**Kriteria selesai:** data tetap ada setelah halaman dimuat ulang pada browser yang sama; berkas ekspor memuat seluruh kos, kamar, riwayat penghuni, dan catatan pembayaran beserta statusnya.
+**Kriteria selesai:** data dan hubungannya tetap tersedia setelah halaman dimuat ulang; ekspor mencakup seluruh data termasuk identitas tanpa masa sewa dan transaksi yang dibatalkan; kegagalan ekspor ditampilkan dengan pesan yang jelas.
 
 ## Batasan MVP dan Hal yang Perlu Diuji
 
 Data tersimpan di browser/perangkat yang digunakan. Menghapus data browser atau kehilangan perangkat dapat menghilangkan data lokal. Alur utama harus dapat digunakan pada layar ponsel selebar 320 px.
 
-Sebelum memperluas fitur, uji bersama calon pengguna: apakah mereka lebih sering mengelola satu atau beberapa kos, apakah sewa selalu bulanan, apakah pembayaran sebagian umum terjadi, dan apakah pencatatan di satu perangkat cukup untuk uji awal.
+Sebelum memperluas fitur, uji bersama calon pengguna: kemudahan membuat properti dan unit sebelum memasukkan penghuni, penggunaan ulang identitas, perubahan tarif per bulan, dan pencatatan di satu perangkat.

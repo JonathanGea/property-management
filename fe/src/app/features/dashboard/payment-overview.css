@@ -1,0 +1,230 @@
+:host {
+  display: block;
+}
+.payment-overview {
+  display: grid;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.payment-summary {
+  padding: 26px;
+  background: #254f40;
+  color: #fffefa;
+}
+.visual-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d3e8c1;
+  font-size: 11px;
+  font-weight: 700;
+}
+.visual-label app-icon {
+  width: 16px;
+  height: 16px;
+}
+.payment-summary h2 {
+  max-width: 260px;
+  margin: 15px 0 18px;
+  font-size: 23px;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+.payment-rate strong {
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+.payment-rate strong span {
+  margin-left: 4px;
+  color: #d3e8c1;
+  font-size: 30px;
+}
+.payment-summary p {
+  max-width: 240px;
+  margin: 12px 0 22px;
+  color: #dce8df;
+  font-size: 12px;
+}
+.summary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fffefa;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.summary-link app-icon {
+  width: 15px;
+  height: 15px;
+}
+.payment-chart {
+  min-width: 0;
+  padding: 24px;
+}
+.chart-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.chart-heading h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.chart-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+.period-chip {
+  flex: none;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #edf2e8;
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 700;
+}
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 19px 0;
+}
+.chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.chart-legend .legend-dot {
+  margin: 0;
+}
+.paid {
+  background: var(--blue);
+  color: #fff;
+}
+.unpaid {
+  background: #e8b56e;
+  color: #503915;
+}
+.chart-rows {
+  display: grid;
+  gap: 16px;
+}
+.chart-row {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.chart-row:hover .chart-row-heading strong {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.chart-row-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  font-size: 11px;
+}
+.chart-row-heading strong {
+  overflow-wrap: anywhere;
+}
+.chart-row-heading span {
+  flex: none;
+  color: var(--muted);
+}
+.chart-track {
+  border-radius: 4px;
+  background: #f3f3ed;
+  overflow: hidden;
+}
+.chart-bar {
+  display: flex;
+  height: 25px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bar-segment {
+  flex-basis: 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+}
+.chart-row-caption {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.chart-empty {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 14px 0;
+}
+.chart-empty > app-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--blue);
+}
+.chart-empty strong {
+  font-size: 13px;
+}
+.chart-empty p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  max-width: 340px;
+}
+.chart-more {
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .payment-overview {
+    grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.8fr);
+    padding: 0;
+  }
+  .payment-summary {
+    padding: 30px;
+  }
+  .payment-chart {
+    padding: 28px 30px;
+  }
+}
+
+.payment-overview {
+  background: #fffefa;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.available {
+  background: #dce6dc;
+}
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.text-link app-icon {
+  width: 15px;
+  height: 15px;
+}
