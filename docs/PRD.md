@@ -171,7 +171,7 @@ Pemilik dapat melihat **Daftar penghuni** lintas seluruh properti, mencakup peng
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka **Lainnya** dan memilih **Daftar penghuni**, yang menjadi pilihan pertama pada halaman tersebut.
+1. Pemilik memilih **Penghuni** pada bar navigasi bawah untuk membuka **Daftar penghuni**.
 2. Pemilik melihat seluruh masa huni lintas properti dan dapat menyaring daftar menurut properti atau status.
 3. Untuk konteks satu properti, pemilik membuka detail properti dan memilih **Riwayat penghuni**.
 4. Dari kedua daftar tersebut, pemilik dapat membuka entri menuju detail unit dan masa huni terkait untuk membetulkan data atau mencatat pembayaran periode lampau.
@@ -187,7 +187,7 @@ Data disimpan di browser yang sama. Pemilik dapat mengunduh salinan JSON yang me
 
 **Alur Pengguna (User Flow)**
 
-1. Pemilik membuka halaman **Lainnya** dan memilih **Ekspor data**.
+1. Pemilik memilih ikon **Lainnya** di kanan atas header untuk membuka halaman **Lainnya**, lalu memilih **Ekspor data**.
 2. Aplikasi mengunduh berkas JSON berisi data yang tersimpan saat itu.
 
 **Kriteria selesai:** data tetap ada setelah halaman dimuat ulang pada browser yang sama; berkas ekspor memuat seluruh kos, kamar, riwayat penghuni, dan catatan pembayaran beserta statusnya.

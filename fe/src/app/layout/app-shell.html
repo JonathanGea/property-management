@@ -1,4 +1,5 @@
 <div class="shell">
+  <a class="skip-link" href="#konten">Lewati ke konten</a>
   <header class="topbar">
     <a routerLink="/" class="brand" aria-label="Rentora, ke beranda"
       ><span class="brand-mark"><app-icon name="home" /></span
@@ -9,29 +10,66 @@
         <a
           [routerLink]="item.path"
           routerLinkActive="active"
+          ariaCurrentWhenActive="page"
           [routerLinkActiveOptions]="{ exact: !!item.exact }"
-          ><app-icon [name]="item.icon" />{{ item.label }}</a
-        >
+          ><app-icon [name]="item.icon" />{{ item.label }}
+          @if (item.path === '/keuangan' && store.unpaidRooms().length) {
+            <span
+              class="nav-badge"
+              [attr.aria-label]="store.unpaidRooms().length + ' pembayaran belum dicatat'"
+              >{{ store.unpaidRooms().length > 99 ? '99+' : store.unpaidRooms().length }}</span
+            >
+          }
+        </a>
       }
     </nav>
-    <span class="owner-badge">Buku kos pemilik</span>
+    <a
+      routerLink="/lainnya"
+      fragment="penyimpanan"
+      class="settings-link"
+      aria-label="Pengaturan penyimpanan dan cadangan data"
+    >
+      <app-icon name="settings" /><span>Pengaturan</span>
+    </a>
   </header>
   @if (store.storageError()) {
     <p class="storage-warning" role="alert">
       Perubahan belum tersimpan di perangkat ini. Periksa ruang penyimpanan atau izin browser.
     </p>
   }
-  <main id="konten"><ng-content /></main>
+  <main id="konten" tabindex="-1"><ng-content /></main>
   <footer class="site-footer">
-    <span>© 2026 Rentora</span><span>Data tersimpan di browser perangkat ini.</span>
+    <div class="footer-brand">
+      <strong>Rentora<span class="brand-dot">.</span></strong
+      ><span>Manajemen properti sewa</span><small>© {{ year }} Rentora</small>
+    </div>
+    <div class="footer-storage">
+      <span class="storage-label"
+        ><app-icon [name]="store.storageError() ? 'warning' : 'check'" />{{
+          store.storageError() ? 'Perubahan belum tersimpan' : 'Data tersimpan di perangkat ini'
+        }}</span
+      >
+      <a routerLink="/lainnya" fragment="penyimpanan">Tentang penyimpanan &amp; cadangan</a>
+    </div>
+    <app-backup-export />
   </footer>
   <nav class="bottom-nav" aria-label="Navigasi utama seluler">
     @for (item of navigation; track item.path) {
       <a
         [routerLink]="item.path"
         routerLinkActive="active"
+        ariaCurrentWhenActive="page"
         [routerLinkActiveOptions]="{ exact: !!item.exact }"
-        ><app-icon [name]="item.icon" /><span>{{ item.label }}</span></a
+        ><span class="nav-icon"
+          ><app-icon [name]="item.icon" />
+          @if (item.path === '/keuangan' && store.unpaidRooms().length) {
+            <span
+              class="nav-badge"
+              [attr.aria-label]="store.unpaidRooms().length + ' pembayaran belum dicatat'"
+              >{{ store.unpaidRooms().length > 99 ? '99+' : store.unpaidRooms().length }}</span
+            >
+          }</span
+        ><span>{{ item.label }}</span></a
       >
     }
   </nav>

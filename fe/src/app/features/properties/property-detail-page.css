@@ -68,11 +68,41 @@ h1 {
   gap: 14px;
 }
 .room-card {
+  scroll-margin-top: 20px;
   padding: 18px;
   background: #fffefa;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+.room-card:target {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px #2f625122;
+}
+.breadcrumbs {
+  display: none;
+}
+@media (min-width: 768px) {
+  .room-card {
+    scroll-margin-top: 96px;
+  }
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .breadcrumbs a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .breadcrumbs [aria-current] {
+    font-weight: 700;
+    color: var(--ink);
+  }
 }
 .room-head,
 .room-head > div,

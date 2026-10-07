@@ -8,14 +8,14 @@ import { Property } from '../../core/property.store';
       <div class="thumbnail">{{ initials() }}</div>
       <div class="description">
         <h3>{{ property().name }}</h3>
-        <p>{{ property().location }} · {{ property().rooms.length }} kamar</p>
+        <p>{{ property().location }} · {{ property().rooms.length }} unit</p>
         <span class="mobile-meta"
           >{{ occupied() }} terisi · {{ property().rooms.length - occupied() }} kosong</span
         >
       </div>
       <div class="desktop-meta">
         <strong>{{ occupied() }}/{{ property().rooms.length }}</strong
-        ><span>kamar terisi</span>
+        ><span>unit terisi</span>
       </div>
       <span class="chevron" aria-hidden="true">›</span>
     </article>

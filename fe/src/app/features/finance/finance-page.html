@@ -13,8 +13,8 @@
     </article>
     <article class="summary">
       <span class="summary-icon amber"><app-icon name="clock" /></span
-      ><span>Belum dibayar bulan ini</span><strong>{{ store.unpaidRooms().length }} kamar</strong
-      ><small>Dari {{ store.occupiedUnits() }} kamar terisi</small>
+      ><span>Belum dibayar bulan ini</span><strong>{{ store.unpaidRooms().length }} unit</strong
+      ><small>Dari {{ store.occupiedUnits() }} unit terisi</small>
     </article>
   </div>
   <section class="panel unpaid-panel">
@@ -23,12 +23,16 @@
       <span>{{ monthLabel }}</span>
     </div>
     @for (item of store.unpaidRooms(); track item.property.id + '-' + item.room.id) {
-      <a class="transaction link-row" [routerLink]="['/properti', item.property.id]"
+      <a
+        class="transaction link-row"
+        [routerLink]="['/properti', item.property.id]"
+        [queryParams]="{ from: 'keuangan' }"
+        [fragment]="'unit-' + item.room.id"
         ><span class="due-date" [attr.aria-label]="'Jatuh tempo tanggal ' + item.room.dueDay"
           ><small>tanggal</small><strong>{{ item.room.dueDay }}</strong></span
         >
         <div>
-          <strong>{{ item.room.tenantName }} · Kamar {{ item.room.number }}</strong
+          <strong>{{ item.room.tenantName }} · Unit {{ item.room.number }}</strong
           ><small>{{ item.property.name }}</small>
         </div>
         <b>Rp {{ item.room.monthlyRent.toLocaleString('id-ID') }}</b></a
@@ -46,7 +50,7 @@
       <div class="transaction">
         <span class="badge"><app-icon name="check" /></span>
         <div>
-          <strong>{{ payment.tenantName }} · Kamar {{ payment.roomNumber }}</strong
+          <strong>{{ payment.tenantName }} · Unit {{ payment.roomNumber }}</strong
           ><small>{{ formatDate(payment.paidAt) }} · Periode {{ payment.period }}</small>
         </div>
         <b>+ Rp {{ payment.amount.toLocaleString('id-ID') }}</b

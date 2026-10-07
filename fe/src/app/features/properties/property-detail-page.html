@@ -1,25 +1,42 @@
 <div class="page">
-  <a routerLink="/properti" class="back-link">← Semua kos</a>
-  @if (property(); as kos) {
+  <a [routerLink]="returnPath()" [queryParams]="returnParams()" class="back-link"
+    >← {{ returnLabel() }}</a
+  >
+  @if (property(); as properti) {
+    <nav class="breadcrumbs" aria-label="Jejak navigasi">
+      <a routerLink="/properti" [queryParams]="returnParams()">Properti</a>
+      <span aria-hidden="true">›</span>
+      @if (selectedRoom(); as room) {
+        <a [routerLink]="['/properti', id]" queryParamsHandling="preserve">{{ properti.name }}</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="location">Unit {{ room.number }}</span>
+      } @else {
+        <span aria-current="page">{{ properti.name }}</span>
+      }
+    </nav>
     <header class="heading">
       <div>
-        <p class="eyebrow">Data kos dan kamar</p>
-        <h1>{{ kos.name }}</h1>
-        <p class="subtitle">{{ kos.location }} · {{ kos.rooms.length }} kamar</p>
+        <p class="eyebrow">Data properti dan unit</p>
+        <h1>{{ properti.name }}</h1>
+        <p class="subtitle">{{ properti.location }} · {{ properti.rooms.length }} unit</p>
       </div>
       <div class="header-actions">
         <button class="button button-secondary" type="button" (click)="openProperty()">
-          Ubah kos
+          Ubah properti
         </button>
         <button class="button button-primary" type="button" (click)="store.addRoom(id)">
-          <app-icon name="plus" />Tambah kamar
+          <app-icon name="plus" />Tambah unit
         </button>
       </div>
     </header>
     @if (editingProperty()) {
       <form class="property-form" #propertyForm="ngForm" (ngSubmit)="saveProperty(propertyForm)">
         <label
-          >Nama kos<input name="propertyName" [(ngModel)]="propertyName" required minlength="3"
+          >Nama properti<input
+            name="propertyName"
+            [(ngModel)]="propertyName"
+            required
+            minlength="3"
         /></label>
         <label
           >Lokasi<input name="propertyLocation" [(ngModel)]="propertyLocation" required
@@ -34,16 +51,20 @@
           ><button class="button button-primary" type="submit">Simpan perubahan</button>
         </div>
         @if (propertyForm.invalid && propertyForm.submitted) {
-          <p class="form-error">Isi nama kos minimal 3 karakter dan lokasi.</p>
+          <p class="form-error">Isi nama properti minimal 3 karakter dan lokasi.</p>
         }
       </form>
     }
     <div class="room-list">
-      @for (room of kos.rooms; track room.id) {
-        <section class="room-card" [attr.aria-label]="'Kamar ' + room.number">
+      @for (room of properti.rooms; track room.id) {
+        <section
+          class="room-card"
+          [id]="'unit-' + room.id"
+          [attr.aria-label]="'Unit ' + room.number"
+        >
           <div class="room-head">
             <div>
-              <span class="room-number">Kamar {{ room.number }}</span
+              <span class="room-number">Unit {{ room.number }}</span
               ><span class="badge" [class.occupied]="room.tenantName">{{
                 room.tenantName ? 'Terisi' : 'Kosong'
               }}</span>
@@ -87,7 +108,7 @@
             </div>
           } @else {
             <p class="empty-room">
-              Belum ada penyewa. Isi data penyewa untuk mulai melacak pembayaran kamar ini.
+              Belum ada penyewa. Isi data penyewa untuk mulai melacak pembayaran unit ini.
             </p>
           }
           @if (editing() === room.id) {
@@ -131,7 +152,7 @@
                 </button>
                 @if (room.tenantName) {
                   <button class="button button-danger" type="button" (click)="vacate(room)">
-                    Kosongkan kamar
+                    Kosongkan unit
                   </button>
                 }
                 <button class="button button-primary" type="submit">Simpan</button>
@@ -146,9 +167,9 @@
     </div>
   } @else {
     <section class="missing">
-      <h1>Kos tidak ditemukan</h1>
-      <p>Periksa kembali daftar kos Anda.</p>
-      <a routerLink="/properti" class="button button-primary">Lihat daftar kos</a>
+      <h1>Properti tidak ditemukan</h1>
+      <p>Periksa kembali daftar properti Anda.</p>
+      <a routerLink="/properti" class="button button-primary">Lihat daftar properti</a>
     </section>
   }
 </div>

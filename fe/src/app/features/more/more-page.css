@@ -67,6 +67,31 @@ h1 {
   border-color: #dfbf80;
   border-left: 5px solid #a66721;
 }
+.storage-panel {
+  padding: 20px;
+  scroll-margin-top: 20px;
+}
+.storage-panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+.storage-panel p {
+  max-width: 620px;
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.storage-panel:target {
+  border-color: var(--blue);
+}
+@media (min-width: 768px) {
+  .storage-panel {
+    scroll-margin-top: 96px;
+  }
+}
 .prototype-warning h2 {
   display: flex;
   align-items: center;

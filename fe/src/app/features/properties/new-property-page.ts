@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PropertyStore } from '../../core/property.store';
 
 @Component({
@@ -8,14 +8,16 @@ import { PropertyStore } from '../../core/property.store';
   imports: [FormsModule, RouterLink],
   template: `
     <div class="page form-page">
-      <a routerLink="/properti" class="back-link">← Kembali ke daftar kos</a>
+      <a routerLink="/properti" [queryParams]="returnParams" class="back-link"
+        >← Kembali ke daftar properti</a
+      >
       <header>
-        <p class="eyebrow">Kos baru</p>
-        <h1>Tambah kos</h1>
-        <p class="subtitle">Isi nama, lokasi, dan jumlah kamar awal.</p>
+        <p class="eyebrow">Properti baru</p>
+        <h1>Tambah properti</h1>
+        <p class="subtitle">Isi nama, lokasi, dan jumlah unit awal.</p>
       </header>
       <form class="panel" #propertyForm="ngForm" (ngSubmit)="save(propertyForm)">
-        <label for="name">Nama kos</label
+        <label for="name">Nama properti</label
         ><input
           id="name"
           name="name"
@@ -23,10 +25,10 @@ import { PropertyStore } from '../../core/property.store';
           required
           minlength="3"
           #nameField="ngModel"
-          placeholder="Contoh: Kos Taman Raya"
+          placeholder="Contoh: Properti Taman Raya"
         />
         @if (nameField.invalid && nameField.touched) {
-          <p class="error">Nama kos minimal 3 karakter.</p>
+          <p class="error">Nama properti minimal 3 karakter.</p>
         }
         <label for="location">Lokasi</label
         ><input
@@ -40,7 +42,7 @@ import { PropertyStore } from '../../core/property.store';
         @if (locationField.invalid && locationField.touched) {
           <p class="error">Lokasi wajib diisi.</p>
         }
-        <label for="units">Jumlah kamar</label
+        <label for="units">Jumlah unit</label
         ><input
           id="units"
           type="number"
@@ -53,11 +55,12 @@ import { PropertyStore } from '../../core/property.store';
           #unitsField="ngModel"
         />
         @if (unitsField.invalid && unitsField.touched) {
-          <p class="error">Jumlah kamar harus antara 1 dan 200.</p>
+          <p class="error">Jumlah unit harus antara 1 dan 200.</p>
         }
         <div class="actions">
-          <a routerLink="/properti" class="button button-secondary">Batal</a
-          ><button type="submit" class="button button-primary">Simpan kos</button>
+          <a routerLink="/properti" [queryParams]="returnParams" class="button button-secondary"
+            >Batal</a
+          ><button type="submit" class="button button-primary">Simpan properti</button>
         </div>
       </form>
       <p class="hint">Data disimpan di browser perangkat ini. Simpan cadangan secara berkala.</p>
@@ -145,6 +148,7 @@ import { PropertyStore } from '../../core/property.store';
 export class NewPropertyPage {
   private readonly store = inject(PropertyStore);
   private readonly router = inject(Router);
+  readonly returnParams = { q: inject(ActivatedRoute).snapshot.queryParamMap.get('q') };
   name = '';
   location = '';
   units = 1;
@@ -162,6 +166,8 @@ export class NewPropertyPage {
       return;
     }
     const id = this.store.addProperty(this.name, this.location, this.units);
-    this.router.navigateByUrl(`/properti/${id}`);
+    void this.router.navigate(['/properti', id], {
+      queryParams: { from: 'properti', ...this.returnParams },
+    });
   }
 }

@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PropertyStore, Room } from '../../core/property.store';
@@ -12,7 +13,42 @@ import { Icon } from '../../shared/ui/icon';
 })
 export class PropertyDetailPage {
   readonly store = inject(PropertyStore);
-  readonly id = Number(inject(ActivatedRoute).snapshot.paramMap.get('id'));
+  private readonly route = inject(ActivatedRoute);
+  private readonly params = toSignal(this.route.queryParamMap, {
+    initialValue: this.route.snapshot.queryParamMap,
+  });
+  private readonly fragment = toSignal(this.route.fragment, {
+    initialValue: this.route.snapshot.fragment,
+  });
+  get id(): number {
+    return Number(this.route.snapshot.paramMap.get('id'));
+  }
+  readonly returnPath = computed(() => {
+    switch (this.params().get('from')) {
+      case 'keuangan':
+        return '/keuangan';
+      case 'beranda':
+        return '/';
+      default:
+        return '/properti';
+    }
+  });
+  readonly returnLabel = computed(() => {
+    switch (this.returnPath()) {
+      case '/keuangan':
+        return 'Kembali ke Keuangan';
+      case '/':
+        return 'Kembali ke Beranda';
+      default:
+        return 'Kembali ke daftar properti';
+    }
+  });
+  readonly returnParams = computed(() => ({
+    q: this.returnPath() === '/properti' ? this.params().get('q') : null,
+  }));
+  selectedRoom(): Room | undefined {
+    return this.property()?.rooms.find((room) => this.fragment() === 'unit-' + room.id);
+  }
   readonly editing = signal<number | null>(null);
   readonly editingProperty = signal(false);
   propertyName = '';
@@ -72,7 +108,7 @@ export class PropertyDetailPage {
   }
 
   vacate(room: Room): void {
-    if (!confirm(`Kosongkan kamar ${room.number}? Riwayat pembayaran tetap tersimpan.`)) return;
+    if (!confirm(`Kosongkan unit ${room.number}? Riwayat pembayaran tetap tersimpan.`)) return;
     this.store.updateRoom(this.id, room.id, {
       tenantName: '',
       tenantPhone: '',

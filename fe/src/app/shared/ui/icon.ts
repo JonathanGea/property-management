@@ -14,7 +14,8 @@ export type IconName =
   | 'search'
   | 'chart'
   | 'warning'
-  | 'settings';
+  | 'settings'
+  | 'download';
 
 @Component({
   selector: 'app-icon',
@@ -29,6 +30,9 @@ export type IconName =
       aria-hidden="true"
     >
       @switch (name()) {
+        @case ('download') {
+          <path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4" />
+        }
         @case ('home') {
           <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
         }

@@ -13,19 +13,25 @@ Dokumen ini menurunkan halaman, data yang tampil, dan aksi pengguna dari [PRD Re
 | H-8 | [Detail unit sewa](#h-8) | Mengelola satu unit, masa huni penyewa, pembayaran, dan riwayatnya | [F-2](PRD.md#fitur-2), [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-6](PRD.md#fitur-6), [F-7](PRD.md#fitur-7) |
 | H-5 | [Riwayat penghuni](#h-5) | Melihat penyewa aktif dan mantan penyewa pada satu properti | [F-7](PRD.md#fitur-7) |
 | H-6 | [Keuangan](#h-6) | Memilih periode sewa serta melihat ringkasan dan riwayat pembayaran | [F-4](PRD.md#fitur-4), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6) |
-| H-7 | [Lainnya](#h-7) | Membuka daftar penghuni, melihat informasi penyimpanan, dan mengunduh salinan data | [F-7](PRD.md#fitur-7), [F-8](PRD.md#fitur-8) |
+| H-7 | [Lainnya](#h-7) | Melihat informasi penyimpanan dan mengunduh salinan data | [F-8](PRD.md#fitur-8) |
 | H-9 | [Daftar penghuni](#h-9) | Melihat seluruh penghuni aktif dan mantan penghuni lintas properti | [F-7](PRD.md#fitur-7) |
 
 Alur utama: [Daftar properti sewa](#h-2) → [Detail properti sewa](#h-4) → [Detail unit sewa](#h-8). Formulir data penyewa, koreksi masa huni, dan pencatatan pembayaran berada di Detail unit sewa. Riwayat penghuni pada H-5 mencakup seluruh unit dalam satu properti; riwayat pada H-8 hanya mencakup unit yang dibuka.
 
-Alur daftar seluruh penghuni: [Lainnya](#h-7) → [Daftar penghuni](#h-9) → [Detail unit sewa](#h-8) pada masa huni terpilih.
+Alur daftar seluruh penghuni: **Penghuni** pada bar navigasi bawah → [Daftar penghuni](#h-9) → [Detail unit sewa](#h-8) pada masa huni terpilih.
 
 ## Navigasi
+
+### Bar navigasi bawah
 
 - [Beranda](#h-1)
 - [Properti](#h-2)
 - [Keuangan](#h-6)
-- [Lainnya](#h-7)
+- [Penghuni](#h-9)
+
+### Header
+
+- [Lainnya](#h-7): ikon saja di kanan atas, dengan nama aksesibel **Lainnya**.
 
 ## Data yang Menghubungkan Halaman
 
@@ -149,25 +155,27 @@ Catatan yang dibatalkan tetap terlihat tetapi tidak dihitung dalam total pembaya
 
 ## H-7 — Lainnya
 
-**Data tampil:** **Daftar penghuni** sebagai pilihan pertama, diikuti informasi penyimpanan pada browser/perangkat yang digunakan dan pilihan ekspor data.
+**Akses:** ikon **Lainnya** di kanan atas header.
 
-**Aksi:** **Daftar penghuni** membuka H-9 untuk semua properti; **Ekspor data** mengunduh berkas JSON berisi seluruh properti, unit, riwayat penghuni, dan catatan pembayaran beserta status pembatalannya.
+**Data tampil:** informasi penyimpanan pada browser/perangkat yang digunakan dan pilihan ekspor data.
+
+**Aksi:** **Ekspor data** mengunduh berkas JSON berisi seluruh properti, unit, riwayat penghuni, dan catatan pembayaran beserta status pembatalannya.
 
 **Keadaan gagal:** bila ekspor gagal, tampilkan pesan yang jelas. Jelaskan bahwa data lokal dapat hilang bila data browser terhapus atau perangkat hilang.
 
-**Acuan PRD:** K-3, K-6; [F-7](PRD.md#fitur-7), [F-8](PRD.md#fitur-8).
+**Acuan PRD:** K-6; [F-8](PRD.md#fitur-8).
 
 <a id="h-9"></a>
 
 ## H-9 — Daftar penghuni
 
-**Tujuan:** melihat seluruh penghuni aktif dan mantan penghuni dari semua properti dalam satu daftar. Halaman diakses melalui **Daftar penghuni**, pilihan pertama di H-7 — Lainnya.
+**Tujuan:** melihat seluruh penghuni aktif dan mantan penghuni dari semua properti dalam satu daftar. Halaman diakses melalui **Penghuni** pada bar navigasi bawah.
 
 **Data tampil:** satu baris untuk setiap masa huni, berisi nama penghuni, nama properti, nomor unit, status **Aktif** atau **Sudah keluar**, tanggal mulai, dan tanggal keluar bila sudah berakhir. Tanggal keluar yang kosong ditampilkan sebagai tanda belum berakhir. Orang yang pernah menyewa beberapa kali memiliki baris terpisah untuk setiap masa huni.
 
 **Filter:** properti dan status penghuni, masing-masing dengan pilihan **Semua**. Awalnya semua properti serta penghuni aktif dan yang sudah keluar ditampilkan. Kedua filter dapat digunakan bersamaan.
 
-**Aksi:** pilih entri untuk membuka H-8 pada unit dan masa huni terkait, lalu melihat riwayat, membetulkan data, atau mencatat pembayaran sesuai aturan PRD; ubah atau kembalikan filter ke **Semua**; kembali ke H-7.
+**Aksi:** pilih entri untuk membuka H-8 pada unit dan masa huni terkait, lalu melihat riwayat, membetulkan data, atau mencatat pembayaran sesuai aturan PRD; ubah atau kembalikan filter ke **Semua**; pindah halaman melalui bar navigasi bawah.
 
 **Keadaan halaman:** bila belum ada masa huni yang pernah dicatat, tampilkan keadaan kosong. Bila tidak ada entri yang cocok dengan filter, tampilkan pesan dan pilihan mengembalikan filter ke **Semua**. Masa huni tanpa pembayaran tetap muncul. Perubahan masa huni dari H-8 memperbarui daftar dan statusnya.
 

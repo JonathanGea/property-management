@@ -5,7 +5,7 @@ import { PropertyStore } from '../../core/property.store';
 import { NewPropertyPage } from './new-property-page';
 
 describe('NewPropertyPage', () => {
-  it('adds a kos and creates its rooms from the form', async () => {
+  it('adds a properti and creates its rooms from the form', async () => {
     localStorage.removeItem('rentora-owner-mvp-v1');
     await TestBed.configureTestingModule({
       imports: [NewPropertyPage],
@@ -33,8 +33,8 @@ describe('NewPropertyPage', () => {
       .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     await fixture.whenStable();
 
-    const kos = TestBed.inject(PropertyStore).properties().at(-1);
-    expect(kos?.name).toBe('Taman Raya');
-    expect(kos?.rooms).toHaveLength(6);
+    const properti = TestBed.inject(PropertyStore).properties().at(-1);
+    expect(properti?.name).toBe('Taman Raya');
+    expect(properti?.rooms).toHaveLength(6);
   });
 });

@@ -8,19 +8,19 @@ export const routes: Routes = [
   },
   {
     path: 'properti',
-    title: 'Kos · Rentora',
+    title: 'Properti · Rentora',
     loadComponent: () =>
       import('./features/properties/properties-page').then((m) => m.PropertiesPage),
   },
   {
     path: 'properti/baru',
-    title: 'Tambah Kos · Rentora',
+    title: 'Tambah Properti · Rentora',
     loadComponent: () =>
       import('./features/properties/new-property-page').then((m) => m.NewPropertyPage),
   },
   {
     path: 'properti/:id',
-    title: 'Detail Kos · Rentora',
+    title: 'Detail Properti · Rentora',
     loadComponent: () =>
       import('./features/properties/property-detail-page').then((m) => m.PropertyDetailPage),
   },

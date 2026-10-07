@@ -1,5 +1,6 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PropertyStore } from '../../core/property.store';
 import { Icon } from '../../shared/ui/icon';
 import { PropertyCard } from '../../shared/ui/property-card';
@@ -11,34 +12,42 @@ import { PropertyCard } from '../../shared/ui/property-card';
     <div class="page">
       <header class="page-header">
         <div>
-          <p class="eyebrow">Daftar kos</p>
-          <h1>Kos Anda</h1>
-          <p class="subtitle">Kelola {{ store.properties().length }} kos dan seluruh kamarnya.</p>
+          <p class="eyebrow">Daftar properti</p>
+          <h1>Properti Anda</h1>
+          <p class="subtitle">
+            Kelola {{ store.properties().length }} properti dan seluruh unitnya.
+          </p>
         </div>
-        <a routerLink="/properti/baru" class="button button-primary"
-          ><app-icon name="plus" />Tambah kos</a
+        <a
+          routerLink="/properti/baru"
+          [queryParams]="{ q: query() || null }"
+          class="button button-primary"
+          ><app-icon name="plus" />Tambah properti</a
         >
       </header>
       <div class="panel">
         <label class="search"
           ><app-icon name="search" /><input
             type="search"
-            placeholder="Cari nama atau lokasi kos"
-            aria-label="Cari kos"
+            placeholder="Cari nama atau lokasi properti"
+            aria-label="Cari properti"
             [value]="query()"
-            (input)="query.set($any($event.target).value)"
+            (input)="search($any($event.target).value)"
         /></label>
-        <div class="count">{{ filtered().length }} kos ditemukan</div>
+        <div class="count">{{ filtered().length }} properti ditemukan</div>
         @for (property of filtered(); track property.id) {
-          <a class="property-link" [routerLink]="['/properti', property.id]"
+          <a
+            class="property-link"
+            [routerLink]="['/properti', property.id]"
+            [queryParams]="{ from: 'properti', q: query() || null }"
             ><app-property-card [property]="property"
           /></a>
         } @empty {
           <div class="empty">
             @if (store.properties().length) {
-              Tidak ada kos yang cocok dengan pencarian.
+              Tidak ada properti yang cocok dengan pencarian.
             } @else {
-              Belum ada kos. Tambahkan kos pertama Anda untuk mulai melacak kamar.
+              Belum ada properti. Tambahkan properti pertama Anda untuk mulai melacak unit.
             }
           </div>
         }
@@ -128,7 +137,20 @@ import { PropertyCard } from '../../shared/ui/property-card';
 })
 export class PropertiesPage {
   readonly store = inject(PropertyStore);
-  readonly query = signal('');
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly params = toSignal(this.route.queryParamMap, {
+    initialValue: this.route.snapshot.queryParamMap,
+  });
+  readonly query = computed(() => this.params().get('q') ?? '');
+
+  search(value: string): void {
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: value || null },
+      replaceUrl: true,
+    });
+  }
   readonly filtered = computed(() => {
     const value = this.query().toLocaleLowerCase('id').trim();
     return this.store
