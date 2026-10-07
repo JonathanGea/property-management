@@ -112,3 +112,8 @@ h1 {
   line-height: 1.6;
   margin: 0;
 }
+.prototype-warning .docs-preview-button {
+  display: inline-flex;
+  min-height: 42px;
+  margin-top: 16px;
+}

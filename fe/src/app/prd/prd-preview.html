@@ -1,0 +1,48 @@
+<header class="preview-header">
+  <a class="brand" routerLink="/prd">Rentora <span>Docs preview</span></a>
+  <span class="dev-label">Development only</span>
+  <a routerLink="/">Kembali ke aplikasi ↗</a>
+</header>
+<div class="preview-layout">
+  <aside>
+    <nav class="documents" aria-label="Dokumen">
+      <a routerLink="/prd" [attr.aria-current]="!isPages ? 'page' : null" [class.active]="!isPages"
+        >PRD <small>Kebutuhan &amp; ruang lingkup</small></a
+      >
+      <a
+        routerLink="/prd/pages"
+        [attr.aria-current]="isPages ? 'page' : null"
+        [class.active]="isPages"
+        >Peta halaman <small>Data, aksi &amp; alur pengguna</small></a
+      >
+    </nav>
+    <details open>
+      <summary>Daftar isi</summary>
+      <nav class="toc" aria-label="Daftar isi">
+        @for (heading of headings(); track heading.id) {
+          <a
+            [routerLink]="isPages ? '/prd/pages' : '/prd'"
+            [fragment]="heading.id"
+            [class.nested]="heading.level > 2"
+            >{{ heading.title }}</a
+          >
+        }
+      </nav>
+    </details>
+  </aside>
+  <main id="dokumen" [attr.aria-busy]="loading()">
+    <div class="source">
+      docs/{{ filename }}
+      <button type="button" (click)="load()" [disabled]="loading()">Muat ulang</button>
+    </div>
+    @if (loading()) {
+      <p role="status">Memuat dokumen…</p>
+    }
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    }
+    @if (!loading() && !error()) {
+      <article class="markdown" [innerHTML]="content()"></article>
+    }
+  </main>
+</div>

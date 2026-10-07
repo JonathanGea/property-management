@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, isDevMode } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../shared/ui/icon';
 import { BackupExport } from '../../shared/ui/backup-export';
@@ -9,4 +9,6 @@ import { BackupExport } from '../../shared/ui/backup-export';
   templateUrl: './more-page.html',
   styleUrl: './more-page.css',
 })
-export class MorePage {}
+export class MorePage {
+  readonly showDocsPreview = isDevMode();
+}

@@ -24,9 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -45,6 +43,15 @@
               "outputHashing": "all"
             },
             "development": {
+              "assets": [
+                { "glob": "**/*", "input": "public" },
+                {
+                  "glob": "{PRD,PAGES}.md",
+                  "input": "src/app/prd/documents",
+                  "output": "prd-docs",
+                  "followSymlinks": true
+                }
+              ],
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true

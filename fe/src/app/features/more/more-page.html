@@ -30,5 +30,10 @@
       ditampilkan belum mencerminkan versi produksi. Data yang Anda masukkan bersifat sementara dan
       dapat terhapus sewaktu-waktu.
     </p>
+    @if (showDocsPreview) {
+      <a routerLink="/prd" class="button button-secondary docs-preview-button"
+        >Preview dokumen <app-icon name="chevron"
+      /></a>
+    }
   </section>
 </div>

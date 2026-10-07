@@ -7,7 +7,8 @@ import { AppShell } from './layout/app-shell';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, AppShell],
-  template: '@if (preview()) { <router-outlet /> } @else { <app-shell><router-outlet /></app-shell> }',
+  template:
+    '@if (preview() !== null) { @if (preview()) { <router-outlet /> } @else { <app-shell><router-outlet /></app-shell> } }',
 })
 export class App {
   private readonly router = inject(Router);
@@ -16,6 +17,8 @@ export class App {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event) => /^\/prd(?:\/|\?|#|$)/.test(event.urlAfterRedirects)),
     ),
-    { initialValue: /^\/prd(?:\/|\?|#|$)/.test(this.router.url) },
+    {
+      initialValue: null,
+    },
   );
 }

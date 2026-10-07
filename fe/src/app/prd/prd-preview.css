@@ -1,0 +1,224 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #fffefa;
+  color: #25372e;
+}
+.preview-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 28px;
+  border-bottom: 1px solid #d7ddd3;
+}
+a {
+  color: #2f6251;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.brand {
+  font-size: 20px;
+  font-weight: 800;
+  margin-right: auto;
+}
+.brand span {
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+.dev-label {
+  background: #eee8cd;
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+.preview-header > a:last-child {
+  font-size: 12px;
+}
+.preview-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 900px);
+  gap: 48px;
+  max-width: 1280px;
+  margin: auto;
+  padding: 32px 28px 80px;
+}
+aside {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+.documents {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.documents a {
+  padding: 12px;
+  border: 1px solid #d7ddd3;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.documents a.active {
+  background: #edf2e9;
+  border-color: #2f6251;
+}
+.documents small {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+  margin-top: 4px;
+}
+summary {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.toc {
+  display: grid;
+  gap: 10px;
+  font-size: 12px;
+}
+.toc .nested {
+  padding-left: 14px;
+  color: #68776d;
+}
+main {
+  min-width: 0;
+}
+.source {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #68776d;
+  border-bottom: 1px solid #d7ddd3;
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+}
+button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #d7ddd3;
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: #2f6251;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.error {
+  background: #fff1eb;
+  padding: 16px;
+}
+:host ::ng-deep .markdown {
+  font-size: 14px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+:host ::ng-deep .markdown h1 {
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.25;
+  margin: 0 0 24px;
+}
+:host ::ng-deep .markdown h2 {
+  font-size: 23px;
+  margin: 44px 0 16px;
+  padding-top: 12px;
+  border-top: 1px solid #d7ddd3;
+}
+:host ::ng-deep .markdown h3 {
+  font-size: 18px;
+  margin: 28px 0 12px;
+}
+:host ::ng-deep .markdown p {
+  margin: 14px 0;
+}
+:host ::ng-deep .markdown ul,
+:host ::ng-deep .markdown ol {
+  padding-left: 24px;
+  margin: 16px 0;
+  list-style: revert;
+}
+:host ::ng-deep .markdown li {
+  margin: 6px 0;
+}
+:host ::ng-deep .markdown a {
+  color: #2f6251;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:host ::ng-deep .markdown [id] {
+  scroll-margin-top: 24px;
+}
+:host ::ng-deep .table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+  border: 1px solid #d7ddd3;
+  border-radius: 6px;
+}
+:host ::ng-deep .markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.6;
+}
+:host ::ng-deep .markdown th,
+:host ::ng-deep .markdown td {
+  text-align: left;
+  vertical-align: top;
+  min-width: 100px;
+  padding: 12px;
+  border-bottom: 1px solid #d7ddd3;
+}
+:host ::ng-deep .markdown th {
+  background: #edf2e9;
+  font-weight: 700;
+}
+:host ::ng-deep .markdown tr:last-child td {
+  border-bottom: 0;
+}
+:host ::ng-deep .markdown pre {
+  padding: 16px;
+  overflow-x: auto;
+  background: #edf2e9;
+}
+:host ::ng-deep .markdown code {
+  font-family: monospace;
+  background: #edf2e9;
+}
+:host ::ng-deep .markdown blockquote {
+  border-left: 3px solid #2f6251;
+  padding-left: 16px;
+  color: #68776d;
+}
+@media (max-width: 760px) {
+  .preview-header {
+    padding: 16px;
+    gap: 12px;
+  }
+  .preview-layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 20px 16px 48px;
+    gap: 24px;
+  }
+  aside {
+    position: static;
+    max-height: none;
+  }
+  .documents {
+    grid-template-columns: 1fr 1fr;
+  }
+  .toc {
+    max-height: 160px;
+    overflow-y: auto;
+  }
+}

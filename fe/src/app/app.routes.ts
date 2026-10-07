@@ -1,6 +1,16 @@
 import { Routes } from '@angular/router';
+import { isDevMode } from '@angular/core';
 
 export const routes: Routes = [
+  ...(isDevMode()
+    ? [
+        {
+          path: 'prd',
+          title: 'Preview PRD · Rentora',
+          loadChildren: () => import('./prd/prd.routes').then((m) => m.PRD_ROUTES),
+        },
+      ]
+    : []),
   {
     path: '',
     title: 'Beranda · Rentora',
