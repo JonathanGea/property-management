@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PropertyStore } from '../core/property.store';
 import { Icon, IconName } from '../shared/ui/icon';
-import { BackupExport } from '../shared/ui/backup-export';
 
 interface NavItem {
   label: string;
@@ -13,7 +12,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterLink, RouterLinkActive, Icon, BackupExport],
+  imports: [RouterLink, RouterLinkActive, Icon],
   templateUrl: './app-shell.html',
   styleUrls: ['./bottom-navigation.css', './app-shell.css'],
 })
@@ -24,6 +23,6 @@ export class AppShell {
     { label: 'Beranda', path: '/', icon: 'home', exact: true },
     { label: 'Properti', path: '/properti', icon: 'building' },
     { label: 'Keuangan', path: '/keuangan', icon: 'wallet' },
-    { label: 'Lainnya', path: '/lainnya', icon: 'menu' },
+    { label: 'Penghuni', path: '/penghuni', icon: 'contacts' },
   ];
 }

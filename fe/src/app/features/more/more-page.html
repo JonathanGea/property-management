@@ -2,33 +2,15 @@
   <header class="heading">
     <p class="eyebrow">Catatan pemilik</p>
     <h1>Lainnya</h1>
-    <p class="subtitle">Akses daftar properti, pembayaran, dan informasi penyimpanan.</p>
+    <p class="subtitle">Informasi tentang aplikasi Rentora.</p>
   </header>
-  <nav class="panel" aria-label="Menu lainnya">
-    <a routerLink="/properti"
-      ><span class="icon"><app-icon name="building" /></span
-      ><span>Daftar properti<small>Lihat properti dan unit Anda</small></span
-      ><app-icon name="chevron" /></a
-    ><a routerLink="/keuangan"
-      ><span class="icon"><app-icon name="wallet" /></span
-      ><span>Keuangan<small>Lihat pembayaran sewa</small></span
-      ><app-icon name="chevron"
-    /></a>
-  </nav>
-  <section id="penyimpanan" class="panel storage-panel" aria-labelledby="storage-title">
-    <h2 id="storage-title"><app-icon name="settings" />Penyimpanan &amp; cadangan</h2>
-    <p>
-      Data tersimpan di browser perangkat ini. Unduh cadangan secara berkala agar data tetap
-      tersedia jika data browser terhapus atau perangkat hilang.
-    </p>
-    <app-backup-export />
-  </section>
   <section class="panel prototype-warning" aria-labelledby="prototype-warning-title">
     <h2 id="prototype-warning-title"><app-icon name="warning" /> Peringatan: Aplikasi prototipe</h2>
     <p>
       Aplikasi ini masih berupa prototipe untuk keperluan demonstrasi. Fitur dan data yang
-      ditampilkan belum mencerminkan versi produksi. Data yang Anda masukkan bersifat sementara dan
-      dapat terhapus sewaktu-waktu.
+      ditampilkan belum mencerminkan versi produksi. Saat pertama dibuka, aplikasi mengisi data
+      properti, penghuni, dan pembayaran contoh agar fitur bisa langsung dicoba. Data yang Anda
+      masukkan bersifat sementara dan dapat terhapus sewaktu-waktu.
     </p>
     @if (showDocsPreview) {
       <a routerLink="/prd" class="button button-secondary docs-preview-button"

@@ -1,108 +1,177 @@
 <div class="page dashboard">
   <header class="dashboard-heading">
-    <div>
-      <h1>Beranda</h1>
-      <p>Ringkasan properti dan pembayaran Anda.</p>
-    </div>
-    @if (store.properties().length) {
-      <a routerLink="/properti/baru" class="button button-primary"
-        ><app-icon name="plus" />Tambah properti</a
-      >
-    }
+    <p class="today-date">{{ dateLabel }}</p>
+    <h1>Ringkasan properti Anda</h1>
+    <p class="dashboard-subtitle">Pantau kondisi seluruh properti Anda.</p>
   </header>
+
   @if (store.properties().length) {
-    <section class="portfolio-summary" aria-label="Ringkasan portofolio">
-      <a routerLink="/properti"
-        ><strong>{{ store.properties().length }}</strong
-        ><span>Properti</span></a
-      >
-      <a routerLink="/properti"
-        ><strong>{{ store.totalUnits() }}</strong
-        ><span>Total unit</span></a
-      >
-      <a routerLink="/keuangan"
-        ><strong>{{ store.unpaidRooms().length }}</strong
-        ><span>Belum lunas</span></a
-      >
-    </section>
+    <dl class="overview-cards" aria-label="Ringkasan properti dan pembayaran">
+      <div class="overview-card">
+        <span class="overview-icon" aria-hidden="true"><app-icon name="building" /></span>
+        <dd>{{ store.properties().length }}</dd>
+        <dt>Total properti</dt>
+      </div>
+      <div class="overview-card">
+        <span class="overview-icon" aria-hidden="true"><app-icon name="check" /></span>
+        <dd>
+          {{ paidUnits() }}<span>/{{ store.occupiedUnits() }}</span>
+        </dd>
+        <dt>Pembayaran lunas</dt>
+      </div>
+    </dl>
   }
 
-  <section class="properties" aria-labelledby="properties-title">
-    <div class="section-head">
-      <div>
-        <h2 id="properties-title">Properti Anda</h2>
-        <p>Kelola unit dan penyewa dari setiap properti.</p>
-      </div>
-      <a routerLink="/properti" class="text-link">Lihat semua <app-icon name="chevron" /></a>
-    </div>
-    <div class="property-list">
-      @for (property of store.properties().slice(0, 3); track property.id) {
-        <a
-          class="property-link"
-          [routerLink]="['/properti', property.id]"
-          [queryParams]="{ from: 'beranda' }"
-          ><app-property-card [property]="property" [featured]="true"
-        /></a>
-      } @empty {
-        <div class="portfolio-empty">
-          <div class="empty-visual" aria-hidden="true">
-            <app-property-visual identity="Rentora" />
-          </div>
-          <div>
-            <h3>Mulai dari properti pertama Anda</h3>
-            <p>Tambahkan properti, atur unit, lalu kelola penyewa dan pembayaran di sini.</p>
-            <a routerLink="/properti/baru" class="button button-primary"
-              ><app-icon name="plus" />Tambah properti</a
-            >
-          </div>
-        </div>
-      }
-    </div>
-  </section>
-
-  <div class="details-grid">
-    <section class="panel activity" aria-labelledby="activity-title">
+  @if (store.properties().length && !store.occupiedUnits()) {
+    <section class="setup-panel" aria-labelledby="setup-title">
+      <h2 id="setup-title">Properti siap, lanjut isi penyewa</h2>
+      <p>
+        Pilih properti untuk mengatur unit dan menambahkan penyewa. Ringkasan pembayaran akan muncul
+        setelah ada penyewa aktif.
+      </p>
+      <a
+        [routerLink]="['/properti', store.properties()[0].id]"
+        [queryParams]="{ from: 'beranda' }"
+        class="button button-primary"
+        >Atur unit &amp; penyewa <app-icon name="chevron"
+      /></a>
+    </section>
+  }
+  @if (store.occupiedUnits()) {
+    <section class="payment-snapshot" aria-labelledby="payment-title">
       <div class="section-head">
-        <div>
-          <h2 id="activity-title">Belum dicatat lunas</h2>
-          <p>{{ store.unpaidRooms().length }} unit menunggu catatan pembayaran</p>
-        </div>
-        <a routerLink="/keuangan" class="text-link">Lihat semua <app-icon name="chevron" /></a>
+        <h2 id="payment-title">Pembayaran {{ monthName }}</h2>
+        <a routerLink="/keuangan" class="text-link">Detail <app-icon name="chevron" /></a>
       </div>
-      <div class="activity-list">
-        @for (
-          item of store.unpaidRooms().slice(0, 3);
-          track item.property.id + '-' + item.room.id
-        ) {
-          <a
-            class="activity-row due-link"
-            [routerLink]="['/properti', item.property.id]"
-            [queryParams]="{ from: 'beranda' }"
-            [fragment]="'unit-' + item.room.id"
-            ><span class="due-date" [attr.aria-label]="'Jatuh tempo tanggal ' + item.room.dueDay"
-              ><small>tanggal</small><strong>{{ item.room.dueDay }}</strong></span
-            >
-            <div>
-              <strong>{{ item.room.tenantName }} · Unit {{ item.room.number }}</strong>
-              <p>{{ item.property.name }}</p>
-            </div>
-            <span class="due-amount"
-              >Rp {{ item.room.monthlyRent.toLocaleString('id-ID') }}</span
-            ></a
+      <p class="payment-total">{{ paymentRate() }}%</p>
+      <div
+        class="payment-progress"
+        role="progressbar"
+        aria-label="Pembayaran lunas dari unit terisi"
+        [attr.aria-valuenow]="paidUnits()"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="store.occupiedUnits()"
+      >
+        <span [style.width.%]="paymentRate()"></span>
+      </div>
+      @if (unpaid().length) {
+        <a routerLink="/keuangan" fragment="belum-lunas" class="payment-alert">
+          <app-icon name="warning" />
+          <span
+            ><strong>{{ unpaid().length }}</strong> pembayaran perlu ditindaklanjuti</span
           >
-        } @empty {
-          <p class="empty-note">
-            {{
-              store.occupiedUnits()
-                ? 'Semua unit terisi sudah dicatat lunas bulan ini.'
-                : 'Belum ada penyewa aktif. Isi data penyewa di halaman properti.'
-            }}
-          </p>
+          <app-icon name="chevron" />
+        </a>
+      } @else {
+        <p class="payment-complete"><app-icon name="check" />Semua pembayaran sudah dicatat</p>
+      }
+    </section>
+
+    @if (unpaid().length) {
+      <section class="activity" aria-labelledby="activity-title">
+        <div class="section-head">
+          <h2 id="activity-title">Perlu ditindaklanjuti</h2>
+          <a routerLink="/keuangan" fragment="belum-lunas" class="text-link"
+            >Lihat semua <app-icon name="chevron"
+          /></a>
+        </div>
+        <div class="activity-list">
+          @for (item of unpaid().slice(0, 3); track item.property.id + '-' + item.room.id) {
+            <a
+              class="activity-row"
+              [routerLink]="['/properti', item.property.id]"
+              [queryParams]="{ from: 'beranda' }"
+              [fragment]="'unit-' + item.room.id"
+            >
+              <strong class="payment-person">{{ item.room.tenantName }}</strong>
+              <strong class="due-amount"
+                >Rp {{ item.room.monthlyRent.toLocaleString('id-ID') }}</strong
+              >
+              <span class="payment-location"
+                >{{ item.property.name }} · Unit {{ item.room.number }}</span
+              >
+              <span
+                class="due-status"
+                [class.overdue]="item.due.status === 'overdue'"
+                [class.today]="item.due.status === 'today'"
+                >{{ item.due.label }}</span
+              >
+            </a>
+          }
+        </div>
+      </section>
+    }
+  }
+
+  @if (store.properties().length) {
+    <section class="properties" aria-labelledby="properties-title">
+      <div class="section-head">
+        <h2 id="properties-title">Properti Anda</h2>
+        <a routerLink="/properti" class="text-link">Lihat semua <app-icon name="chevron" /></a>
+      </div>
+      <div
+        class="property-list"
+        role="group"
+        aria-label="Geser ke samping untuk melihat properti lainnya"
+      >
+        @for (property of store.properties(); track property.id) {
+          <a
+            class="property-link"
+            [routerLink]="['/properti', property.id]"
+            [queryParams]="{ from: 'beranda' }"
+          >
+            <app-property-card [property]="property" [featured]="true" />
+          </a>
         }
       </div>
     </section>
-    @if (store.properties().length) {
-      <app-payment-overview />
+  }
+
+  @if (store.properties().length) {
+    @if (store.occupiedUnits()) {
+      <section
+        class="statistics"
+        [class.is-open]="statisticsOpen()"
+        aria-labelledby="statistics-toggle"
+      >
+        <button
+          type="button"
+          class="statistics-toggle"
+          id="statistics-toggle"
+          [attr.aria-expanded]="statisticsOpen()"
+          aria-controls="statistics-content"
+          (click)="statisticsOpen.set(!statisticsOpen())"
+        >
+          <strong>Statistik per properti</strong>
+          <span class="statistics-action" aria-hidden="true">
+            <app-icon name="chevron" />
+          </span>
+        </button>
+        <div
+          id="statistics-content"
+          class="statistics-content"
+          [attr.inert]="statisticsOpen() ? null : ''"
+          [attr.aria-hidden]="!statisticsOpen()"
+        >
+          <div class="statistics-inner">
+            <app-payment-overview class="statistics-overview" />
+          </div>
+        </div>
+      </section>
     }
-  </div>
+  } @else {
+    <section class="portfolio-empty" aria-labelledby="welcome-title">
+      <div class="empty-visual" aria-hidden="true"><app-property-visual identity="Rentora" /></div>
+      <h2 id="welcome-title">Mulai dari properti pertama Anda</h2>
+      <p>Kelola unit, penyewa, dan catatan pembayaran dalam satu tempat.</p>
+      <ol class="setup-steps">
+        <li><span>1</span>Tambah properti</li>
+        <li><span>2</span>Atur unit sewa</li>
+        <li><span>3</span>Isi data penyewa</li>
+      </ol>
+      <a routerLink="/properti/baru" class="button button-primary"
+        ><app-icon name="plus" />Tambah properti</a
+      >
+    </section>
+  }
 </div>

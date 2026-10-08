@@ -1,35 +1,43 @@
 import { Component, input } from '@angular/core';
 import { Property } from '../../core/property.store';
-import { PropertyVisual } from './property-visual';
+import { Icon } from './icon';
 
 @Component({
   selector: 'app-property-card',
-  imports: [PropertyVisual],
+  imports: [Icon],
   template: `
     <article class="property" [class.featured]="featured()">
-      <div class="thumbnail" aria-hidden="true">
-        <app-property-visual [identity]="property().name" />
-        <span class="initials">{{ initials() }}</span>
+      <div class="thumbnail">
+        @if (featured()) {
+          <img [src]="examplePhoto()" alt="Foto contoh bangunan" loading="lazy" />
+          <span class="photo-label">Foto contoh</span>
+        } @else {
+          <app-icon name="building" aria-hidden="true" />
+        }
       </div>
       <div class="description">
         <h3>{{ property().name }}</h3>
-        <p>{{ property().location }} · {{ property().rooms.length }} unit</p>
-        <span class="mobile-meta"
-          >{{ occupied() }} terisi · {{ property().rooms.length - occupied() }} kosong</span
-        >
+        @if (featured()) {
+          <p>{{ property().rooms.length }} unit · {{ occupied() }} terisi</p>
+        } @else {
+          <p>{{ property().location }} · {{ property().rooms.length }} unit</p>
+          <span class="mobile-meta"
+            >{{ occupied() }} terisi · {{ property().rooms.length - occupied() }} kosong</span
+          >
+        }
       </div>
       <div class="desktop-meta">
         <strong>{{ occupied() }}/{{ property().rooms.length }}</strong
         ><span>unit terisi</span>
       </div>
-      <span class="chevron" aria-hidden="true">›</span>
+      <span class="chevron" aria-hidden="true"><app-icon name="chevron" /></span>
     </article>
   `,
   styles: [
     `
       .property {
         display: grid;
-        grid-template-columns: 64px minmax(0, 1fr) 18px;
+        grid-template-columns: 44px minmax(0, 1fr) 18px;
         align-items: center;
         gap: var(--space-12);
         padding: var(--space-14) 0;
@@ -37,8 +45,8 @@ import { PropertyVisual } from './property-visual';
       }
       .thumbnail {
         position: relative;
-        width: 64px;
-        height: 64px;
+        width: 44px;
+        height: 44px;
         overflow: hidden;
         display: grid;
         place-items: center;
@@ -78,45 +86,49 @@ import { PropertyVisual } from './property-visual';
         color: var(--color-text-muted);
         font-size: var(--font-size-22);
       }
-      .initials {
-        position: absolute;
-        right: 4px;
-        bottom: 4px;
-        padding: 2px 4px;
-        border-radius: var(--radius-xs);
-        background: var(--color-surface);
-        color: var(--color-brand-strong);
-        font-size: var(--font-size-10);
-      }
       .featured {
         display: block;
+        height: 100%;
         padding: 0;
         overflow: hidden;
-        border: 1px solid var(--color-border);
+        border: 0;
         border-radius: var(--radius-panel);
         background: var(--color-surface);
+        box-shadow: var(--shadow-card);
       }
       .featured .thumbnail {
         width: 100%;
-        height: 144px;
+        height: 128px;
         border-radius: 0;
+        background: var(--color-surface-muted);
       }
-      .featured .initials {
-        right: 12px;
-        bottom: 12px;
-        padding: 5px 8px;
-        font-size: var(--font-size-12);
+      .featured .thumbnail img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+      .photo-label {
+        position: absolute;
+        bottom: var(--space-8);
+        left: var(--space-8);
+        padding: 3px 7px;
+        border-radius: var(--radius-xs);
+        background: color-mix(in srgb, var(--color-text) 70%, transparent);
+        color: var(--color-on-brand);
+        font-size: var(--font-size-10);
+        font-weight: 650;
       }
       .featured .description {
-        padding: var(--space-16);
+        padding: var(--space-12);
       }
       .featured .description h3 {
-        font-size: var(--font-size-16);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--font-size-14);
       }
-      .featured .mobile-meta {
-        display: block;
-        margin-top: var(--space-12);
-        color: var(--color-text);
+      .featured .description p {
         font-size: var(--font-size-12);
       }
       .featured .desktop-meta,
@@ -124,8 +136,8 @@ import { PropertyVisual } from './property-visual';
         display: none;
       }
       @media (min-width: 768px) {
-        .property {
-          grid-template-columns: 64px minmax(0, 1fr) 90px 18px;
+        .property:not(.featured) {
+          grid-template-columns: 44px minmax(0, 1fr) 90px 18px;
         }
         .property:not(.featured) .mobile-meta {
           display: none;
@@ -152,12 +164,9 @@ import { PropertyVisual } from './property-visual';
 export class PropertyCard {
   readonly property = input.required<Property>();
   readonly featured = input(false);
-  initials(): string {
-    return this.property()
-      .name.split(/\s+/)
-      .slice(0, 2)
-      .map((word) => word[0]?.toUpperCase() ?? '')
-      .join('');
+  examplePhoto(): string {
+    const number = (Math.abs(this.property().id - 1) % 3) + 1;
+    return `/images/property-examples/residence-${number}.jpg`;
   }
   occupied(): number {
     return this.property().rooms.filter((room) => !!room.tenantName).length;

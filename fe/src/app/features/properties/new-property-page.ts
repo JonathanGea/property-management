@@ -64,7 +64,7 @@ import { PropertyStore } from '../../core/property.store';
           ><button type="submit" class="button button-primary">Simpan properti</button>
         </div>
       </form>
-      <p class="hint">Data disimpan di browser perangkat ini. Simpan cadangan secara berkala.</p>
+      <p class="hint">Perubahan properti akan tersimpan otomatis di browser ini.</p>
     </div>
   `,
   styles: [
@@ -117,16 +117,15 @@ import { PropertyStore } from '../../core/property.store';
         height: 48px;
         padding: 0 13px;
         margin-bottom: var(--space-18);
-        border: 1px solid var(--color-border);
+        border: 0;
         border-radius: var(--radius-control);
         font: inherit;
         font-size: var(--font-size-16);
         color: var(--color-text);
-        background: var(--color-surface);
+        background: var(--color-surface-muted);
       }
       input:focus {
-        border-color: var(--color-brand);
-        box-shadow: 0 0 0 3px var(--color-focus-subtle);
+        background: var(--color-surface);
       }
       .error {
         margin: calc(-1 * var(--space-12)) 0 var(--space-16);

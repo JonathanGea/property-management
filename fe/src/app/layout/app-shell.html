@@ -25,12 +25,13 @@
     </nav>
     <a
       routerLink="/lainnya"
-      fragment="penyimpanan"
-      class="settings-link"
-      aria-label="Pengaturan penyimpanan dan cadangan data"
-    >
-      <app-icon name="settings" /><span>Pengaturan</span>
-    </a>
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      class="more-link"
+      aria-label="Lainnya"
+      title="Lainnya"
+      ><app-icon name="menu"
+    /></a>
   </header>
   @if (store.storageError()) {
     <p class="storage-warning" role="alert">
@@ -43,15 +44,6 @@
       <strong>Rentora<span class="brand-dot">.</span></strong
       ><span>Manajemen properti sewa</span><small>© {{ year }} Rentora</small>
     </div>
-    <div class="footer-storage">
-      <span class="storage-label"
-        ><app-icon [name]="store.storageError() ? 'warning' : 'check'" />{{
-          store.storageError() ? 'Perubahan belum tersimpan' : 'Data tersimpan di perangkat ini'
-        }}</span
-      >
-      <a routerLink="/lainnya" fragment="penyimpanan">Tentang penyimpanan &amp; cadangan</a>
-    </div>
-    <app-backup-export />
   </footer>
   <nav class="bottom-nav" aria-label="Navigasi utama seluler">
     @for (item of navigation; track item.path) {

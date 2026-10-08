@@ -92,10 +92,16 @@ import { PropertyCard } from '../../shared/ui/property-card';
         display: flex;
         align-items: center;
         gap: var(--space-10);
-        border: 1px solid var(--color-border);
+        border: 0;
         border-radius: var(--radius-control);
+        background: var(--color-surface-muted);
         padding: 0 13px;
         color: var(--color-text-muted);
+      }
+      .search:focus-within {
+        background: var(--color-surface);
+        color: var(--color-brand);
+        box-shadow: inset 0 -2px 0 var(--color-brand);
       }
       .search input {
         width: 100%;
@@ -103,9 +109,14 @@ import { PropertyCard } from '../../shared/ui/property-card';
         height: 44px;
         border: 0;
         background: transparent;
+        box-shadow: none;
         color: var(--color-text);
         font: inherit;
         font-size: var(--font-size-16);
+      }
+      .search input:focus {
+        background: transparent;
+        box-shadow: none;
       }
       .count {
         margin: var(--space-12) 0 var(--space-8);

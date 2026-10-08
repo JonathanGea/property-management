@@ -6,7 +6,8 @@ import { PropertyStore } from './core/property.store';
 
 describe('App', () => {
   it('renders the owner dashboard and routes to the properti list', async () => {
-    localStorage.removeItem('rentora-owner-mvp-v1');
+    localStorage.setItem('rentora-initialized-v1', '1');
+    localStorage.setItem('rentora-owner-mvp-v1', '{"properties":[],"payments":[]}');
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideRouter(routes)],
@@ -17,7 +18,8 @@ describe('App', () => {
     await router.navigateByUrl('/');
     fixture.detectChanges();
     await fixture.whenStable();
-    expect(fixture.nativeElement.textContent).toContain('Belum dicatat lunas');
+    expect(fixture.nativeElement.textContent).toContain('Mulai dari properti pertama Anda');
+    expect(fixture.nativeElement.querySelector('.payment-snapshot')).toBeNull();
 
     await router.navigateByUrl('/properti');
     fixture.detectChanges();
@@ -26,7 +28,8 @@ describe('App', () => {
   });
 
   it('keeps the property search when returning from a detail page', async () => {
-    localStorage.removeItem('rentora-owner-mvp-v1');
+    localStorage.setItem('rentora-initialized-v1', '1');
+    localStorage.setItem('rentora-owner-mvp-v1', '{"properties":[],"payments":[]}');
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideRouter(routes)],
@@ -59,7 +62,8 @@ describe('App', () => {
   });
 
   it('opens the selected unit from finance and returns to finance after recording payment', async () => {
-    localStorage.removeItem('rentora-owner-mvp-v1');
+    localStorage.setItem('rentora-initialized-v1', '1');
+    localStorage.setItem('rentora-owner-mvp-v1', '{"properties":[],"payments":[]}');
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideRouter(routes)],

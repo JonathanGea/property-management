@@ -5,17 +5,17 @@ import { PaymentOverview } from './payment-overview';
 
 describe('PaymentOverview', () => {
   beforeEach(() => {
-    localStorage.removeItem('rentora-owner-mvp-v1');
+    localStorage.setItem('rentora-initialized-v1', '1');
+    localStorage.setItem('rentora-owner-mvp-v1', '{"properties":[],"payments":[]}');
     TestBed.configureTestingModule({
       imports: [PaymentOverview],
       providers: [provideRouter([])],
     });
   });
 
-  it('shows an empty state without invalid percentages', () => {
+  it('shows an empty state', () => {
     const fixture = TestBed.createComponent(PaymentOverview);
     fixture.detectChanges();
-    expect(fixture.componentInstance.paymentRate()).toBe(0);
     expect(fixture.nativeElement.querySelector('.chart-empty')).toBeTruthy();
   });
 
@@ -27,14 +27,22 @@ describe('PaymentOverview', () => {
     store.updateRoom(id, 2, { tenantName: 'Budi', monthlyRent: 1000000 });
     store.markPaid(id, 1);
     fixture.detectChanges();
-    expect(fixture.componentInstance.paymentRate()).toBe(50);
-    expect(fixture.nativeElement.querySelector('.chart-track').getAttribute('aria-label')).toBe(
-      'Taman Raya: 1 unit lunas, 1 belum lunas, 1 kosong',
+    expect(fixture.componentInstance.paymentOverview()[0].paid).toBe(1);
+    expect(fixture.nativeElement.querySelector('.chart-row').getAttribute('aria-label')).toContain(
+      '1 lunas, 1 belum lunas, 1 kosong',
     );
+    expect(fixture.nativeElement.querySelectorAll('.chart-row-counts .chart-count')).toHaveLength(
+      3,
+    );
+
+    const metrics = fixture.nativeElement.querySelectorAll('.metric-label');
+    expect(metrics[0].textContent).toContain('1 / 2 unit terisi lunas');
+    expect(metrics[1].textContent).toContain('2 / 3 unit terisi');
+    expect(fixture.nativeElement.querySelector('.metric-fill.paid').style.width).toBe('50%');
 
     store.cancelPayment(store.payments()[0].id);
     fixture.detectChanges();
-    expect(fixture.componentInstance.paymentRate()).toBe(0);
+    expect(fixture.componentInstance.paymentOverview()[0].paid).toBe(0);
 
     store.markPaid(id, 1);
     store.updateRoom(id, 1, { tenantName: '' });

@@ -7,8 +7,9 @@ Folder ini memisahkan script pengujian UI Rentora dari hasil pemeriksaan browser
 
 Hasil pengujian: Hasil terbaru menggantikan berkas dengan nama yang sama.
 
-- `results/browser-report.json`: hasil 24 pemeriksaan layout (6 halaman × 4 lebar layar), visibilitas navigasi, ukuran input, error JavaScript, dan alur pencatatan pembayaran.
-- `results/screenshots/dashboard-mobile.png`: beranda pada viewport 390 × 844 px.
+- `results/browser-report.json`: hasil 28 pemeriksaan layout (7 halaman × 4 lebar layar), visibilitas label tab aktif pada dock navigasi, ruang konten di atas navigasi, ukuran input, error JavaScript, dan alur pencatatan pembayaran.
+- `results/screenshots/first-visit-mobile.png`: beranda pada kunjungan pertama dengan data contoh.
+- `results/screenshots/dashboard-mobile.png`: beranda dengan fixture pengujian pada viewport 390 × 844 px.
 - `results/screenshots/finance-mobile.png`: keuangan pada viewport 390 × 844 px.
 - `results/screenshots/dashboard-desktop.png`: beranda pada viewport 1280 × 844 px.
 

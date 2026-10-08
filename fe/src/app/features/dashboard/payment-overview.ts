@@ -1,11 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PropertyStore } from '../../core/property.store';
-import { Icon } from '../../shared/ui/icon';
 
 @Component({
   selector: 'app-payment-overview',
-  imports: [RouterLink, Icon],
+  imports: [RouterLink],
   templateUrl: './payment-overview.html',
   styleUrl: './payment-overview.css',
 })
@@ -24,13 +23,6 @@ export class PaymentOverview {
         vacant: property.rooms.length - occupied.length,
       };
     });
-    const max = Math.max(1, ...rows.map((row) => row.total));
-    return rows.map((row) => ({ ...row, width: (row.total / max) * 100 }));
+    return rows;
   });
-  readonly paidUnits = computed(() => this.store.occupiedUnits() - this.store.unpaidRooms().length);
-  readonly paymentRate = computed(() =>
-    this.store.occupiedUnits()
-      ? Math.round((this.paidUnits() / this.store.occupiedUnits()) * 100)
-      : 0,
-  );
 }

@@ -1,149 +1,177 @@
 :host {
   display: block;
 }
-.panel {
-  padding: var(--space-16);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-panel);
+.dashboard {
+  max-width: var(--layout-content-width);
 }
-.activity {
-  border-top: 3px solid var(--color-chart-warning);
+h2 {
+  margin: 0;
+  font-size: var(--font-size-16);
+  letter-spacing: -0.02em;
 }
 .section-head {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-10);
-  margin-bottom: var(--space-12);
-}
-.section-head > div {
-  flex: 1;
-  min-width: 0;
+  gap: var(--space-12);
 }
 .section-head h2 {
-  margin: 0 0 5px;
-  font-size: var(--font-size-18);
-  letter-spacing: -0.02em;
-}
-.section-head p {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-12);
+  min-width: 0;
 }
 .text-link {
   display: inline-flex;
   align-items: center;
-  flex: none;
+  gap: 2px;
   min-height: 44px;
+  flex: none;
   color: var(--color-brand);
   font-size: var(--font-size-12);
   font-weight: 700;
   text-decoration: none;
-  white-space: nowrap;
 }
 .text-link app-icon {
   width: 15px;
   height: 15px;
 }
+.payment-snapshot {
+  padding: var(--space-16);
+  margin-bottom: var(--space-24);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card-hover);
+}
+.payment-total {
+  margin: var(--space-12) 0 var(--space-10);
+  font-size: var(--font-size-30);
+  font-weight: 750;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+.payment-progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-chip);
+  background: var(--color-track);
+}
+.payment-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-success);
+}
+.payment-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 44px;
+  margin-top: var(--space-10);
+  color: var(--color-warning);
+  font-size: var(--font-size-12);
+  text-decoration: none;
+}
+.payment-alert app-icon {
+  width: 18px;
+  height: 18px;
+}
+.payment-alert app-icon:last-child {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+}
+.payment-alert strong {
+  font-weight: 800;
+}
+.payment-alert:hover span {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.payment-complete {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin: var(--space-12) 0 0;
+  color: var(--color-success);
+  font-size: var(--font-size-12);
+  font-weight: 650;
+}
+.payment-complete app-icon {
+  width: 16px;
+  height: 16px;
+}
+.activity {
+  margin-bottom: var(--space-24);
+}
 .activity-list {
-  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: var(--space-8);
 }
 .activity-row {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) auto;
-  gap: var(--space-14);
-  align-items: center;
-  min-height: 73px;
-  padding: var(--space-10) 0;
-  border-bottom: 1px solid var(--color-border);
-}
-.due-link,
-.property-link {
-  color: inherit;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-6) var(--space-10);
+  min-width: 0;
+  padding: var(--space-14) var(--space-16);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
   text-decoration: none;
+  transition: background-color var(--motion-duration-fast);
 }
-.due-link:hover,
-.property-link:hover {
+.activity-row:hover {
   background: var(--color-surface-hover);
 }
-.due-date {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  width: 48px;
-  height: 48px;
-  background: var(--color-warning-subtle);
-  color: var(--color-warning);
-  border-left: 3px solid var(--color-warning-accent);
-}
-.due-date small {
-  font-size: var(--font-size-10);
-  font-weight: 700;
-  letter-spacing: 0;
-  white-space: nowrap;
-}
-.due-date strong {
-  font-size: var(--font-size-21);
-  line-height: 1.2;
-}
-.activity-row > div strong {
-  overflow-wrap: anywhere;
-  display: block;
-  margin-bottom: 5px;
+.payment-person {
+  min-width: 0;
   font-size: var(--font-size-13);
-}
-.activity-row > div p {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-12);
+  overflow-wrap: anywhere;
 }
 .due-amount {
-  color: var(--color-warning);
-  font-size: var(--font-size-12);
-  font-weight: 750;
+  justify-self: end;
+  font-size: var(--font-size-13);
   white-space: nowrap;
 }
-.empty-note {
-  margin: 0;
-  padding: var(--space-20) 0;
+.payment-location {
+  min-width: 0;
   color: var(--color-text-muted);
-  font-size: var(--font-size-13);
+  font-size: var(--font-size-11);
+  overflow-wrap: anywhere;
 }
-.dashboard-heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-12);
-  margin-bottom: var(--space-16);
-}
-.dashboard-heading h1 {
-  margin: 0;
-  font-size: var(--font-size-page-title);
-  letter-spacing: -0.04em;
-}
-.dashboard-heading p {
-  margin: var(--space-4) 0 0;
-  font-size: var(--font-size-13);
+.due-status {
+  justify-self: end;
   color: var(--color-text-muted);
+  font-size: var(--font-size-11);
+  font-weight: 650;
+  white-space: nowrap;
 }
-@media (min-width: 768px) {
-  .panel {
-    padding: var(--space-24);
-  }
+.due-status.overdue {
+  color: var(--color-danger);
 }
-@media (max-width: 420px) {
-  .activity-row {
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: var(--space-10);
-  }
-  .due-date {
-    width: 44px;
-  }
+.due-status.today {
+  color: var(--color-warning);
+}
+@media (max-width: 359px) {
   .due-amount {
+    font-size: var(--font-size-12);
+  }
+}
+@media (min-width: 960px) {
+  .dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    column-gap: var(--space-24);
+    align-items: start;
+  }
+  .dashboard > * {
+    grid-column: 1 / -1;
+  }
+  .dashboard > .payment-snapshot {
+    grid-column: 1;
+  }
+  .dashboard > .activity {
     grid-column: 2;
-    margin-top: calc(-1 * var(--space-12));
+  }
+  .payment-snapshot {
+    padding: var(--space-20);
   }
 }

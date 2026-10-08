@@ -40,6 +40,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/finance/finance-page').then((m) => m.FinancePage),
   },
   {
+    path: 'penghuni',
+    title: 'Penghuni · Rentora',
+    loadComponent: () => import('./features/tenants/tenants-page').then((m) => m.TenantsPage),
+  },
+  {
     path: 'lainnya',
     title: 'Lainnya · Rentora',
     loadComponent: () => import('./features/more/more-page').then((m) => m.MorePage),

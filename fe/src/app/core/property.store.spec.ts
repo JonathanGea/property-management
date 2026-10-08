@@ -2,7 +2,61 @@ import { TestBed } from '@angular/core/testing';
 import { PropertyStore } from './property.store';
 
 describe('PropertyStore', () => {
-  beforeEach(() => localStorage.removeItem('rentora-owner-mvp-v1'));
+  beforeEach(() => {
+    localStorage.setItem('rentora-initialized-v1', '1');
+    localStorage.setItem('rentora-owner-mvp-v1', '{"properties":[],"payments":[]}');
+  });
+
+  it('loads example data once for a new or previously untouched empty workspace', () => {
+    localStorage.removeItem('rentora-initialized-v1');
+    localStorage.removeItem('rentora-owner-mvp-v1');
+    const store = TestBed.inject(PropertyStore);
+    expect(store.properties().map((item) => item.name)).toEqual([
+      'Foresta',
+      'Casa Melati',
+      'Taman Raya',
+    ]);
+    expect(store.occupiedUnits()).toBe(3);
+    expect(store.paidThisMonth()).toHaveLength(1);
+    expect(store.unpaidRooms()).toHaveLength(2);
+    TestBed.tick();
+    expect(localStorage.getItem('rentora-initialized-v1')).toBe('1');
+    expect(
+      JSON.parse(localStorage.getItem('rentora-owner-mvp-v1') ?? '{}').properties,
+    ).toHaveLength(3);
+  });
+
+  it('migrates an old empty workspace once and respects a later empty import', () => {
+    localStorage.removeItem('rentora-initialized-v1');
+    const store = TestBed.inject(PropertyStore);
+    expect(store.properties()).toHaveLength(3);
+    store.properties.set([]);
+    store.payments.set([]);
+    TestBed.tick();
+    const reopened = TestBed.runInInjectionContext(() => new PropertyStore());
+    expect(reopened.properties()).toHaveLength(0);
+  });
+
+  it('keeps a deliberately empty workspace empty after initialization', () => {
+    const store = TestBed.inject(PropertyStore);
+    expect(store.properties()).toHaveLength(0);
+    expect(store.payments()).toHaveLength(0);
+  });
+
+  it('preserves existing property data without adding examples', () => {
+    localStorage.removeItem('rentora-initialized-v1');
+    localStorage.setItem(
+      'rentora-owner-mvp-v1',
+      JSON.stringify({
+        properties: [{ id: 42, name: 'Milik Saya', location: 'Bogor', rooms: [] }],
+        payments: [],
+      }),
+    );
+    const store = TestBed.inject(PropertyStore);
+    expect(store.properties().map((item) => item.name)).toEqual(['Milik Saya']);
+    TestBed.tick();
+    expect(localStorage.getItem('rentora-initialized-v1')).toBe('1');
+  });
 
   it('tracks rooms, occupancy, payments, and vacancy without losing payment history', () => {
     const store = TestBed.inject(PropertyStore);
@@ -31,17 +85,6 @@ describe('PropertyStore', () => {
     store.updateRoom(kosId, 1, { tenantName: 'Maya', monthlyRent: 950000 });
     expect(store.isPaid(kosId, 1)).toBe(false);
     expect(store.unpaidRooms()).toHaveLength(1);
-  });
-
-  it('exports and restores valid data while rejecting invalid backups', () => {
-    const store = TestBed.inject(PropertyStore);
-    store.addProperty('Kos Melati', 'Depok', 3);
-    const backup = store.exportData();
-    store.addProperty('Kos Mawar', 'Bogor', 1);
-    expect(store.importData('{"properties":"wrong","payments":[]}')).toBe(false);
-    expect(store.properties()).toHaveLength(2);
-    expect(store.importData(backup)).toBe(true);
-    expect(store.properties()).toHaveLength(1);
   });
 
   it('persists kos data in the current browser', () => {

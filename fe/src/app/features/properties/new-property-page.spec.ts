@@ -6,7 +6,8 @@ import { NewPropertyPage } from './new-property-page';
 
 describe('NewPropertyPage', () => {
   it('adds a properti and creates its rooms from the form', async () => {
-    localStorage.removeItem('rentora-owner-mvp-v1');
+    localStorage.setItem('rentora-initialized-v1', '1');
+    localStorage.setItem('rentora-owner-mvp-v1', '{"properties":[],"payments":[]}');
     await TestBed.configureTestingModule({
       imports: [NewPropertyPage],
       providers: [provideRouter(routes)],

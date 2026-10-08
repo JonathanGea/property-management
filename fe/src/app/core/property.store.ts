@@ -1,7 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
 import { computed, effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { createDemoData } from './demo-data';
 
 const STORAGE_KEY = 'rentora-owner-mvp-v1';
+const INITIALIZED_KEY = 'rentora-initialized-v1';
 
 export interface Room {
   id: number;
@@ -37,7 +39,7 @@ interface OwnerData {
   payments: Payment[];
 }
 
-function validBackup(value: unknown): value is OwnerData {
+function validOwnerData(value: unknown): value is OwnerData {
   if (!value || typeof value !== 'object') return false;
   const data = value as OwnerData;
   return (
@@ -122,6 +124,7 @@ export class PropertyStore {
       if (!this.isBrowser) return;
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        localStorage.setItem(INITIALIZED_KEY, '1');
         this.storageError.set(false);
       } catch {
         this.storageError.set(true);
@@ -133,11 +136,24 @@ export class PropertyStore {
     if (!this.isBrowser) return { properties: [], payments: [] };
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return { properties: [], payments: [] };
-      const parsed: unknown = JSON.parse(raw);
-      return validBackup(parsed) ? parsed : { properties: [], payments: [] };
+      const initialized = localStorage.getItem(INITIALIZED_KEY) === '1';
+      if (raw === null) {
+        return initialized ? { properties: [], payments: [] } : createDemoData(currentPeriod());
+      }
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        return { properties: [], payments: [] };
+      }
+      if (!validOwnerData(parsed)) return { properties: [], payments: [] };
+      // Migrate an older, untouched empty workspace to the portfolio example once.
+      return !initialized && !parsed.properties.length && !parsed.payments.length
+        ? createDemoData(currentPeriod())
+        : parsed;
     } catch {
-      return { properties: [], payments: [] };
+      // Keep the demo usable in memory if browser storage is unavailable.
+      return createDemoData(currentPeriod());
     }
   }
 
@@ -264,25 +280,5 @@ export class PropertyStore {
 
   cancelPayment(paymentId: string): void {
     this.payments.update((items) => items.filter((payment) => payment.id !== paymentId));
-  }
-
-  exportData(): string {
-    return JSON.stringify(
-      { version: 1, properties: this.properties(), payments: this.payments() },
-      null,
-      2,
-    );
-  }
-
-  importData(raw: string): boolean {
-    try {
-      const parsed: unknown = JSON.parse(raw);
-      if (!validBackup(parsed)) return false;
-      this.properties.set(parsed.properties);
-      this.payments.set(parsed.payments);
-      return true;
-    } catch {
-      return false;
-    }
   }
 }

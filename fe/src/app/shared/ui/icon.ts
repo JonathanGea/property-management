@@ -5,6 +5,7 @@ export type IconName =
   | 'building'
   | 'wallet'
   | 'menu'
+  | 'contacts'
   | 'bell'
   | 'plus'
   | 'arrow'
@@ -30,9 +31,6 @@ export type IconName =
       aria-hidden="true"
     >
       @switch (name()) {
-        @case ('download') {
-          <path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4" />
-        }
         @case ('home') {
           <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
         }
@@ -46,6 +44,11 @@ export type IconName =
         }
         @case ('menu') {
           <path d="M4 6h16M4 12h16M4 18h16" />
+        }
+        @case ('contacts') {
+          <rect x="2.5" y="4" width="19" height="16" rx="2" />
+          <circle cx="8.5" cy="10" r="2" />
+          <path d="M5.5 16a3 3 0 0 1 6 0M15 9h4m-4 4h4m-4 4h3" />
         }
         @case ('bell') {
           <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
@@ -74,7 +77,9 @@ export type IconName =
           <path d="M4 20V4m0 16h16M8 16v-5m5 5V7m5 9v-9" />
         }
         @case ('warning') {
-          <path d="M10.3 3.8 2.4 18a2 2 0 0 0 1.8 3h15.6a2 2 0 0 0 1.8-3L13.7 3.8a2 2 0 0 0-3.4 0Z" />
+          <path
+            d="M10.3 3.8 2.4 18a2 2 0 0 0 1.8 3h15.6a2 2 0 0 0 1.8-3L13.7 3.8a2 2 0 0 0-3.4 0Z"
+          />
           <path d="M12 9v5m0 3h.01" />
         }
         @case ('settings') {

@@ -41,7 +41,7 @@ src/app/
 └── app.ts              # root aplikasi
 ```
 
-Data kos, kamar, penyewa, dan pembayaran disimpan di `localStorage` browser melalui `PropertyStore`. Rancangan cadangan JSON dan daftar fitur di luar cakupan MVP dijelaskan di PRD.
+Pada pembukaan pertama, Rentora mengisi tiga properti, tiga penyewa, dan satu pembayaran contoh agar halaman portofolio langsung dapat dicoba. Data ini hanya dibuat sekali; data yang sudah tersimpan atau workspace yang sengaja dikosongkan tidak ditimpa. Data kos, kamar, penyewa, dan pembayaran disimpan di `localStorage` browser melalui `PropertyStore`. Daftar fitur di luar cakupan MVP dijelaskan di PRD.
 
 Rancangan cakupan dan batasan MVP ada di [PRD](../docs/PRD.md). Data dan aksi tiap halaman dijabarkan di [peta halaman](../docs/PAGES.md).
 

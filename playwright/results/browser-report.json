@@ -1,6 +1,13 @@
 {
-  "testedAt": "2026-10-08T04:02:00.555Z",
+  "testedAt": "2026-10-08T09:13:53.635Z",
   "browser": "Chromium",
+  "firstVisit": {
+    "properties": 3,
+    "occupied": 3,
+    "paid": "1/3",
+    "progress": "33%",
+    "persisted": true
+  },
   "results": [
     {
       "width": 320,
@@ -9,6 +16,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -18,6 +26,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": [
         "16px"
       ]
@@ -29,6 +38,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -38,6 +48,17 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
+      "inputs": []
+    },
+    {
+      "width": 320,
+      "route": "/penghuni",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -47,6 +68,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -56,6 +78,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": [
         "16px",
         "16px",
@@ -69,6 +92,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -78,6 +102,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": [
         "16px"
       ]
@@ -89,6 +114,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -98,6 +124,17 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
+      "inputs": []
+    },
+    {
+      "width": 390,
+      "route": "/penghuni",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -107,6 +144,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -116,6 +154,7 @@
       "navVisible": true,
       "gapBottom": 8,
       "navHeight": 68,
+      "activeLabelVisible": true,
       "inputs": [
         "16px",
         "16px",
@@ -129,6 +168,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -138,6 +178,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": [
         "16px"
       ]
@@ -149,6 +190,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -158,6 +200,17 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
+      "inputs": []
+    },
+    {
+      "width": 768,
+      "route": "/penghuni",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -167,6 +220,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -176,6 +230,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": [
         "16px",
         "16px",
@@ -189,6 +244,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -198,6 +254,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": [
         "16px"
       ]
@@ -209,6 +266,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -218,6 +276,17 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
+      "inputs": []
+    },
+    {
+      "width": 1280,
+      "route": "/penghuni",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -227,6 +296,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": []
     },
     {
@@ -236,6 +306,7 @@
       "navVisible": false,
       "gapBottom": 844,
       "navHeight": 0,
+      "activeLabelVisible": true,
       "inputs": [
         "16px",
         "16px",
@@ -244,5 +315,6 @@
     }
   ],
   "recorded": 1,
+  "contentClear": true,
   "errors": []
 }
