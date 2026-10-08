@@ -15,7 +15,7 @@ Dokumen ini menurunkan halaman, data, aksi, dan aturan dari [PRD Rentora MVP](PR
 | H-6 | [Keuangan](#h-6) | Melihat pembayaran dan periode yang belum dicatat lunas | [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), [F-5](PRD.md#fitur-5), [F-6](PRD.md#fitur-6) |
 | H-9 | [Daftar penghuni](#h-9) | Mengelola identitas penghuni lintas properti | [F-7](PRD.md#fitur-7) |
 | H-10 | [Detail penghuni](#h-10) | Mengelola identitas dan memulai atau melihat masa sewa | [F-3](PRD.md#fitur-3), [F-7](PRD.md#fitur-7) |
-| H-7 | [Lainnya](#h-7) | Melihat informasi penyimpanan dan mengekspor data | [F-8](PRD.md#fitur-8) |
+| H-7 | [Lainnya](#h-7) | Melihat informasi prototipe dan data contoh | — |
 
 ## Navigasi
 
@@ -52,7 +52,6 @@ Dokumen ini menurunkan halaman, data, aksi, dan aturan dari [PRD Rentora MVP](PR
 | Masa sewa | Hubungan penghuni-unit, tanggal masuk/keluar, jatuh tempo | H-5, H-8, H-10; ringkasan pada H-1, H-4, H-6, H-9 |
 | Riwayat tarif | Masa sewa, tarif kesepakatan, bulan/tahun mulai berlaku, catatan opsional | H-8; tarif awal pada H-10; tarif periode pada H-6 |
 | Transaksi pembayaran | Masa sewa terkait; salinan properti, unit, nama penghuni, periode sewa, tarif periode, nominal, tanggal pembayaran, waktu pencatatan, status | H-4, H-6, H-8 |
-| Salinan data JSON | Seluruh data di atas, hubungan antar data, tarif terjadwal, dan transaksi yang dibatalkan | H-7 |
 
 **Pemilihan tarif:** gunakan tarif kesepakatan dengan periode mulai berlaku paling akhir yang tidak melewati bulan sewa pilihan. Harga standar unit hanya menjadi nilai awal untuk masa sewa baru. Transaksi menyimpan salinan tarif dan nominal saat dicatat, sesuai [F-3](PRD.md#fitur-3), [F-4](PRD.md#fitur-4), dan [F-6](PRD.md#fitur-6).
 
@@ -223,10 +222,8 @@ Pembayaran yang dibatalkan tetap terlihat dan dikecualikan dari total. Riwayat t
 
 **Akses:** ikon **Lainnya** di kanan atas header.
 
-**Data tampil:** informasi penyimpanan pada browser/perangkat yang digunakan dan pilihan ekspor data.
+**Data tampil:** penjelasan bahwa Rentora merupakan prototipe portofolio dan bahwa data contoh properti, penghuni, serta pembayaran dimuat pada kunjungan pertama. Data yang dimasukkan pengguna tetap tersimpan secara lokal di browser.
 
-**Aksi:** **Ekspor data** mengunduh JSON berisi seluruh properti, unit dan harga standar, identitas penghuni, masa sewa, riwayat tarif termasuk jadwal mendatang, serta transaksi beserta salinan data dan status pembatalannya. Hubungan antar data ikut diekspor.
+**Aksi:** pada lingkungan pengembangan, **Preview dokumen** membuka halaman PRD. Tidak ada aksi ekspor atau pemulihan data pada halaman ini.
 
-**Keadaan gagal:** jika ekspor gagal, tampilkan pesan yang jelas. Jelaskan bahwa data lokal dapat hilang jika data browser terhapus atau perangkat hilang.
-
-**Acuan PRD:** [K-6](PRD.md#k-6); [F-8](PRD.md#fitur-8).
+**Keadaan halaman:** informasi prototipe selalu tersedia, termasuk saat belum ada properti.

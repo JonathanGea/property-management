@@ -24,7 +24,6 @@ Rincian data dan aksi tiap halaman ada di [Peta Halaman Rentora MVP](PAGES.md).
 3. <a id="k-3"></a> **K-3 — Mencatat penyewa aktif dan riwayat penghuni.** Pemilik perlu menyimpan identitas penghuni sekali, menghubungkannya dengan masa sewa, menentukan tarif kesepakatan dan jatuh tempo, serta melihat perubahan tarif dan riwayat penyewaannya.
 4. <a id="k-4"></a> **K-4 — Memantau pembayaran.** Pemilik perlu mengetahui periode sewa yang sudah atau belum dicatat lunas, termasuk periode lampau, dan dapat membetulkan salah input.
 5. <a id="k-5"></a> **K-5 — Melihat ringkasan dan riwayat.** Pemilik perlu melihat kondisi seluruh properti, total pembayaran yang tercatat, dan riwayat pembayaran bulan sebelumnya.
-6. <a id="k-6"></a> **K-6 — Menjaga salinan data.** Pemilik perlu mempertahankan data saat halaman dimuat ulang dan dapat mengunduh salinannya.
 
 ## Daftar Fitur & Ruang Lingkup
 
@@ -39,7 +38,6 @@ Rincian data dan aksi tiap halaman ada di [Peta Halaman Rentora MVP](PAGES.md).
 | 5 | [Dashboard dan ringkasan keuangan](#fitur-5) | [K-2](#k-2), [K-4](#k-4), [K-5](#k-5) | [Beranda](PAGES.md#h-1), [Daftar properti sewa](PAGES.md#h-2), [Detail properti sewa](PAGES.md#h-4), [Keuangan](PAGES.md#h-6) |
 | 6 | [Riwayat pembayaran](#fitur-6) | [K-5](#k-5) | [Detail properti sewa](PAGES.md#h-4), [Detail unit sewa](PAGES.md#h-8), [Keuangan](PAGES.md#h-6) |
 | 7 | [Kelola penghuni dan riwayat penyewaan](#fitur-7) | [K-3](#k-3) | [Daftar penghuni](PAGES.md#h-9), [Detail penghuni](PAGES.md#h-10), [Detail properti sewa](PAGES.md#h-4), [Riwayat penghuni](PAGES.md#h-5), [Detail unit sewa](PAGES.md#h-8) |
-| 8 | [Penyimpanan lokal dan ekspor data](#fitur-8) | [K-6](#k-6) | [Lainnya](PAGES.md#h-7) |
 
 <a id="rencana-pengembangan"></a>
 
@@ -56,7 +54,7 @@ Fitur berikut tidak dikerjakan sekarang dan belum ditetapkan sebagai rencana pen
 - **Akun dan login:** pendaftaran akun dan autentikasi pengguna.
 - **Akses staf dan penyewa:** penggunaan aplikasi oleh staf dan penyewa, termasuk akses staf dan portal penyewa.
 - **Sinkronisasi dan cadangan otomatis:** sinkronisasi data antar perangkat serta pencadangan data secara otomatis.
-- **Impor dan pemulihan data:** impor cadangan JSON dan pemulihan data dari berkas pada prototipe.
+- **Ekspor, impor, dan pemulihan data:** unduhan atau pemuatan berkas data secara manual tidak tersedia pada prototipe.
 - **Penerimaan uang:** penerimaan uang pembayaran sewa oleh aplikasi.
 - **Tagihan otomatis:** pembuatan tagihan sewa secara otomatis.
 - **Pembayaran online:** pembayaran sewa secara online, termasuk melalui QRIS.
@@ -208,21 +206,8 @@ Detail penghuni memuat identitas dan seluruh masa sewanya lintas properti. Riway
 
 **Kriteria selesai:** nama wajib, telepon opsional; nama yang sama tidak otomatis dianggap orang yang sama; tampilkan calon identitas yang serupa sebelum membuat penghuni baru agar pengguna dapat memilih identitas yang sudah ada; perubahan identitas muncul pada daftar dan masa sewa terkait tanpa mengubah transaksi lama; filter properti mencocokkan seluruh riwayat masa sewa penghuni; identitas tanpa masa sewa tidak muncul pada filter properti tertentu; penghuni dengan riwayat tidak dapat dihapus, sedangkan identitas yang belum memiliki masa sewa dapat dihapus setelah konfirmasi; riwayat tetap terlihat tanpa pembayaran.
 
-<a id="fitur-8"></a>
-
-### Fitur 8 — Penyimpanan lokal dan ekspor data [K-6](#k-6)
-
-Data disimpan pada browser yang sama. Salinan JSON mencakup properti, unit dan harga standarnya, identitas penghuni, masa sewa, seluruh riwayat tarif termasuk jadwal mendatang, dan semua transaksi beserta salinan data dan status pembatalannya. Hubungan antar data tetap disertakan.
-
-**Alur Pengguna (User Flow)**
-
-1. Pilih ikon **Lainnya** di kanan atas header, lalu **Ekspor data**.
-2. Unduh berkas JSON berisi seluruh data saat itu.
-
-**Kriteria selesai:** data dan hubungannya tetap tersedia setelah halaman dimuat ulang; ekspor mencakup seluruh data termasuk identitas tanpa masa sewa dan transaksi yang dibatalkan; kegagalan ekspor ditampilkan dengan pesan yang jelas.
-
 ## Batasan MVP dan Hal yang Perlu Diuji
 
-Data tersimpan di browser/perangkat yang digunakan. Menghapus data browser atau kehilangan perangkat dapat menghilangkan data lokal. Alur utama harus dapat digunakan pada layar ponsel selebar 320 px.
+Perubahan data tersimpan otomatis di browser yang digunakan dan tetap tersedia setelah halaman dimuat ulang. Pada kunjungan pertama, prototipe memuat data contoh properti, penghuni, dan pembayaran; data yang sudah tersimpan tidak ditimpa. Menghapus data browser atau kehilangan perangkat dapat menghilangkan data lokal. Alur utama harus dapat digunakan pada layar ponsel selebar 320 px.
 
 Sebelum memperluas fitur, uji bersama calon pengguna: kemudahan membuat properti dan unit sebelum memasukkan penghuni, penggunaan ulang identitas, perubahan tarif per bulan, dan pencatatan di satu perangkat.
