@@ -61,63 +61,63 @@ import { PropertyCard } from '../../shared/ui/property-card';
         flex-wrap: wrap;
         align-items: end;
         justify-content: space-between;
-        gap: 18px;
-        margin-bottom: 23px;
+        gap: var(--space-12);
+        margin-bottom: var(--space-16);
       }
       .eyebrow {
-        margin: 0 0 8px;
-        color: var(--blue);
-        font-size: 11px;
+        margin: 0 0 var(--space-8);
+        color: var(--color-brand);
+        font-size: var(--font-size-11);
         font-weight: 800;
         letter-spacing: 0;
       }
       h1 {
         margin: 0;
-        font-size: clamp(26px, 5vw, 32px);
+        font-size: var(--font-size-page-title);
         letter-spacing: -0.04em;
       }
       .subtitle {
-        margin: 8px 0 0;
-        color: var(--muted);
-        font-size: 13px;
+        margin: var(--space-8) 0 0;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-13);
       }
       .panel {
-        background: #fffefa;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        padding: 18px;
-        box-shadow: var(--shadow);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-panel);
+        padding: var(--space-16);
+        box-shadow: var(--shadow-panel);
       }
       .search {
         display: flex;
         align-items: center;
-        gap: 10px;
-        border: 1px solid var(--line);
-        border-radius: 4px;
+        gap: var(--space-10);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-control);
         padding: 0 13px;
-        color: #809086;
+        color: var(--color-text-muted);
       }
       .search input {
         width: 100%;
         min-width: 0;
         height: 44px;
         border: 0;
-        outline: 0;
-        color: var(--ink);
+        background: transparent;
+        color: var(--color-text);
         font: inherit;
-        font-size: 13px;
+        font-size: var(--font-size-16);
       }
       .count {
-        margin: 19px 0 10px;
-        font-size: 11px;
+        margin: var(--space-12) 0 var(--space-8);
+        font-size: var(--font-size-11);
         font-weight: 700;
-        color: var(--muted);
+        color: var(--color-text-muted);
       }
       .empty {
-        padding: 30px 0;
+        padding: var(--space-30) 0;
         text-align: center;
-        color: var(--muted);
-        font-size: 13px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-13);
       }
       .property-link {
         display: block;
@@ -126,7 +126,7 @@ import { PropertyCard } from '../../shared/ui/property-card';
       }
       @media (min-width: 768px) {
         .panel {
-          padding: 24px;
+          padding: var(--space-24);
         }
         .search {
           max-width: 420px;

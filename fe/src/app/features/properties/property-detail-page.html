@@ -125,6 +125,7 @@
                   name="tenantPhone"
                   [(ngModel)]="tenantPhone"
                   type="tel"
+                  autocomplete="tel"
                   placeholder="08..."
               /></label>
               <label
@@ -132,6 +133,7 @@
                   name="monthlyRent"
                   [(ngModel)]="monthlyRent"
                   type="number"
+                  inputmode="numeric"
                   required
                   min="1"
                   step="1"
@@ -141,6 +143,7 @@
                   name="dueDay"
                   [(ngModel)]="dueDay"
                   type="number"
+                  inputmode="numeric"
                   required
                   min="1"
                   max="28"

@@ -1,0 +1,248 @@
+{
+  "testedAt": "2026-10-08T04:02:00.555Z",
+  "browser": "Chromium",
+  "results": [
+    {
+      "width": 320,
+      "route": "/",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 320,
+      "route": "/properti",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": [
+        "16px"
+      ]
+    },
+    {
+      "width": 320,
+      "route": "/keuangan",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 320,
+      "route": "/lainnya",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 320,
+      "route": "/properti/1",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 320,
+      "route": "/properti/baru",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": [
+        "16px",
+        "16px",
+        "16px"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 390,
+      "route": "/properti",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": [
+        "16px"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/keuangan",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 390,
+      "route": "/lainnya",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 390,
+      "route": "/properti/1",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": []
+    },
+    {
+      "width": 390,
+      "route": "/properti/baru",
+      "overflow": false,
+      "navVisible": true,
+      "gapBottom": 8,
+      "navHeight": 68,
+      "inputs": [
+        "16px",
+        "16px",
+        "16px"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 768,
+      "route": "/properti",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": [
+        "16px"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/keuangan",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 768,
+      "route": "/lainnya",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 768,
+      "route": "/properti/1",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 768,
+      "route": "/properti/baru",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": [
+        "16px",
+        "16px",
+        "16px"
+      ]
+    },
+    {
+      "width": 1280,
+      "route": "/",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 1280,
+      "route": "/properti",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": [
+        "16px"
+      ]
+    },
+    {
+      "width": 1280,
+      "route": "/keuangan",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 1280,
+      "route": "/lainnya",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 1280,
+      "route": "/properti/1",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": []
+    },
+    {
+      "width": 1280,
+      "route": "/properti/baru",
+      "overflow": false,
+      "navVisible": false,
+      "gapBottom": 844,
+      "navHeight": 0,
+      "inputs": [
+        "16px",
+        "16px",
+        "16px"
+      ]
+    }
+  ],
+  "recorded": 1,
+  "errors": []
+}

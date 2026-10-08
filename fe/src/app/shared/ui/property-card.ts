@@ -1,11 +1,16 @@
 import { Component, input } from '@angular/core';
 import { Property } from '../../core/property.store';
+import { PropertyVisual } from './property-visual';
 
 @Component({
   selector: 'app-property-card',
+  imports: [PropertyVisual],
   template: `
-    <article class="property">
-      <div class="thumbnail">{{ initials() }}</div>
+    <article class="property" [class.featured]="featured()">
+      <div class="thumbnail" aria-hidden="true">
+        <app-property-visual [identity]="property().name" />
+        <span class="initials">{{ initials() }}</span>
+      </div>
       <div class="description">
         <h3>{{ property().name }}</h3>
         <p>{{ property().location }} · {{ property().rooms.length }} unit</p>
@@ -24,29 +29,31 @@ import { Property } from '../../core/property.store';
     `
       .property {
         display: grid;
-        grid-template-columns: 44px minmax(0, 1fr) 18px;
+        grid-template-columns: 64px minmax(0, 1fr) 18px;
         align-items: center;
-        gap: 12px;
-        padding: 14px 0;
-        border-top: 1px solid var(--line);
+        gap: var(--space-12);
+        padding: var(--space-14) 0;
+        border-top: 1px solid var(--color-border);
       }
       .thumbnail {
-        width: 44px;
-        height: 44px;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        overflow: hidden;
         display: grid;
         place-items: center;
-        border-radius: 4px;
-        color: var(--blue);
-        background: #e7efe8;
-        font-size: 12px;
+        border-radius: var(--radius-lg);
+        color: var(--color-brand);
+        background: var(--color-property-sky);
+        font-size: var(--font-size-12);
         font-weight: 800;
       }
       .description {
         min-width: 0;
       }
       .description h3 {
-        margin: 0 0 4px;
-        font-size: 14px;
+        margin: 0 0 var(--space-4);
+        font-size: var(--font-size-14);
         font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
@@ -54,31 +61,76 @@ import { Property } from '../../core/property.store';
       }
       .description p {
         margin: 0;
-        color: var(--muted);
-        font-size: 12px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-12);
       }
       .mobile-meta {
         display: block;
-        margin-top: 7px;
-        font-size: 12px;
-        color: var(--blue);
+        margin-top: var(--space-4);
+        font-size: var(--font-size-12);
+        color: var(--color-brand);
         font-weight: 700;
       }
       .desktop-meta {
         display: none;
       }
       .chevron {
-        color: #809086;
-        font-size: 22px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-22);
+      }
+      .initials {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        padding: 2px 4px;
+        border-radius: var(--radius-xs);
+        background: var(--color-surface);
+        color: var(--color-brand-strong);
+        font-size: var(--font-size-10);
+      }
+      .featured {
+        display: block;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-panel);
+        background: var(--color-surface);
+      }
+      .featured .thumbnail {
+        width: 100%;
+        height: 144px;
+        border-radius: 0;
+      }
+      .featured .initials {
+        right: 12px;
+        bottom: 12px;
+        padding: 5px 8px;
+        font-size: var(--font-size-12);
+      }
+      .featured .description {
+        padding: var(--space-16);
+      }
+      .featured .description h3 {
+        font-size: var(--font-size-16);
+      }
+      .featured .mobile-meta {
+        display: block;
+        margin-top: var(--space-12);
+        color: var(--color-text);
+        font-size: var(--font-size-12);
+      }
+      .featured .desktop-meta,
+      .featured .chevron {
+        display: none;
       }
       @media (min-width: 768px) {
         .property {
-          grid-template-columns: 44px minmax(0, 1fr) 90px 18px;
+          grid-template-columns: 64px minmax(0, 1fr) 90px 18px;
         }
-        .mobile-meta {
+        .property:not(.featured) .mobile-meta {
           display: none;
         }
-        .desktop-meta {
+        .property:not(.featured) .desktop-meta {
           display: block;
         }
         .desktop-meta strong,
@@ -86,11 +138,11 @@ import { Property } from '../../core/property.store';
           display: block;
         }
         .desktop-meta strong {
-          font-size: 13px;
+          font-size: var(--font-size-13);
         }
         .desktop-meta span {
-          font-size: 11px;
-          color: var(--muted);
+          font-size: var(--font-size-11);
+          color: var(--color-text-muted);
           margin-top: 3px;
         }
       }
@@ -99,6 +151,7 @@ import { Property } from '../../core/property.store';
 })
 export class PropertyCard {
   readonly property = input.required<Property>();
+  readonly featured = input(false);
   initials(): string {
     return this.property()
       .name.split(/\s+/)

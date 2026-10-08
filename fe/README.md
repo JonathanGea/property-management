@@ -11,6 +11,10 @@ npm start
 
 Buka `http://localhost:4200`. Untuk verifikasi, jalankan `npm run build` dan `npm test -- --watch=false`.
 
+## Tema dan design token
+
+Token warna, tipografi, jarak, radius, bayangan, dan animasi terpusat di `src/styles/tokens.css`. Lihat [panduan design token](src/styles/README.md) untuk mengganti tema dari satu tempat.
+
 ## Deploy ke Railway
 
 Gunakan builder Railpack dengan Root Directory `/fe` dan Build Command `npm run build`.

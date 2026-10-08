@@ -1,49 +1,69 @@
 <div class="page dashboard">
-  <section aria-label="Ringkasan" class="stats-grid">
-    <app-stat-card
-      icon="building"
-      tone="blue"
-      label="Total properti"
-      [value]="store.properties().length.toString()"
-      suffix="properti"
-      [detail]="store.totalUnits() + ' unit dalam portofolio Anda'"
-      action="Kelola properti"
-    />
-    <app-stat-card
-      icon="check"
-      tone="green"
-      label="Unit terisi"
-      [value]="store.occupiedUnits().toString()"
-      [suffix]="'/ ' + store.totalUnits() + ' unit'"
-      [detail]="store.occupancyRate() + '% dari seluruh unit terisi'"
-      [progress]="store.totalUnits() ? (store.occupiedUnits() / store.totalUnits()) * 100 : 0"
-      action="Lihat ketersediaan unit"
-    />
-    <app-stat-card
-      icon="wallet"
-      tone="amber"
-      label="Belum dibayar"
-      [value]="store.unpaidRooms().length.toString()"
-      suffix="unit"
-      [detail]="
-        store.unpaidRooms().length
-          ? 'Menunggu catatan lunas bulan ini'
-          : store.occupiedUnits()
-            ? 'Semua unit terisi sudah lunas'
-            : 'Belum ada penyewa aktif'
-      "
-      link="/keuangan"
-      action="Periksa pembayaran"
-    />
+  <header class="dashboard-heading">
+    <div>
+      <h1>Beranda</h1>
+      <p>Ringkasan properti dan pembayaran Anda.</p>
+    </div>
+    @if (store.properties().length) {
+      <a routerLink="/properti/baru" class="button button-primary"
+        ><app-icon name="plus" />Tambah properti</a
+      >
+    }
+  </header>
+  @if (store.properties().length) {
+    <section class="portfolio-summary" aria-label="Ringkasan portofolio">
+      <a routerLink="/properti"
+        ><strong>{{ store.properties().length }}</strong
+        ><span>Properti</span></a
+      >
+      <a routerLink="/properti"
+        ><strong>{{ store.totalUnits() }}</strong
+        ><span>Total unit</span></a
+      >
+      <a routerLink="/keuangan"
+        ><strong>{{ store.unpaidRooms().length }}</strong
+        ><span>Belum lunas</span></a
+      >
+    </section>
+  }
+
+  <section class="properties" aria-labelledby="properties-title">
+    <div class="section-head">
+      <div>
+        <h2 id="properties-title">Properti Anda</h2>
+        <p>Kelola unit dan penyewa dari setiap properti.</p>
+      </div>
+      <a routerLink="/properti" class="text-link">Lihat semua <app-icon name="chevron" /></a>
+    </div>
+    <div class="property-list">
+      @for (property of store.properties().slice(0, 3); track property.id) {
+        <a
+          class="property-link"
+          [routerLink]="['/properti', property.id]"
+          [queryParams]="{ from: 'beranda' }"
+          ><app-property-card [property]="property" [featured]="true"
+        /></a>
+      } @empty {
+        <div class="portfolio-empty">
+          <div class="empty-visual" aria-hidden="true">
+            <app-property-visual identity="Rentora" />
+          </div>
+          <div>
+            <h3>Mulai dari properti pertama Anda</h3>
+            <p>Tambahkan properti, atur unit, lalu kelola penyewa dan pembayaran di sini.</p>
+            <a routerLink="/properti/baru" class="button button-primary"
+              ><app-icon name="plus" />Tambah properti</a
+            >
+          </div>
+        </div>
+      }
+    </div>
   </section>
 
-  <app-payment-overview />
-
-  <div class="insights-grid">
+  <div class="details-grid">
     <section class="panel activity" aria-labelledby="activity-title">
       <div class="section-head">
         <div>
-          <p class="section-index">01 / Pembayaran</p>
           <h2 id="activity-title">Belum dicatat lunas</h2>
           <p>{{ store.unpaidRooms().length }} unit menunggu catatan pembayaran</p>
         </div>
@@ -81,79 +101,8 @@
         }
       </div>
     </section>
-    <section class="panel occupancy" aria-labelledby="occupancy-title">
-      <div class="section-head">
-        <div>
-          <p class="section-index">02 / Unit</p>
-          <h2 id="occupancy-title">Okupansi unit</h2>
-          <p>Seluruh properti Anda saat ini</p>
-        </div>
-      </div>
-      <div class="occupancy-content">
-        <div
-          class="occupancy-donut"
-          role="img"
-          [attr.aria-label]="
-            store.occupiedUnits() +
-            ' dari ' +
-            store.totalUnits() +
-            ' unit terisi (' +
-            store.occupancyRate() +
-            '%)'
-          "
-          [style.--occupied]="
-            (store.totalUnits() ? (store.occupiedUnits() / store.totalUnits()) * 100 : 0) + '%'
-          "
-        >
-          <div class="occupancy-total" aria-hidden="true">
-            <app-icon name="building" /><strong>{{ store.occupancyRate() }}<small>%</small></strong
-            ><span>unit terisi</span>
-          </div>
-        </div>
-        <div class="legend">
-          <div>
-            <i class="legend-dot rented"></i><span>Terisi</span
-            ><strong>{{ store.occupiedUnits() }} unit</strong>
-          </div>
-          <div>
-            <i class="legend-dot available"></i><span>Kosong</span
-            ><strong>{{ store.totalUnits() - store.occupiedUnits() }} unit</strong>
-          </div>
-        </div>
-        <p class="occupancy-note">
-          {{
-            store.totalUnits()
-              ? store.totalUnits() -
-                store.occupiedUnits() +
-                ' unit tersedia untuk penyewa berikutnya.'
-              : 'Tambahkan unit untuk mulai memantau okupansi.'
-          }}
-        </p>
-      </div>
-    </section>
+    @if (store.properties().length) {
+      <app-payment-overview />
+    }
   </div>
-
-  <section class="panel properties" aria-labelledby="properties-title">
-    <div class="section-head">
-      <div>
-        <h2 id="properties-title">Daftar properti</h2>
-        <p>Buka properti untuk melihat unit dan mencatat pembayaran</p>
-      </div>
-      <a routerLink="/properti" class="text-link">Lihat semua <app-icon name="chevron" /></a>
-    </div>
-    <div class="property-list">
-      @for (property of store.properties().slice(0, 3); track property.id) {
-        <a
-          class="property-link"
-          [routerLink]="['/properti', property.id]"
-          [queryParams]="{ from: 'beranda' }"
-          ><app-property-card [property]="property"
-        /></a>
-      } @empty {
-        <p class="empty-note">
-          Belum ada properti. Tambahkan properti pertama untuk mulai melacak unit.
-        </p>
-      }
-    </div>
-  </section>
 </div>

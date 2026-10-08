@@ -22,15 +22,15 @@ import { Icon } from './icon';
     }
     .export-error,
     .export-message {
-      margin: 8px 0 0;
+      margin: var(--space-8) 0 0;
       max-width: 280px;
-      font-size: 11px;
+      font-size: var(--font-size-11);
     }
     .export-error {
-      color: #b94444;
+      color: var(--color-danger);
     }
     .export-message {
-      color: var(--blue);
+      color: var(--color-brand);
     }
   `,
 })

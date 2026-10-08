@@ -1,91 +1,91 @@
 .heading {
-  margin-bottom: 22px;
+  margin-bottom: var(--space-16);
 }
 .eyebrow {
-  margin: 0 0 8px;
-  color: var(--blue);
-  font-size: 11px;
+  margin: 0 0 var(--space-8);
+  color: var(--color-brand);
+  font-size: var(--font-size-11);
   font-weight: 800;
   letter-spacing: 0;
 }
 h1 {
-  font-size: clamp(26px, 5vw, 32px);
+  font-size: var(--font-size-page-title);
   letter-spacing: -0.04em;
   margin: 0;
 }
 .subtitle {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 13px;
+  margin: var(--space-8) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-13);
 }
 .panel {
-  background: #fffefa;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 3px 18px;
-  box-shadow: var(--shadow);
-  margin-bottom: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  padding: 3px var(--space-18);
+  box-shadow: var(--shadow-panel);
+  margin-bottom: var(--space-16);
 }
 .panel a {
   display: grid;
   grid-template-columns: 36px 1fr 18px;
   align-items: center;
-  gap: 12px;
-  min-height: 70px;
+  gap: var(--space-12);
+  min-height: 64px;
   text-decoration: none;
-  color: var(--ink);
-  font-size: 13px;
+  color: var(--color-text);
+  font-size: var(--font-size-13);
   font-weight: 700;
 }
 .panel a + a {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
 }
 .panel a .icon {
   display: grid;
   place-items: center;
   width: 34px;
   height: 34px;
-  border-radius: 4px;
-  background: #e7efe8;
-  color: var(--blue);
+  border-radius: var(--radius-control);
+  background: var(--color-brand-subtle);
+  color: var(--color-brand);
 }
 .panel a small {
   display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 11px;
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-11);
   font-weight: 400;
 }
 .panel a > app-icon {
-  color: #809086;
+  color: var(--color-text-muted);
   width: 16px;
   height: 16px;
 }
 .prototype-warning {
-  padding: 20px;
-  background: #fcf2df;
-  border-color: #dfbf80;
-  border-left: 5px solid #a66721;
+  padding: var(--space-20);
+  background: var(--color-warning-subtle);
+  border-color: var(--color-warning-border);
+  border-left: 5px solid var(--color-warning-accent);
 }
 .storage-panel {
-  padding: 20px;
-  scroll-margin-top: 20px;
+  padding: var(--space-20);
+  scroll-margin-top: var(--space-20);
 }
 .storage-panel h2 {
   display: flex;
   align-items: center;
   gap: 9px;
-  margin: 0 0 10px;
-  font-size: 16px;
+  margin: 0 0 var(--space-10);
+  font-size: var(--font-size-16);
 }
 .storage-panel p {
   max-width: 620px;
-  margin: 0 0 16px;
-  font-size: 13px;
-  color: var(--muted);
+  margin: 0 0 var(--space-16);
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
 }
 .storage-panel:target {
-  border-color: var(--blue);
+  border-color: var(--color-brand);
 }
 @media (min-width: 768px) {
   .storage-panel {
@@ -96,24 +96,24 @@ h1 {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 16px;
-  color: #694618;
-  margin: 0 0 10px;
+  font-size: var(--font-size-16);
+  color: var(--color-warning-strong);
+  margin: 0 0 var(--space-10);
 }
 .prototype-warning h2 app-icon {
   width: 20px;
   height: 20px;
-  color: #8c551b;
+  color: var(--color-warning);
 }
 .prototype-warning p {
   max-width: 620px;
-  font-size: 13px;
-  color: #5d472c;
+  font-size: var(--font-size-13);
+  color: var(--color-warning-text);
   line-height: 1.6;
   margin: 0;
 }
 .prototype-warning .docs-preview-button {
   display: inline-flex;
-  min-height: 42px;
-  margin-top: 16px;
+  min-height: 44px;
+  margin-top: var(--space-16);
 }

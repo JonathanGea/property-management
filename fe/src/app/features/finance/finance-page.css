@@ -1,22 +1,22 @@
 .heading {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-16);
 }
 .eyebrow {
-  margin: 0 0 8px;
-  color: var(--blue);
-  font-size: 11px;
+  margin: 0 0 var(--space-8);
+  color: var(--color-brand);
+  font-size: var(--font-size-11);
   font-weight: 800;
   letter-spacing: 0;
 }
 h1 {
-  font-size: clamp(26px, 5vw, 32px);
+  font-size: var(--font-size-page-title);
   letter-spacing: -0.04em;
   margin: 0;
 }
 .subtitle {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 13px;
+  margin: var(--space-8) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-13);
 }
 .finance-grid {
   display: grid;
@@ -25,71 +25,76 @@ h1 {
 }
 .summary,
 .panel {
-  background: #fffefa;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
 }
 .unpaid-panel {
-  border-top: 4px solid #aa6b2c;
+  border-top: 3px solid var(--color-chart-warning);
 }
 .summary {
   display: grid;
-  gap: 7px;
-  padding: 20px;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  gap: 5px;
+  padding: var(--space-16);
 }
 .summary-icon {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
   display: grid;
   place-items: center;
   width: 36px;
   height: 36px;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   background: transparent;
-  color: var(--blue);
-  margin-bottom: 8px;
+  color: var(--color-brand);
+  margin-bottom: var(--space-8);
 }
 .summary-icon.amber {
   background: transparent;
-  color: #a76727;
+  color: var(--color-warning);
 }
 .summary span:not(.summary-icon) {
-  font-size: 12px;
-  color: var(--muted);
+  font-size: var(--font-size-12);
+  color: var(--color-text-muted);
 }
 .summary strong {
-  font-size: 25px;
+  font-size: var(--font-size-25);
   letter-spacing: -0.04em;
 }
 .summary small {
-  color: #809086;
-  font-size: 11px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-11);
 }
 .panel {
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: var(--space-16);
+  margin-bottom: var(--space-16);
 }
 .panel-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
 }
 .panel-heading h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--font-size-16);
 }
 .panel-heading span {
-  font-size: 11px;
-  color: var(--muted);
+  font-size: var(--font-size-11);
+  color: var(--color-text-muted);
 }
 .transaction {
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-10);
   padding: 15px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
 }
 .due-date {
   width: 48px;
@@ -97,19 +102,19 @@ h1 {
   display: grid;
   justify-items: center;
   align-content: center;
-  background: #f8eddb;
-  border-left: 3px solid #aa6b2c;
-  color: #99521f;
+  background: var(--color-warning-subtle);
+  border-left: 3px solid var(--color-warning-accent);
+  color: var(--color-warning);
 }
 .transaction .due-date small {
   margin: 0;
-  font-size: 10px;
+  font-size: var(--font-size-10);
   font-weight: 700;
-  color: #99521f;
+  color: var(--color-warning);
   white-space: nowrap;
 }
 .transaction .due-date strong {
-  font-size: 21px;
+  font-size: var(--font-size-21);
   line-height: 1.2;
 }
 .badge {
@@ -117,13 +122,13 @@ h1 {
   height: 32px;
   display: grid;
   place-items: center;
-  border-radius: 4px;
-  background: #e5efe6;
-  color: #2f7350;
+  border-radius: var(--radius-xs);
+  background: var(--color-success-subtle);
+  color: var(--color-success);
 }
 .badge.amber {
-  background: #f8eddb;
-  color: #a76727;
+  background: var(--color-warning-subtle);
+  color: var(--color-warning);
 }
 .badge app-icon {
   width: 16px;
@@ -134,16 +139,16 @@ h1 {
   display: block;
 }
 .transaction strong {
-  font-size: 12px;
+  font-size: var(--font-size-12);
 }
 .transaction small {
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 4px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-11);
+  margin-top: var(--space-4);
 }
 .transaction b {
-  color: #2f7350;
-  font-size: 11px;
+  color: var(--color-success);
+  font-size: var(--font-size-11);
   white-space: nowrap;
 }
 .link-row {
@@ -151,41 +156,58 @@ h1 {
   text-decoration: none;
 }
 .link-row b {
-  color: #99521f;
+  color: var(--color-warning);
 }
 .history .transaction {
   grid-template-columns: 34px minmax(0, 1fr) auto auto;
 }
 .cancel {
+  min-width: 44px;
+  min-height: 44px;
   border: 0;
   background: none;
-  color: var(--muted);
-  font-size: 11px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-11);
   cursor: pointer;
 }
 .empty {
   margin: 0;
-  padding: 20px 0;
-  color: var(--muted);
-  font-size: 12px;
+  padding: var(--space-20) 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-12);
 }
 @media (max-width: 460px) {
+  .transaction,
   .history .transaction {
-    grid-template-columns: 30px minmax(0, 1fr) auto;
+    grid-template-columns: 40px minmax(0, 1fr) 44px;
+    gap: var(--space-6) var(--space-10);
+  }
+  .transaction > div {
+    grid-column: 2 / -1;
+    min-width: 0;
+  }
+  .transaction b {
+    grid-column: 2;
+    white-space: normal;
   }
   .history .transaction .cancel {
     grid-column: 3;
+    grid-row: 2;
   }
-  .transaction b {
-    font-size: 11px;
+  .due-date {
+    width: 40px;
   }
+}
+.transaction strong,
+.summary strong {
+  overflow-wrap: anywhere;
 }
 @media (min-width: 768px) {
   .finance-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: var(--space-18);
   }
   .panel {
-    padding: 24px;
+    padding: var(--space-24);
   }
 }

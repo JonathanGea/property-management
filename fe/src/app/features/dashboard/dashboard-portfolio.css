@@ -1,0 +1,94 @@
+.portfolio-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: var(--space-24);
+  padding-block: var(--space-12);
+  border-block: 1px solid var(--color-border);
+}
+.portfolio-summary a {
+  display: grid;
+  gap: var(--space-4);
+  padding-inline: var(--space-12);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.portfolio-summary a:first-child {
+  padding-left: 0;
+}
+.portfolio-summary a + a {
+  border-left: 1px solid var(--color-border);
+}
+.portfolio-summary strong {
+  font-size: var(--font-size-25);
+  line-height: 1.2;
+}
+.portfolio-summary span {
+  font-size: var(--font-size-12);
+  color: var(--color-text-muted);
+}
+.portfolio-summary a:hover strong {
+  color: var(--color-brand);
+}
+.properties {
+  margin-bottom: var(--space-24);
+}
+.property-list {
+  display: grid;
+  gap: var(--space-16);
+}
+.property-link {
+  display: block;
+  min-width: 0;
+  border-radius: var(--radius-panel);
+}
+.property-link:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+.details-grid > .activity {
+  margin-bottom: var(--space-16);
+}
+.portfolio-empty {
+  grid-column: 1 / -1;
+  display: grid;
+  align-items: center;
+  gap: var(--space-20);
+  padding: var(--space-24);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+}
+.empty-visual {
+  width: 100%;
+  max-width: 280px;
+  margin-inline: auto;
+}
+.portfolio-empty h3 {
+  margin: 0 0 var(--space-8);
+  font-size: var(--font-size-20);
+}
+.portfolio-empty p {
+  margin: 0 0 var(--space-16);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-13);
+}
+@media (min-width: 768px) {
+  .property-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+  .portfolio-empty {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .property-list:has(.property-link) {
+    grid-auto-flow: column;
+    grid-auto-columns: calc(100% - 28px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    padding-bottom: var(--space-8);
+  }
+  .property-link {
+    scroll-snap-align: start;
+  }
+}

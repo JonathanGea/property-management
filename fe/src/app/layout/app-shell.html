@@ -59,6 +59,7 @@
         [routerLink]="item.path"
         routerLinkActive="active"
         ariaCurrentWhenActive="page"
+        [attr.aria-label]="item.label"
         [routerLinkActiveOptions]="{ exact: !!item.exact }"
         ><span class="nav-icon"
           ><app-icon [name]="item.icon" />
@@ -69,7 +70,7 @@
               >{{ store.unpaidRooms().length > 99 ? '99+' : store.unpaidRooms().length }}</span
             >
           }</span
-        ><span>{{ item.label }}</span></a
+        ><span class="nav-label" aria-hidden="true">{{ item.label }}</span></a
       >
     }
   </nav>

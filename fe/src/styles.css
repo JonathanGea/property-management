@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './styles/tokens.css';
 
 @font-face {
   font-family: 'Plus Jakarta Sans';
@@ -9,18 +10,9 @@
 }
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: var(--font-family-sans);
 }
 
-:root {
-  --blue: #2f6251;
-  --ink: #25372e;
-  --muted: #68776d;
-  --line: #d7ddd3;
-  --radius: 4px;
-  --shadow: none;
-  --page-gutter: 16px;
-}
 * {
   box-sizing: border-box;
 }
@@ -29,18 +21,28 @@ html {
 }
 body {
   margin: 0;
-  background: #f5f3eb;
-  color: var(--ink);
+  background: var(--color-background);
+  color: var(--color-text);
   font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   font-variant-numeric: tabular-nums;
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
 }
 button,
 input,
 select,
 textarea {
   font: inherit;
+}
+input,
+select,
+textarea {
+  scroll-margin-block: 90px;
 }
 button,
 a {
@@ -49,24 +51,25 @@ a {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  outline: 3px solid #7ca78f;
+  outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
 .page {
-  max-width: 1180px;
+  max-width: var(--layout-content-width);
   margin: auto;
-  padding: 26px var(--page-gutter) calc(120px + env(safe-area-inset-bottom));
+  padding: var(--space-20) var(--page-gutter)
+    calc(var(--mobile-navigation-height) + 26px + env(safe-area-inset-bottom, 0px));
 }
 .button {
-  min-height: 42px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   padding: 0 15px;
   text-decoration: none;
-  font-size: 13px;
+  font-size: var(--font-size-13);
   font-weight: 700;
   border: 1px solid transparent;
   cursor: pointer;
@@ -76,20 +79,20 @@ input:focus-visible {
   height: 17px;
 }
 .button-primary {
-  background: var(--blue);
-  color: #fff;
+  background: var(--color-brand);
+  color: var(--color-on-brand);
 }
 .button-secondary {
-  border-color: var(--line);
-  background: #fffefa;
-  color: var(--ink);
+  border-color: var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
 }
 @media (min-width: 768px) {
   :root {
-    --page-gutter: 28px;
+    --page-gutter: var(--space-28);
   }
   .page {
     padding-top: 39px;
-    padding-bottom: 54px;
+    padding-bottom: var(--space-54);
   }
 }

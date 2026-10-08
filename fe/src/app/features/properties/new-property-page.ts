@@ -46,6 +46,7 @@ import { PropertyStore } from '../../core/property.store';
         ><input
           id="units"
           type="number"
+          inputmode="numeric"
           name="units"
           [(ngModel)]="units"
           required
@@ -72,74 +73,76 @@ import { PropertyStore } from '../../core/property.store';
         max-width: 720px;
       }
       .back-link {
-        display: inline-block;
-        margin-bottom: 24px;
-        color: var(--blue);
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        margin-bottom: var(--space-8);
+        color: var(--color-brand);
         text-decoration: none;
-        font-size: 12px;
+        font-size: var(--font-size-12);
         font-weight: 700;
       }
       .eyebrow {
-        margin: 0 0 8px;
-        color: var(--blue);
-        font-size: 11px;
+        margin: 0 0 var(--space-8);
+        color: var(--color-brand);
+        font-size: var(--font-size-11);
         font-weight: 800;
         letter-spacing: 0;
       }
       h1 {
-        font-size: clamp(26px, 5vw, 32px);
+        font-size: var(--font-size-page-title);
         letter-spacing: -0.04em;
         margin: 0;
       }
       .subtitle {
-        margin: 8px 0 22px;
-        color: var(--muted);
-        font-size: 13px;
+        margin: var(--space-8) 0 22px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-13);
       }
       .panel {
         display: grid;
-        padding: 22px;
-        background: #fffefa;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
+        padding: var(--space-16);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-panel);
+        box-shadow: var(--shadow-panel);
       }
       label {
-        font-size: 12px;
+        font-size: var(--font-size-12);
         font-weight: 700;
-        margin: 0 0 8px;
+        margin: 0 0 var(--space-8);
       }
       input {
         width: 100%;
-        height: 45px;
+        height: 48px;
         padding: 0 13px;
-        margin-bottom: 18px;
-        border: 1px solid #cbd5ca;
-        border-radius: 4px;
+        margin-bottom: var(--space-18);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-control);
         font: inherit;
-        font-size: 13px;
-        color: var(--ink);
-        outline: 0;
+        font-size: var(--font-size-16);
+        color: var(--color-text);
+        background: var(--color-surface);
       }
       input:focus {
-        border-color: var(--blue);
-        box-shadow: 0 0 0 3px #2f625122;
+        border-color: var(--color-brand);
+        box-shadow: 0 0 0 3px var(--color-focus-subtle);
       }
       .error {
-        margin: -12px 0 16px;
-        color: #c44846;
-        font-size: 11px;
+        margin: calc(-1 * var(--space-12)) 0 var(--space-16);
+        color: var(--color-danger);
+        font-size: var(--font-size-11);
       }
       .actions {
         display: flex;
         justify-content: flex-end;
-        gap: 10px;
+        gap: var(--space-10);
         flex-wrap: wrap;
         margin-top: 7px;
       }
       .hint {
-        color: var(--muted);
-        font-size: 11px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-11);
         margin: 15px 0;
       }
     `,

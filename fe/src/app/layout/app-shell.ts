@@ -15,7 +15,7 @@ interface NavItem {
   selector: 'app-shell',
   imports: [RouterLink, RouterLinkActive, Icon, BackupExport],
   templateUrl: './app-shell.html',
-  styleUrl: './app-shell.css',
+  styleUrls: ['./bottom-navigation.css', './app-shell.css'],
 })
 export class AppShell {
   readonly store = inject(PropertyStore);

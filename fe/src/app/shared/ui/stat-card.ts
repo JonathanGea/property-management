@@ -36,53 +36,53 @@ import { Icon, IconName } from './icon';
         min-width: 0;
       }
       .card {
-        --accent: #3e655f;
-        --tint: #eaf0e9;
+        --accent: var(--color-brand);
+        --stat-tint: var(--color-brand-subtle);
         display: flex;
         flex-direction: column;
         height: 100%;
-        padding: 20px 22px 0;
-        border: 1px solid #dce2d8;
-        border-radius: 14px;
-        background: #fffefa;
-        color: var(--ink);
+        padding: var(--space-14) var(--space-14) 0;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-card);
+        background: var(--color-surface);
+        color: var(--color-text);
         text-decoration: none;
-        box-shadow: 0 3px 12px #25372e04;
+        box-shadow: var(--shadow-card);
         transition:
-          border-color 0.18s,
-          box-shadow 0.18s;
+          border-color var(--motion-duration-fast),
+          box-shadow var(--motion-duration-fast);
       }
       .card.green {
-        --accent: #486c46;
-        --tint: #e3eddc;
-        background: #f0f4e9;
-        border-color: #d8e1cf;
+        --accent: var(--color-success-accent);
+        --stat-tint: var(--color-success-tint);
+        background: var(--color-success-surface);
+        border-color: var(--color-success-border);
       }
       .card.amber {
-        --accent: #92612b;
-        --tint: #f4e3c6;
-        background: #fcf5e9;
-        border-color: #ebdfcb;
+        --accent: var(--color-warning-card-accent);
+        --stat-tint: var(--color-warning-tint);
+        background: var(--color-warning-surface);
+        border-color: var(--color-warning-card-border);
       }
       .card:hover {
         border-color: var(--accent);
-        box-shadow: 0 5px 18px #25372e0b;
+        box-shadow: var(--shadow-card-hover);
       }
       .card-heading {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 12px;
+        gap: var(--space-6);
+        margin-bottom: var(--space-12);
       }
       .icon {
-        width: 36px;
-        height: 36px;
+        width: 30px;
+        height: 30px;
         display: grid;
         place-items: center;
         flex: none;
-        border-radius: 10px;
-        background: var(--tint);
+        border-radius: var(--radius-control);
+        background: var(--stat-tint);
         color: var(--accent);
       }
       .icon app-icon {
@@ -92,13 +92,13 @@ import { Icon, IconName } from './icon';
       p {
         margin: 0;
         color: var(--accent);
-        font-size: 12px;
+        font-size: var(--font-size-12);
         font-weight: 700;
       }
       .card-body {
         flex: 1;
-        min-height: 100px;
-        padding-bottom: 16px;
+        min-height: 72px;
+        padding-bottom: var(--space-12);
       }
       .metric {
         display: flex;
@@ -107,55 +107,72 @@ import { Icon, IconName } from './icon';
         gap: 7px;
       }
       strong {
-        font-size: 42px;
+        font-size: var(--font-size-42);
         font-weight: 750;
         letter-spacing: -0.05em;
         line-height: 1.15;
       }
       .metric span {
-        color: var(--muted);
-        font-size: 12px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-12);
       }
       small {
         display: block;
         margin-top: 7px;
-        color: var(--muted);
-        font-size: 11px;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-11);
       }
       .progress-track {
         height: 5px;
-        margin-top: 12px;
-        background: #dce5d3;
-        border-radius: 8px;
+        margin-top: var(--space-12);
+        background: var(--stat-tint);
+        border-radius: var(--radius-md);
         overflow: hidden;
       }
       .progress-track span {
         display: block;
         height: 100%;
-        background: #62816a;
+        background: var(--accent);
         border-radius: inherit;
       }
       .card-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 8px;
-        min-height: 42px;
-        border-top: 1px solid var(--tint);
+        gap: var(--space-8);
+        min-height: 44px;
+        border-top: 1px solid var(--stat-tint);
         color: var(--accent);
-        font-size: 11px;
+        font-size: var(--font-size-11);
         font-weight: 700;
       }
       .card-footer app-icon {
         width: 14px;
         height: 14px;
       }
-      @media (max-width: 767px) {
+      @media (prefers-reduced-motion: reduce) {
         .card {
-          padding: 16px 16px 0;
+          transition: none;
+        }
+      }
+      @media (max-width: 767px) {
+        .card-heading {
+          margin-bottom: var(--space-8);
+        }
+        .card-footer {
+          font-size: var(--font-size-11);
+        }
+        .card-body {
+          min-height: 64px;
+        }
+        .card.amber .card-body {
+          min-height: 0;
+        }
+        .card {
+          padding: var(--space-14) var(--space-14) 0;
         }
         strong {
-          font-size: 36px;
+          font-size: var(--font-size-30);
         }
       }
     `,
