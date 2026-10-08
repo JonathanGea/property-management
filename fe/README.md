@@ -11,6 +11,16 @@ npm start
 
 Buka `http://localhost:4200`. Untuk verifikasi, jalankan `npm run build` dan `npm test -- --watch=false`.
 
+## Deploy ke Railway
+
+Gunakan builder Railpack dengan Root Directory `/fe` dan Build Command `npm run build`.
+Kosongkan pengaturan Start Command agar Railpack menyajikan hasil build sebagai situs statis.
+
+`angular.json` menetapkan `outputPath` ke `dist/fe`. File situs, termasuk `index.html`,
+berada di `dist/fe/browser`. Jika Railway masih mencoba menyalin `/app/browser`,
+atur variable `RAILPACK_SPA_OUTPUT_DIR=dist/fe/browser`, lalu deploy ulang.
+Path ini relatif terhadap Root Directory `/fe`, sehingga tidak perlu awalan `fe/` atau `/app/`.
+
 ## Struktur
 
 ```text
